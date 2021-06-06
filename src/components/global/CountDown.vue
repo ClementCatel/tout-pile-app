@@ -6,14 +6,13 @@
 
 <script>
 export default {
+  name: "CountDown",
   emits: ["answered"],
-
   data() {
     return {
       timerCount: 15,
     };
   },
-
   watch: {
     timerCount: {
       handler(value) {
