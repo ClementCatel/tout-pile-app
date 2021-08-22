@@ -1,3 +1,7 @@
 {
-  "message": "hello i18n !!"
+  "message": "hello i18n !!",
+  "onboarding": {
+    "start": "Start",
+    "username": "Username"
+  }
 }
