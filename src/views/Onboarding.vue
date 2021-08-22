@@ -1,10 +1,8 @@
 <template>
   <v-container>
     <v-row justify="center" class="my-15">
-      <v-col cols="auto"
-        ><v-avatar size="150">
-          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="avatar" />
-        </v-avatar>
+      <v-col cols="auto">
+        <v-icon size="200">mdi-account-circle</v-icon>
       </v-col>
     </v-row>
 
