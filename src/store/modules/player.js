@@ -13,12 +13,12 @@ export const mutations = {
 export const actions = {
   async createPlayer({commit}, playerData) {
     const player = await db.collection("players").add(playerData);
-    commit("SET_PLAYER", player);
+    commit("SET_PLAYER", player.data());
     localStorage.playerId = player.id;
   },
 
   async getPlayer({commit}, userId) {
     const player = await db.collection("players").doc(userId).get();
-    commit("SET_PLAYER", player);
+    commit("SET_PLAYER", player.data());
   },
 };
