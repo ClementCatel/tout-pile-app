@@ -3,5 +3,10 @@
   "onboarding": {
     "start": "Start",
     "username": "Username"
+  },
+  "gameLobby": {
+    "return": "Return",
+    "copyLink": "Copy Link",
+    "startGame": "Start Game"
   }
 }

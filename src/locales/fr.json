@@ -2,5 +2,10 @@
   "onboarding": {
     "start": "Start",
     "username": "Pseudo"
+  },
+  "gameLobby": {
+    "return": "Retour",
+    "copyLink": "Copier le lien",
+    "startGame": "Zé partiiii !"
   }
 }
