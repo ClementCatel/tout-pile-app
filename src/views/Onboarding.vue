@@ -23,16 +23,17 @@
       <v-col cols="auto">
         <v-btn
           v-if="isInvited"
-          @click="joinGame"
           elevation="2"
           class="px-10 font-weight-bold"
+          @click="joinGame"
           >{{ $t("onboarding.join") }}</v-btn
         >
         <v-btn
           v-else
-          @click="startGame"
+          large
           elevation="2"
           class="px-10 font-weight-bold"
+          @click="createGame"
           >{{ $t("onboarding.start") }}</v-btn
         >
       </v-col>
@@ -54,8 +55,8 @@ export default {
     },
   },
   methods: {
-    async startGame() {
-      console.log("start");
+    async createGame() {
+      console.log("create");
     },
     async joinGame() {
       console.log("join");
