@@ -63,7 +63,7 @@ const actions = {
   async bindGame({commit}, gameId) {
     db.collection("games")
       .doc(gameId)
-      .onSnaphost((document) => {
+      .onSnaphot((document) => {
         commit("SET_GAME", document.data());
       });
   },
