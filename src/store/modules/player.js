@@ -1,16 +1,16 @@
 import {db} from "@/services/firebase";
 
-export const state = () => ({
+const state = () => ({
   player: null,
 });
 
-export const mutations = {
+const mutations = {
   SET_PLAYER(state, payload) {
     state.player = payload;
   },
 };
 
-export const actions = {
+const actions = {
   async createPlayer({commit}, playerData) {
     const player = await db.collection("players").add(playerData);
     commit("SET_PLAYER", player.data());
@@ -21,4 +21,11 @@ export const actions = {
     const player = await db.collection("players").doc(userId).get();
     commit("SET_PLAYER", player.data());
   },
+};
+
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions,
 };

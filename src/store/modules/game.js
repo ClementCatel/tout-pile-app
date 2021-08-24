@@ -1,23 +1,25 @@
-import {db} from "@/services/firebase";
+import {db, fv} from "@/services/firebase";
 
-export const state = () => ({
+const state = () => ({
   game: null,
 });
 
-export const mutations = {
+const mutations = {
   SET_GAME(state, payload) {
     state.game = payload;
   },
 };
 
-export const actions = {
+const actions = {
   async createGame({commit, rootState}) {
     const game = await db.collection("games").add({
+      answers: [],
       currentRound: 0,
       leaderId: rootState.player.player.id,
       players: [rootState.player.player],
       questions: [],
       rounds: 10,
+      scores: [],
       started: false,
       timer: 30,
     });
@@ -65,4 +67,35 @@ export const actions = {
         commit("SET_GAME", document.data());
       });
   },
+
+  async addPlayer({state}, player) {
+    db.collection("games")
+      .doc(state.game.id)
+      .update({
+        players: fv.arrayUnion(player),
+      });
+  },
+
+  async addAnswer({state}, answer) {
+    db.collection("games")
+      .doc(state.game.id)
+      .update({
+        answers: fv.arrayUnion(answer),
+      });
+  },
+
+  async addScore({state}, score) {
+    db.collection("games")
+      .doc(state.game.id)
+      .update({
+        scores: fv.arrayUnion(score),
+      });
+  },
+};
+
+export default {
+  namespaced: true,
+  state,
+  mutations,
+  actions,
 };
