@@ -23,7 +23,7 @@ const actions = {
       started: false,
       timer: 30,
     });
-    commit("SET_GAME", game.data());
+    commit("SET_GAME", {id: game.id, ...game.data()});
   },
 
   async updateGame({state}, gameData) {
@@ -63,8 +63,8 @@ const actions = {
   async bindGame({commit}, gameId) {
     db.collection("games")
       .doc(gameId)
-      .onSnaphot((document) => {
-        commit("SET_GAME", document.data());
+      .onSnaphot((game) => {
+        commit("SET_GAME", {id: game.id, ...game.data()});
       });
   },
 
@@ -73,6 +73,14 @@ const actions = {
       .doc(state.game.id)
       .update({
         players: fv.arrayUnion(player),
+      });
+  },
+
+  async removePlayer({state}, player) {
+    db.collection("games")
+      .doc(state.game.id)
+      .update({
+        players: fv.arrayRemove(player),
       });
   },
 
