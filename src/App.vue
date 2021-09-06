@@ -1,8 +1,8 @@
 <template>
   <v-app>
-    <v-main class="background">
-      <v-row justify="center" class="my-15">
-        <v-col cols="auto"> <h1 class="primary--text">Tout Pile</h1> </v-col>
+    <v-main class="primary">
+      <v-row justify="center" class="mt-15">
+        <v-col cols="auto"> <h1 class="white--text">Tout Pile</h1> </v-col>
       </v-row>
       <router-view />
     </v-main>

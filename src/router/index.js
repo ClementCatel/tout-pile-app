@@ -18,7 +18,7 @@ const routes = [
     component: Onboarding,
   },
   {
-    path: "/gameLobby",
+    path: "/lobby",
     name: "GameLobby",
     component: GameLobby,
   },

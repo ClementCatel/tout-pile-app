@@ -4,9 +4,14 @@
     "start": "Start",
     "username": "Username"
   },
-  "gameLobby": {
+  "lobby": {
     "return": "Return",
     "copyLink": "Copy Link",
-    "startGame": "Start Game"
+    "startGame": "Start Game",
+    "players": "Players",
+    "settings": "Settings",
+    "timer": "Timer",
+    "categories": "Categories",
+    "rounds": "Rounds"
   }
 }

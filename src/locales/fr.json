@@ -3,9 +3,14 @@
     "start": "Start",
     "username": "Pseudo"
   },
-  "gameLobby": {
+  "lobby": {
     "return": "Retour",
     "copyLink": "Copier le lien",
-    "startGame": "Zé partiiii !"
+    "startGame": "Zé partiiii !",
+    "players": "Joueurs",
+    "settings": "Réglages",
+    "timer": "Durée",
+    "categories": "Catégories",
+    "rounds": "Les manches"
   }
 }
