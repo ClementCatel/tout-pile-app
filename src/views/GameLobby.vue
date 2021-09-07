@@ -41,9 +41,9 @@
           >
             {{ $t("lobby.settings") }}
           </v-card-title>
-          <div class="mx-6">
+          <div class="mx-6 mb-3">
             <v-row>
-              <div class="col-3 text-h5">
+              <div class="col-6 text-h5">
                 {{ $t("lobby.timer") }}
               </div>
               <v-col>
@@ -52,11 +52,12 @@
                   :items="timerItems"
                   label="Durée"
                   solo
+                  hide-details
                 ></v-select>
               </v-col>
             </v-row>
             <v-row>
-              <div class="col-3 text-h5">
+              <div class="col-6 text-h5">
                 {{ $t("lobby.rounds") }}
               </div>
               <v-col>
@@ -65,11 +66,12 @@
                   :items="roundsItems"
                   label="Tours"
                   solo
+                  hide-details
                 ></v-select>
               </v-col>
             </v-row>
             <v-row>
-              <div class="col-3 text-h5">
+              <div class="col-6 text-h5">
                 {{ $t("lobby.categories") }}
               </div>
               <v-col>
@@ -79,6 +81,7 @@
                   label="Catégories"
                   solo
                   clearable
+                  hide-details
                   :items="categoriesItems"
                 ></v-autocomplete>
               </v-col>
