@@ -152,6 +152,6 @@ export default {
 </script>
 <style scoped>
 .card {
-  background-color: #4c37a4 !important;
+  background-color: #4a3c82;
 }
 </style>
