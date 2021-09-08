@@ -1,9 +1,18 @@
 {
-  "message": "hello i18n !!",
   "onboarding": {
     "start": "Start",
     "username": "Username",
     "has_been_invited": "You've been invited to join a game !",
     "join": "Join"
+  },
+  "lobby": {
+    "return": "Return",
+    "copyLink": "Copy Link",
+    "startGame": "Start Game",
+    "players": "Players",
+    "settings": "Settings",
+    "timer": "Timer",
+    "categories": "Categories",
+    "rounds": "Rounds"
   }
 }

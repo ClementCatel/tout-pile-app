@@ -4,5 +4,15 @@
     "username": "Pseudo",
     "has_been_invited": "Vous avez été invité à rejoindre une partie !",
     "join": "Rejoindre"
+  },
+  "lobby": {
+    "return": "Retour",
+    "copyLink": "Copier le lien",
+    "startGame": "Zé partiiii !",
+    "players": "Joueurs",
+    "settings": "Réglages",
+    "timer": "Timer",
+    "categories": "Catégories",
+    "rounds": "Manches"
   }
 }
