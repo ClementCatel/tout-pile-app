@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="10">
+      <v-col cols="10" class="pl-0">
         <v-btn
           class="px-10 font-weight-bold white--text mb-5"
           outlined
