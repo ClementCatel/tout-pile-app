@@ -8,7 +8,8 @@
     >
       <div class="d-flex align-center">
         <v-avatar size="60" color="grey">
-          <v-icon dark> mdi-account-circle </v-icon>
+          <img :src="player.avatarURL" />
+          <!-- <v-icon dark> mdi-account-circle </v-icon> -->
         </v-avatar>
         <v-card-title>
           {{ player.username }}
@@ -16,7 +17,14 @@
         <v-spacer></v-spacer>
 
         <span v-if="player.isLeader" class="text-h5 mr-2">👑</span>
-        <v-btn v-else color="primary" x-small fab dark class="mr-2"
+        <v-btn
+          v-else-if="isLeader"
+          color="primary"
+          x-small
+          fab
+          dark
+          class="mr-2"
+          @click="kickPlayer(player.id)"
           ><v-icon> mdi-close </v-icon></v-btn
         >
       </div>
@@ -30,6 +38,16 @@ export default {
   props: {
     players: {
       type: Array,
+    },
+  },
+  computed: {
+    isLeader() {
+      return true;
+    },
+  },
+  methods: {
+    kickPlayer(playerId) {
+      this.$emit("kick", playerId);
     },
   },
 };
