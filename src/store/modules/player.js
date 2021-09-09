@@ -13,7 +13,7 @@ const mutations = {
 const actions = {
   async createPlayer({commit}, playerData) {
     const player = await db.collection("players").add(playerData);
-    commit("SET_PLAYER", {id: player.id, ...player.data()});
+    commit("SET_PLAYER", {id: player.id, ...playerData});
     localStorage.playerId = player.id;
   },
 
