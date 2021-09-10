@@ -58,14 +58,23 @@ export default {
     isInvited() {
       return !!this.$route.query.game;
     },
+    localPlayer() {
+      return this.$store.state.player.player;
+    },
   },
   methods: {
     async createGame() {
       try {
         this.loading = true;
-        await this.$store.dispatch("player/createPlayer", {
-          username: this.username,
-        });
+        if (!this.localPlayer) {
+          await this.$store.dispatch("player/createPlayer", {
+            username: this.username,
+          });
+        } else {
+          await this.$store.dispatch("player/editPlayer", {
+            username: this.username,
+          });
+        }
         await this.$store.dispatch("game/createGame");
         this.$router.push("/lobby");
       } catch (error) {
@@ -85,6 +94,13 @@ export default {
         console.log(error);
       }
     },
+  },
+  async created() {
+    const playerId = localStorage.playerId;
+    if (playerId) {
+      await this.$store.dispatch("player/getPlayer", playerId);
+      this.username = this.$store.state.player.player.username;
+    }
   },
 };
 </script>

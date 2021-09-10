@@ -17,6 +17,14 @@ const actions = {
     localStorage.playerId = player.id;
   },
 
+  async editPlayer({commit}, playerData) {
+    await db
+      .collection("players")
+      .doc(localStorage.playerId)
+      .update(playerData);
+    commit("SET_PLAYER", {id: localStorage.playerId, ...playerData});
+  },
+
   async getPlayer({commit}, userId) {
     const player = await db.collection("players").doc(userId).get();
     commit("SET_PLAYER", {id: player.id, ...player.data()});
