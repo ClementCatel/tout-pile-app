@@ -11,8 +11,8 @@ const mutations = {
 };
 
 const actions = {
-  async createGame({commit, rootState}) {
-    const game = await db.collection("games").add({
+  async createGame({dispatch, rootState}) {
+    const gameData = {
       answers: [],
       currentRound: 0,
       leaderId: rootState.player.player.id,
@@ -22,8 +22,10 @@ const actions = {
       scores: [],
       started: false,
       timer: 30,
-    });
-    commit("SET_GAME", {id: game.id, ...game.data()});
+    };
+    const game = await db.collection("games").add(gameData);
+    await dispatch("bindGame", game.id);
+    // commit("SET_GAME", {id: game.id, ...gameData});
   },
 
   async updateGame({state}, gameData) {
@@ -61,23 +63,26 @@ const actions = {
   },
 
   async bindGame({commit}, gameId) {
-    db.collection("games")
+    await db
+      .collection("games")
       .doc(gameId)
-      .onSnaphot((game) => {
+      .onSnapshot((game) => {
         commit("SET_GAME", {id: game.id, ...game.data()});
       });
   },
 
-  async addPlayer({state}, player) {
-    db.collection("games")
-      .doc(state.game.id)
+  async addPlayer({rootState}, gameId) {
+    await db
+      .collection("games")
+      .doc(gameId)
       .update({
-        players: fv.arrayUnion(player),
+        players: fv.arrayUnion(rootState.player.player),
       });
   },
 
   async removePlayer({state}, player) {
-    db.collection("games")
+    await db
+      .collection("games")
       .doc(state.game.id)
       .update({
         players: fv.arrayRemove(player),
