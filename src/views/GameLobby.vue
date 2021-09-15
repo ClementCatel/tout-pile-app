@@ -174,9 +174,13 @@ export default {
       clipboardData.writeText(link);
       this.snackbar = true;
     },
-    leaveGame() {
+    async leaveGame() {
       console.log("Leave game");
-      this.$router.push("/");
+      await await this.$store.dispatch(
+        "game/removePlayer",
+        this.$store.state.player.player,
+      );
+      // this.$router.push("/");
     },
     prefillForm() {
       this.timerSelected = this.game.timer;
@@ -187,7 +191,7 @@ export default {
   watch: {
     // Check if player has been kicked
     players(val) {
-      if (val.length > 0) {
+      if (val.length >= 0) {
         if (
           !val.some(
             (player) => player.id === this.$store.state.player.player.id,
