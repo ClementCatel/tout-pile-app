@@ -96,6 +96,7 @@ export default {
           avatarURL: this.avatarURL,
         });
         await this.$store.dispatch("game/addPlayer", this.$route.query.game);
+        await this.$store.dispatch("game/getGame", this.$route.query.game);
         await this.$store.dispatch("game/bindGame", this.$route.query.game);
         this.$router.push("/lobby");
       } catch (error) {

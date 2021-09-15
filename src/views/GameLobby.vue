@@ -20,7 +20,7 @@
           class="card white--text pa-3"
         >
           <v-card-title
-            class="justify-center text-h4 font-weight-bold text-uppercase"
+            class="justify-center text-h5 font-weight-bold text-uppercase"
           >
             {{ $t("lobby.players") }}
           </v-card-title>
@@ -36,14 +36,15 @@
           class="card white--text pa-3"
         >
           <v-card-title
-            class="justify-center text-h4 font-weight-bold text-uppercase"
+            class="justify-center text-h5 font-weight-bold text-uppercase"
           >
             {{ $t("lobby.settings") }}
           </v-card-title>
           <div class="mx-6 mb-3">
-            <v-row>
-              <div class="col-4 text-h5">
-                {{ $t("lobby.timer") }}
+            <v-row align="center">
+              <div class="col-6 text-h5">
+                <v-icon color="white" left large>mdi-clock-fast</v-icon
+                >{{ $t("lobby.timer") }}
               </div>
               <v-col>
                 <v-select
@@ -57,8 +58,9 @@
               </v-col>
             </v-row>
             <v-row>
-              <div class="col-4 text-h5">
-                {{ $t("lobby.rounds") }}
+              <div class="col-6 text-h5">
+                <v-icon color="white" left large>mdi-repeat</v-icon
+                >{{ $t("lobby.rounds") }}
               </div>
               <v-col>
                 <v-select
@@ -71,8 +73,9 @@
               </v-col>
             </v-row>
             <v-row>
-              <div class="col-4 text-h5">
-                {{ $t("lobby.categories") }}
+              <div class="col-6 text-h5">
+                <v-icon color="white" left large>mdi-label-outline</v-icon
+                >{{ $t("lobby.categories") }}
               </div>
               <v-col>
                 <v-autocomplete
@@ -110,6 +113,14 @@
       </v-col>
     </v-row>
 
+    <v-overlay absolute :opacity="0.5" :value="overlay">
+      <div id="readyGo">
+        <span class="nums font-weight-bold" :key="countDown">{{
+          countDown
+        }}</span>
+      </div>
+    </v-overlay>
+
     <v-snackbar v-model="snackbar" :timeout="2000" content-class="text-center">
       {{ $t("lobby.link_copied") }}
     </v-snackbar>
@@ -141,6 +152,8 @@ export default {
       ],
       categoriesSelected: [],
       snackbar: false,
+      overlay: false,
+      countDown: 3,
     };
   },
   computed: {
@@ -148,10 +161,13 @@ export default {
     players() {
       return this.game?.players || [];
     },
+    started() {
+      return this.game?.started;
+    },
     isLeader() {
       return (
         this.$store.state.player.player.id ===
-        this.$store.state.game.game.leaderId
+        this.$store.state.game.game?.leaderId
       );
     },
   },
@@ -159,8 +175,13 @@ export default {
     async kickPlayer(player) {
       await this.$store.dispatch("game/removePlayer", player);
     },
-    startGame() {
+    async startGame() {
       console.log("Start game");
+      await this.$store.dispatch("game/startGame", {
+        timer: this.timerSelected,
+        rounds: this.roundsSelected,
+        categories: this.categoriesSelected,
+      });
     },
     copyLink() {
       // dev link
@@ -175,7 +196,6 @@ export default {
       this.snackbar = true;
     },
     async leaveGame() {
-      console.log("Leave game");
       await await this.$store.dispatch(
         "game/removePlayer",
         this.$store.state.player.player,
@@ -186,6 +206,14 @@ export default {
       this.timerSelected = this.game.timer;
       this.roundsSelected = this.game.rounds;
       this.categoriesSelected = [];
+    },
+    countDownTimer() {
+      if (this.countDown > 0) {
+        setTimeout(() => {
+          this.countDown -= 1;
+          this.countDownTimer();
+        }, 1000);
+      }
     },
   },
   watch: {
@@ -201,8 +229,15 @@ export default {
         }
       }
     },
+    started(val) {
+      if (val) {
+        this.overlay = true;
+        this.countDownTimer();
+      }
+    },
   },
   created() {
+    console.log(this.game);
     if (this.game) {
       this.prefillForm();
     }
@@ -212,5 +247,23 @@ export default {
 <style scoped>
 .card {
   background-color: #4a3c82;
+}
+
+@keyframes count {
+  0% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nums {
+  font-size: 10em;
+  height: auto;
+  position: absolute;
+  top: 0;
+  right: 0;
+  animation: count 0.1s cubic-bezier(0.1, 0.1, 1, 1) 1;
 }
 </style>

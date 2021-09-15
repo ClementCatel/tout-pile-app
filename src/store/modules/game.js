@@ -24,6 +24,7 @@ const actions = {
       timer: 30,
     };
     const game = await db.collection("games").add(gameData);
+    await dispatch("getGame", game.id);
     await dispatch("bindGame", game.id);
     // commit("SET_GAME", {id: game.id, ...gameData});
   },
@@ -32,9 +33,9 @@ const actions = {
     return await db.collection("games").doc(state.game.id).update(gameData);
   },
 
-  async startGame({state, dispatch}) {
+  async startGame({dispatch}, gameData) {
     // Generate an array of random numbers
-    const max = state.game.rounds;
+    const max = gameData.rounds;
     let random = [];
     for (let i = 0; i < max; i++) {
       let tmp = Math.floor(Math.random() * max + 1);
@@ -57,18 +58,24 @@ const actions = {
       currentRound: 1,
       started: true,
       questions: questions,
+      ...gameData,
     };
 
     await dispatch("updateGame", data);
   },
 
   async bindGame({commit}, gameId) {
-    await db
+    return await db
       .collection("games")
       .doc(gameId)
       .onSnapshot((game) => {
         commit("SET_GAME", {id: game.id, ...game.data()});
       });
+  },
+
+  async getGame({commit}, gameId) {
+    const game = await db.collection("games").doc(gameId).get();
+    commit("SET_GAME", {id: game.id, ...game.data()});
   },
 
   async addPlayer({rootState}, gameId) {

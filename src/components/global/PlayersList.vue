@@ -3,7 +3,10 @@
     <v-card
       v-for="(player, index) in players"
       :key="index"
-      class="pa-2 mb-4 playerCard white--text"
+      :class="[
+        isPlayer(player.id) ? 'whiteBorder' : '',
+        'pa-2 mb-4 playerCard white--text',
+      ]"
       rounded="pill"
     >
       <div class="d-flex align-center">
@@ -49,6 +52,9 @@ export default {
     },
   },
   methods: {
+    isPlayer(playerId) {
+      return playerId === this.$store.state.player.player.id;
+    },
     isPlayerLeader(playerId) {
       return playerId === this.$store.state.game.game.leaderId;
     },
@@ -62,5 +68,8 @@ export default {
 <style scoped>
 .playerCard {
   background-color: rgb(0, 0, 0, 0.34) !important;
+}
+.whiteBorder {
+  border: solid 2px #00e676;
 }
 </style>
