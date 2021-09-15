@@ -30,7 +30,7 @@
 
       <v-col cols="6" class="ml-3">
         <v-card
-          rounded="xl"
+          rounded="lg"
           elevation="10"
           outlined
           class="card white--text pa-3"
