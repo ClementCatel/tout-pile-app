@@ -24,7 +24,7 @@
           fab
           dark
           class="mr-2"
-          @click="kickPlayer(player.id)"
+          @click="kickPlayer(player)"
           ><v-icon> mdi-close </v-icon></v-btn
         >
       </div>
@@ -52,8 +52,8 @@ export default {
     isPlayerLeader(playerId) {
       return playerId === this.$store.state.game.game.leaderId;
     },
-    kickPlayer(playerId) {
-      this.$emit("kick", playerId);
+    kickPlayer(player) {
+      this.$emit("kick", player);
     },
   },
 };

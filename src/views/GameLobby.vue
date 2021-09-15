@@ -109,6 +109,10 @@
         </div>
       </v-col>
     </v-row>
+
+    <v-snackbar v-model="snackbar" :timeout="2000" content-class="text-center">
+      {{ $t("lobby.link_copied") }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -125,7 +129,7 @@ export default {
     return {
       timerItems: [15, 30, 45],
       timerSelected: null,
-      roundsItems: [15, 20, 25],
+      roundsItems: [10, 15, 20, 25],
       roundsSelected: null,
       categoriesItems: [
         "History",
@@ -136,6 +140,7 @@ export default {
         "Video games",
       ],
       categoriesSelected: [],
+      snackbar: false,
     };
   },
   computed: {
@@ -144,26 +149,59 @@ export default {
       return this.game?.players || [];
     },
     isLeader() {
-      return true;
+      return (
+        this.$store.state.player.player.id ===
+        this.$store.state.game.game.leaderId
+      );
     },
   },
   methods: {
-    kickPlayer(playerId) {
-      console.log("kick : ", playerId);
+    async kickPlayer(player) {
+      await this.$store.dispatch("game/removePlayer", player);
     },
     startGame() {
       console.log("Start game");
     },
     copyLink() {
-      console.log("Copy Link");
+      // dev link
+      const link = `http://192.168.1.36:8080/?game=${this.game.id}`;
+      // production link
+      //const link = "";
+      const clipboardData =
+        window.clipboardData ||
+        event.originalEvent?.clipboardData ||
+        navigator.clipboard;
+      clipboardData.writeText(link);
+      this.snackbar = true;
     },
     leaveGame() {
       console.log("Leave game");
       this.$router.push("/");
     },
+    prefillForm() {
+      this.timerSelected = this.game.timer;
+      this.roundsSelected = this.game.rounds;
+      this.categoriesSelected = [];
+    },
+  },
+  watch: {
+    // Check if player has been kicked
+    players(val) {
+      if (val.length > 0) {
+        if (
+          !val.some(
+            (player) => player.id === this.$store.state.player.player.id,
+          )
+        ) {
+          this.$router.push("/");
+        }
+      }
+    },
   },
   created() {
-    console.log();
+    if (this.game) {
+      this.prefillForm();
+    }
   },
 };
 </script>

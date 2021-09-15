@@ -93,7 +93,7 @@ export default {
         this.loading = true;
         await this.$store.dispatch("player/createPlayer", {
           username: this.username,
-          avatarURL: "https://avatars.dicebear.com/api/bottts/:seed.svg",
+          avatarURL: this.avatarURL,
         });
         await this.$store.dispatch("game/addPlayer", this.$route.query.game);
         await this.$store.dispatch("game/bindGame", this.$route.query.game);
