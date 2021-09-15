@@ -7,7 +7,7 @@
       rounded="pill"
     >
       <div class="d-flex align-center">
-        <v-avatar size="60" color="grey">
+        <v-avatar size="60" color="transparent">
           <img :src="player.avatarURL" />
           <!-- <v-icon dark> mdi-account-circle </v-icon> -->
         </v-avatar>
@@ -16,7 +16,7 @@
         </v-card-title>
         <v-spacer></v-spacer>
 
-        <span v-if="player.isLeader" class="text-h5 mr-2">👑</span>
+        <span v-if="isPlayerLeader(player.id)" class="text-h5 mr-2">👑</span>
         <v-btn
           v-else-if="isLeader"
           color="primary"
@@ -42,10 +42,16 @@ export default {
   },
   computed: {
     isLeader() {
-      return true;
+      return (
+        this.$store.state.player.player.id ===
+        this.$store.state.game.game.leaderId
+      );
     },
   },
   methods: {
+    isPlayerLeader(playerId) {
+      return playerId === this.$store.state.game.game.leaderId;
+    },
     kickPlayer(playerId) {
       this.$emit("kick", playerId);
     },

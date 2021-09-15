@@ -5,7 +5,9 @@
         <h2 v-if="isInvited" class="white--text mb-3">
           {{ $t("onboarding.has_been_invited") }}
         </h2>
-        <v-icon size="200">mdi-account-circle</v-icon>
+        <v-avatar size="200" color="transparent">
+          <img :src="avatarURL" />
+        </v-avatar>
       </v-col>
     </v-row>
 
@@ -35,7 +37,7 @@
           elevation="2"
           class="px-10 font-weight-bold"
           :loading="loading"
-          @click="createGame"
+          @click="start"
           >{{ $t("onboarding.start") }}</v-btn
         >
       </v-col>
@@ -61,18 +63,23 @@ export default {
     localPlayer() {
       return this.$store.state.player.player;
     },
+    avatarURL() {
+      return `https://avatars.dicebear.com/api/bottts/${this.username}.svg`;
+    },
   },
   methods: {
-    async createGame() {
+    async start() {
       try {
         this.loading = true;
         if (!this.localPlayer) {
           await this.$store.dispatch("player/createPlayer", {
             username: this.username,
+            avatarURL: this.avatarURL,
           });
         } else {
           await this.$store.dispatch("player/editPlayer", {
             username: this.username,
+            avatarURL: this.avatarURL,
           });
         }
         await this.$store.dispatch("game/createGame");
@@ -86,6 +93,7 @@ export default {
         this.loading = true;
         await this.$store.dispatch("player/createPlayer", {
           username: this.username,
+          avatarURL: "https://avatars.dicebear.com/api/bottts/:seed.svg",
         });
         await this.$store.dispatch("game/addPlayer", this.$route.query.game);
         await this.$store.dispatch("game/bindGame", this.$route.query.game);

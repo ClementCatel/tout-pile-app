@@ -114,6 +114,7 @@
 
 <script>
 import PlayersList from "@/components/global/PlayersList";
+import {mapState} from "vuex";
 
 export default {
   name: "Home",
@@ -138,30 +139,9 @@ export default {
     };
   },
   computed: {
+    ...mapState("game", ["game"]),
     players() {
-      return [
-        {
-          username: "bob",
-          isLeader: true,
-          avatarURL: "https://picsum.photos/200",
-          id: "1",
-        },
-        {
-          username: "john",
-          avatarURL: "https://picsum.photos/200",
-          id: "2",
-        },
-        {
-          username: "peter",
-          avatarURL: "https://picsum.photos/200",
-          id: "3",
-        },
-        {
-          username: "fred",
-          avatarURL: "https://picsum.photos/200",
-          id: "4",
-        },
-      ];
+      return this.game?.players || [];
     },
     isLeader() {
       return true;
@@ -181,6 +161,9 @@ export default {
       console.log("Leave game");
       this.$router.push("/");
     },
+  },
+  created() {
+    console.log();
   },
 };
 </script>
