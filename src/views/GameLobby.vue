@@ -14,7 +14,7 @@
     <v-row justify="center">
       <v-col cols="4" class="mr-3">
         <v-card
-          rounded="xl"
+          rounded="lg"
           elevation="10"
           outlined
           class="card white--text pa-3"
