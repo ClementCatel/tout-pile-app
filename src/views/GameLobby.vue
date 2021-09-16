@@ -178,7 +178,6 @@ export default {
       await this.$store.dispatch("game/removePlayer", player);
     },
     async startGame() {
-      console.log("Start game");
       this.loading = true;
       await this.$store.dispatch("game/startGame", {
         timer: this.timerSelected,
