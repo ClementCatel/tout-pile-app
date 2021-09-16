@@ -45,9 +45,19 @@ const actions = {
     }
     // Get random questions
     const questions = [];
+    // for (const ran of random) {
+    //   const querySnapshot = await db
+    //     .collection("questions")
+    //     .where("id", "==", ran)
+    //     .get();
+    //   console.log(querySnapshot);
+    //   querySnapshot.forEach((document) => {
+    //     questions.push(document.data());
+    //   });
+    // }
     const querySnapshot = await db
       .collection("questions")
-      .where("id", "in", random)
+      .where("id", ">=", random)
       .get();
 
     querySnapshot.forEach((document) => {

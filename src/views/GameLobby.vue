@@ -104,6 +104,7 @@
           <v-btn
             v-if="isLeader"
             large
+            :loading="loading"
             class="ml-3 font-weight-bold secondary--text"
             @click="startGame"
             ><v-icon left>mdi-play-outline</v-icon
@@ -140,7 +141,7 @@ export default {
     return {
       timerItems: [15, 30, 45],
       timerSelected: null,
-      roundsItems: [10, 15, 20, 25],
+      roundsItems: [5, 10],
       roundsSelected: null,
       categoriesItems: [
         "History",
@@ -154,6 +155,7 @@ export default {
       snackbar: false,
       overlay: false,
       countDown: 3,
+      loading: false,
     };
   },
   computed: {
@@ -177,11 +179,13 @@ export default {
     },
     async startGame() {
       console.log("Start game");
+      this.loading = true;
       await this.$store.dispatch("game/startGame", {
         timer: this.timerSelected,
         rounds: this.roundsSelected,
         categories: this.categoriesSelected,
       });
+      this.loading = false;
     },
     copyLink() {
       // dev link
@@ -237,7 +241,6 @@ export default {
     },
   },
   created() {
-    console.log(this.game);
     if (this.game) {
       this.prefillForm();
     }
