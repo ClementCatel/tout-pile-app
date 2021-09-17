@@ -57,7 +57,7 @@ const actions = {
     // }
     const querySnapshot = await db
       .collection("questions")
-      .where("id", ">=", random)
+      .where("id", "in", random)
       .get();
 
     querySnapshot.forEach((document) => {

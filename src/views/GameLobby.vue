@@ -184,7 +184,7 @@ export default {
     },
     copyLink() {
       // dev link
-      const link = `http://192.168.1.36:8080/?game=${this.game.id}`;
+      const link = `http://localhost:8080/?game=${this.game.id}`;
       // production link
       //const link = "";
       const clipboardData =
