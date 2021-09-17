@@ -114,12 +114,8 @@
       </v-col>
     </v-row>
 
-    <v-overlay absolute :opacity="0.5" :value="overlay">
-      <div id="readyGo">
-        <span class="nums font-weight-bold" :key="countDown">{{
-          countDown
-        }}</span>
-      </div>
+    <v-overlay :opacity="0.5" :value="overlay">
+      <div class="nums font-weight-bold" :key="countDown">{{ countDown }}</div>
     </v-overlay>
 
     <v-snackbar v-model="snackbar" :timeout="2000" content-class="text-center">
@@ -213,7 +209,9 @@ export default {
     countDownTimer() {
       if (this.countDown > 0) {
         setTimeout(() => {
-          this.countDown -= 1;
+          this.countDown !== 1
+            ? (this.countDown -= 1)
+            : (this.countDown = "Go !");
           this.countDownTimer();
         }, 1000);
       }
@@ -263,9 +261,7 @@ export default {
 .nums {
   font-size: 10em;
   height: auto;
-  position: absolute;
-  top: 0;
-  right: 0;
+  text-align: center;
   animation: count 0.1s cubic-bezier(0.1, 0.1, 1, 1) 1;
 }
 </style>
