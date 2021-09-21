@@ -3,11 +3,14 @@
     <v-card
       v-for="(player, index) in players"
       :key="index"
-      class="pa-2 mb-4 playerCard white--text"
+      :class="[
+        isPlayer(player.id) ? 'whiteBorder' : '',
+        'pa-2 mb-4 playerCard white--text',
+      ]"
       rounded="pill"
     >
       <div class="d-flex align-center">
-        <v-avatar size="60" color="grey">
+        <v-avatar size="60" color="transparent">
           <img :src="player.avatarURL" />
           <!-- <v-icon dark> mdi-account-circle </v-icon> -->
         </v-avatar>
@@ -16,7 +19,7 @@
         </v-card-title>
         <v-spacer></v-spacer>
 
-        <span v-if="player.isLeader" class="text-h5 mr-2">👑</span>
+        <span v-if="isPlayerLeader(player.id)" class="text-h5 mr-2">👑</span>
         <v-btn
           v-else-if="isLeader"
           color="primary"
@@ -24,7 +27,7 @@
           fab
           dark
           class="mr-2"
-          @click="kickPlayer(player.id)"
+          @click="kickPlayer(player)"
           ><v-icon> mdi-close </v-icon></v-btn
         >
       </div>
@@ -42,12 +45,21 @@ export default {
   },
   computed: {
     isLeader() {
-      return true;
+      return (
+        this.$store.state.player.player.id ===
+        this.$store.state.game.game.leaderId
+      );
     },
   },
   methods: {
-    kickPlayer(playerId) {
-      this.$emit("kick", playerId);
+    isPlayer(playerId) {
+      return playerId === this.$store.state.player.player.id;
+    },
+    isPlayerLeader(playerId) {
+      return playerId === this.$store.state.game.game.leaderId;
+    },
+    kickPlayer(player) {
+      this.$emit("kick", player);
     },
   },
 };
@@ -56,5 +68,8 @@ export default {
 <style scoped>
 .playerCard {
   background-color: rgb(0, 0, 0, 0.34) !important;
+}
+.whiteBorder {
+  border: solid 2px #00e676;
 }
 </style>

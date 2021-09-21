@@ -14,13 +14,13 @@
     <v-row justify="center">
       <v-col cols="4" class="mr-3">
         <v-card
-          rounded="xl"
+          rounded="lg"
           elevation="10"
           outlined
           class="card white--text pa-3"
         >
           <v-card-title
-            class="justify-center text-h4 font-weight-bold text-uppercase"
+            class="justify-center text-h5 font-weight-bold text-uppercase"
           >
             {{ $t("lobby.players") }}
           </v-card-title>
@@ -30,20 +30,21 @@
 
       <v-col cols="6" class="ml-3">
         <v-card
-          rounded="xl"
+          rounded="lg"
           elevation="10"
           outlined
           class="card white--text pa-3"
         >
           <v-card-title
-            class="justify-center text-h4 font-weight-bold text-uppercase"
+            class="justify-center text-h5 font-weight-bold text-uppercase"
           >
             {{ $t("lobby.settings") }}
           </v-card-title>
           <div class="mx-6 mb-3">
-            <v-row>
-              <div class="col-4 text-h5">
-                {{ $t("lobby.timer") }}
+            <v-row align="center">
+              <div class="col-6 text-h5">
+                <v-icon color="white" left large>mdi-clock-fast</v-icon
+                >{{ $t("lobby.timer") }}
               </div>
               <v-col>
                 <v-select
@@ -57,8 +58,9 @@
               </v-col>
             </v-row>
             <v-row>
-              <div class="col-4 text-h5">
-                {{ $t("lobby.rounds") }}
+              <div class="col-6 text-h5">
+                <v-icon color="white" left large>mdi-repeat</v-icon
+                >{{ $t("lobby.rounds") }}
               </div>
               <v-col>
                 <v-select
@@ -71,8 +73,9 @@
               </v-col>
             </v-row>
             <v-row>
-              <div class="col-4 text-h5">
-                {{ $t("lobby.categories") }}
+              <div class="col-6 text-h5">
+                <v-icon color="white" left large>mdi-label-outline</v-icon
+                >{{ $t("lobby.categories") }}
               </div>
               <v-col>
                 <v-autocomplete
@@ -101,6 +104,7 @@
           <v-btn
             v-if="isLeader"
             large
+            :loading="loading"
             class="ml-3 font-weight-bold secondary--text"
             @click="startGame"
             ><v-icon left>mdi-play-outline</v-icon
@@ -109,11 +113,20 @@
         </div>
       </v-col>
     </v-row>
+
+    <v-overlay :opacity="0.5" :value="overlay">
+      <div class="nums font-weight-bold" :key="countDown">{{ countDown }}</div>
+    </v-overlay>
+
+    <v-snackbar v-model="snackbar" :timeout="2000" content-class="text-center">
+      {{ $t("lobby.link_copied") }}
+    </v-snackbar>
   </v-container>
 </template>
 
 <script>
 import PlayersList from "@/components/global/PlayersList";
+import {mapState} from "vuex";
 
 export default {
   name: "Home",
@@ -124,7 +137,7 @@ export default {
     return {
       timerItems: [15, 30, 45],
       timerSelected: null,
-      roundsItems: [15, 20, 25],
+      roundsItems: [5, 10],
       roundsSelected: null,
       categoriesItems: [
         "History",
@@ -135,57 +148,120 @@ export default {
         "Video games",
       ],
       categoriesSelected: [],
+      snackbar: false,
+      overlay: false,
+      countDown: 3,
+      loading: false,
     };
   },
   computed: {
+    ...mapState("game", ["game"]),
     players() {
-      return [
-        {
-          username: "bob",
-          isLeader: true,
-          avatarURL: "https://picsum.photos/200",
-          id: "1",
-        },
-        {
-          username: "john",
-          avatarURL: "https://picsum.photos/200",
-          id: "2",
-        },
-        {
-          username: "peter",
-          avatarURL: "https://picsum.photos/200",
-          id: "3",
-        },
-        {
-          username: "fred",
-          avatarURL: "https://picsum.photos/200",
-          id: "4",
-        },
-      ];
+      return this.game?.players || [];
+    },
+    started() {
+      return this.game?.started;
     },
     isLeader() {
-      return true;
+      return (
+        this.$store.state.player.player.id ===
+        this.$store.state.game.game?.leaderId
+      );
     },
   },
   methods: {
-    kickPlayer(playerId) {
-      console.log("kick : ", playerId);
+    async kickPlayer(player) {
+      await this.$store.dispatch("game/removePlayer", player);
     },
-    startGame() {
-      console.log("Start game");
+    async startGame() {
+      this.loading = true;
+      await this.$store.dispatch("game/startGame", {
+        timer: this.timerSelected,
+        rounds: this.roundsSelected,
+        categories: this.categoriesSelected,
+      });
+      this.loading = false;
     },
     copyLink() {
-      console.log("Copy Link");
+      // dev link
+      const link = `http://localhost:8080/?game=${this.game.id}`;
+      // production link
+      //const link = "";
+      const clipboardData =
+        window.clipboardData ||
+        event.originalEvent?.clipboardData ||
+        navigator.clipboard;
+      clipboardData.writeText(link);
+      this.snackbar = true;
     },
-    leaveGame() {
-      console.log("Leave game");
-      this.$router.push("/");
+    async leaveGame() {
+      await await this.$store.dispatch(
+        "game/removePlayer",
+        this.$store.state.player.player,
+      );
+      // this.$router.push("/");
     },
+    prefillForm() {
+      this.timerSelected = this.game.timer;
+      this.roundsSelected = this.game.rounds;
+      this.categoriesSelected = [];
+    },
+    countDownTimer() {
+      if (this.countDown > 0) {
+        setTimeout(() => {
+          this.countDown !== 1
+            ? (this.countDown -= 1)
+            : (this.countDown = "Go !");
+          this.countDownTimer();
+        }, 1000);
+      }
+    },
+  },
+  watch: {
+    // Check if player has been kicked
+    players(val) {
+      if (val.length >= 0) {
+        if (
+          !val.some(
+            (player) => player.id === this.$store.state.player.player.id,
+          )
+        ) {
+          this.$router.push("/");
+        }
+      }
+    },
+    started(val) {
+      if (val) {
+        this.overlay = true;
+        this.countDownTimer();
+      }
+    },
+  },
+  created() {
+    if (this.game) {
+      this.prefillForm();
+    }
   },
 };
 </script>
 <style scoped>
 .card {
   background-color: #4a3c82;
+}
+
+@keyframes count {
+  0% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.nums {
+  font-size: 10em;
+  height: auto;
+  text-align: center;
+  animation: count 0.1s cubic-bezier(0.1, 0.1, 1, 1) 1;
 }
 </style>
