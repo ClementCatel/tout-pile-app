@@ -15,5 +15,8 @@
     "categories": "Categories",
     "rounds": "Rounds",
     "link_copied": "Link copied"
+  },
+  "answers": {
+    "show_results": "Show results"
   }
 }

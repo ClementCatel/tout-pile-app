@@ -15,5 +15,8 @@
     "categories": "Catégories",
     "rounds": "Manches",
     "link_copied": "Lien copié"
+  },
+  "answers": {
+    "show_results": "Afficher les resultats"
   }
 }
