@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="auto text-center">
+      <v-col cols="4" class="text-center">
         <div class="white--text text-h5 mb-5">{{ question }}</div>
         <v-card
           rounded="lg"

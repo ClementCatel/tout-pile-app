@@ -181,6 +181,7 @@ export default {
         categories: this.categoriesSelected,
       });
       this.loading = false;
+      this.$router.push("/answers");
     },
     copyLink() {
       // dev link
