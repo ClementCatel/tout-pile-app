@@ -15,5 +15,9 @@
     "categories": "Categories",
     "rounds": "Rounds",
     "link_copied": "Link copied"
+  },
+  "round": {
+    "response": "Response",
+    "validate": "Validate"
   }
 }

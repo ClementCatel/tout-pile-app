@@ -10,8 +10,13 @@ export default {
   emits: ["answered"],
   data() {
     return {
-      timerCount: 15,
+      timerCount: this.timer,
     };
+  },
+  props: {
+    timer: {
+      type: Number,
+    },
   },
   watch: {
     timerCount: {
