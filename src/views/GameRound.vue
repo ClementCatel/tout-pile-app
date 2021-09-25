@@ -65,18 +65,14 @@ export default {
     ...mapState("game", ["game"]),
   },
   methods: {
-    nextRound() {
+    async nextRound() {
       const finalAnswer = {
         answer: this.answer,
         playerId: this.$store.state.player.player.id,
         round: this.game.currentRound,
       };
-      this.$store.dispatch("game/addAnswer", finalAnswer);
-      if (this.game.currentRound < this.game.rounds) {
-        this.$store.dispatch("game/updateGame", {
-          currentRound: this.game.currentRound + 1,
-        });
-      }
+      await this.$store.dispatch("game/addAnswer", finalAnswer);
+      this.$router.push("/lobby");
     },
   },
 };
