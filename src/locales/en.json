@@ -19,5 +19,8 @@
   "round": {
     "response": "Response",
     "validate": "Validate"
+  },
+  "results": {
+    "back_to_lobby": "Back to lobby"
   }
 }

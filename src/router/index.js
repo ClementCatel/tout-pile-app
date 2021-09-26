@@ -4,6 +4,7 @@ import Home from "../views/Home.vue";
 import Onboarding from "../views/Onboarding.vue";
 import GameLobby from "../views/GameLobby.vue";
 import GameRound from "../views/GameRound.vue";
+import GameFinalResults from "../views/GameFinalResults.vue";
 
 Vue.use(VueRouter);
 
@@ -27,6 +28,11 @@ const routes = [
     path: "/round",
     name: "GameRound",
     component: GameRound,
+  },
+  {
+    path: "/results",
+    name: "FinalResults",
+    component: GameFinalResults,
   },
 ];
 
