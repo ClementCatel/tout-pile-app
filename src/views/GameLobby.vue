@@ -215,6 +215,8 @@ export default {
             : (this.countDown = "Go !");
           this.countDownTimer();
         }, 1000);
+      } else {
+        this.$router.push("/round");
       }
     },
   },

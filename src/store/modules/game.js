@@ -64,6 +64,15 @@ const actions = {
       questions.push(document.data());
     });
 
+    // - Shuffle the questions
+    for (let i = questions.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = questions[i];
+      questions[i] = questions[j];
+      questions[j] = temp;
+    }
+    // -
+
     const data = {
       currentRound: 1,
       started: true,

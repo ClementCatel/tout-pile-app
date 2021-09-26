@@ -18,5 +18,9 @@
   },
   "answers": {
     "show_results": "Show results"
+  },
+  "round": {
+    "response": "Response",
+    "validate": "Validate"
   }
 }
