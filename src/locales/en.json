@@ -17,7 +17,9 @@
     "link_copied": "Link copied"
   },
   "answers": {
-    "show_results": "Show results"
+    "show_results": "Show results",
+    "answers": "Answers",
+    "right_answer": "Right Answer"
   },
   "round": {
     "response": "Response",

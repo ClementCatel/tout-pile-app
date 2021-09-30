@@ -1,15 +1,28 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <v-row justify="center">
-      <v-col cols="4" class="text-center">
-        <div class="white--text text-h5 mb-5">{{ question }}</div>
+      <v-col cols="4" class="text-center white--text">
+        <div class="text-h5 my-5">
+          {{ game.questions[game.currentRound - 1].question }}
+        </div>
+        <div>
+          {{ $t("answers.right_answer") }} :
+          <span class="text-h4 blurry-text px-3">{{
+            game.questions[game.currentRound - 1].answer
+          }}</span>
+        </div>
         <v-card
           rounded="lg"
           elevation="10"
           outlined
-          class="card white--text pa-3 mb-6"
+          class="card white--text pa-3 my-6"
         >
-          <players-list :players="players" />
+          <v-card-title
+            class="justify-center text-h5 font-weight-bold text-uppercase"
+          >
+            {{ $t("answers.answers") }}
+          </v-card-title>
+          <players-list :players="players" :answers="answersDictionnary" />
         </v-card>
         <v-btn
           v-if="isLeader"
@@ -44,8 +57,14 @@ export default {
     players() {
       return this.game?.players || [];
     },
-    question() {
-      return "Hello world !";
+    answersDictionnary() {
+      const dict = {};
+      this.game?.answers.forEach((answer) => {
+        if (answer.round === this.game.currentRound) {
+          dict[answer.playerId] = answer;
+        }
+      });
+      return dict;
     },
     isLeader() {
       return (
@@ -65,5 +84,10 @@ export default {
 <style scoped>
 .card {
   background-color: #4a3c82;
+}
+
+.blurry-text {
+  color: transparent;
+  text-shadow: 0 0 14px white;
 }
 </style>

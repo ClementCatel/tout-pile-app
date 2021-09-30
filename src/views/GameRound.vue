@@ -72,7 +72,7 @@ export default {
         round: this.game.currentRound,
       };
       await this.$store.dispatch("game/addAnswer", finalAnswer);
-      this.$router.push("/lobby");
+      this.$router.push("/answers");
     },
   },
 };

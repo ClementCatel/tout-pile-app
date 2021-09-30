@@ -181,7 +181,6 @@ export default {
         categories: this.categoriesSelected,
       });
       this.loading = false;
-      this.$router.push("/answers");
     },
     copyLink() {
       // dev link
@@ -208,7 +207,7 @@ export default {
       this.categoriesSelected = [];
     },
     countDownTimer() {
-      if (this.countDown > 0) {
+      if (this.countDown > 0 || this.countDown === "Go !") {
         setTimeout(() => {
           this.countDown !== 1
             ? (this.countDown -= 1)

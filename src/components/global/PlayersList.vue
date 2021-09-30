@@ -19,17 +19,27 @@
         </v-card-title>
         <v-spacer></v-spacer>
 
-        <span v-if="isPlayerLeader(player.id)" class="text-h5 mr-2">👑</span>
-        <v-btn
-          v-else-if="isLeader"
-          color="primary"
-          x-small
-          fab
-          dark
-          class="mr-2"
-          @click="kickPlayer(player)"
-          ><v-icon> mdi-close </v-icon></v-btn
+        <v-chip
+          v-if="answers"
+          color="white"
+          class="px-6 mr-2 font-weight-bold"
+          large
+          >{{ playerAnswer(player.id) }}</v-chip
         >
+
+        <div v-else>
+          <span v-if="isPlayerLeader(player.id)" class="text-h5 mr-2">👑</span>
+          <v-btn
+            v-else-if="isLeader"
+            color="primary"
+            x-small
+            fab
+            dark
+            class="mr-2"
+            @click="kickPlayer(player)"
+            ><v-icon> mdi-close </v-icon></v-btn
+          >
+        </div>
       </div>
     </v-card>
   </div>
@@ -41,6 +51,13 @@ export default {
   props: {
     players: {
       type: Array,
+      default: () => {
+        return [];
+      },
+    },
+    answers: {
+      type: [Object, Boolean],
+      default: false,
     },
   },
   computed: {
@@ -57,6 +74,12 @@ export default {
     },
     isPlayerLeader(playerId) {
       return playerId === this.$store.state.game.game.leaderId;
+    },
+    playerAnswer(playerId) {
+      if (this.answers) {
+        return this.answers[playerId]?.answer || "";
+      }
+      return null;
     },
     kickPlayer(player) {
       this.$emit("kick", player);
