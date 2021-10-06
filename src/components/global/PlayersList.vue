@@ -20,11 +20,18 @@
         <v-spacer></v-spacer>
 
         <v-chip
-          v-if="answers"
+          v-if="answers && !showPoints"
           color="white"
           class="px-6 mr-2 font-weight-bold"
           >{{ playerAnswer(player.id) }}</v-chip
         >
+
+        <div v-else-if="scores && showPoints">
+          <span>{{ $t("players.points") }} : </span>
+          <span class="px-2 mr-2 font-weight-bold">{{
+            playerScore(player.id)
+          }}</span>
+        </div>
 
         <div v-else>
           <span v-if="isPlayerLeader(player.id)" class="text-h5 mr-2">👑</span>
@@ -58,6 +65,14 @@ export default {
       type: [Object, Boolean],
       default: false,
     },
+    scores: {
+      type: [Object, Boolean],
+      default: false,
+    },
+    showPoints: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     isLeader() {
@@ -76,7 +91,13 @@ export default {
     },
     playerAnswer(playerId) {
       if (this.answers) {
-        return this.answers[playerId]?.answer || "";
+        return this.answers[playerId]?.answer || 0;
+      }
+      return null;
+    },
+    playerScore(playerId) {
+      if (this.scores) {
+        return this.scores[playerId]?.score || 0;
       }
       return null;
     },

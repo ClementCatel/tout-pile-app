@@ -24,5 +24,8 @@
   "round": {
     "response": "Réponse",
     "validate": "Valider"
+  },
+  "players": {
+    "points": "Points"
   }
 }

@@ -19,14 +19,19 @@
           rounded="lg"
           elevation="10"
           outlined
-          class="card white--text py-3 px-6 my-6"
+          class="card white--text py-3 px-6 mt-6 mb-10"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
           >
             {{ $t("answers.answers") }}
           </v-card-title>
-          <players-list :players="players" :answers="answersDictionnary" />
+          <players-list
+            :players="players"
+            :answers="answersDictionnary"
+            :scores="scoresDictionnary"
+            :show-points="game.showResults"
+          />
         </v-card>
         <v-btn
           v-if="isLeader"
@@ -77,6 +82,14 @@ export default {
         }
       }, {});
     },
+    scoresDictionnary() {
+      return this.game?.scores.reduce((obj, item) => {
+        if (item.round === this.game.currentRound) {
+          obj[item["playerId"]] = item;
+          return obj;
+        }
+      }, {});
+    },
     isLeader() {
       return (
         this.$store.state.player.player?.id ===
@@ -87,13 +100,13 @@ export default {
   methods: {
     async showResults() {
       this.loading = true;
+      await this.calculateScores();
       await this.$store.dispatch("game/updateGame", {
         showResults: true,
       });
-      this.calculateScores();
       this.loading = false;
     },
-    calculateScores() {
+    async calculateScores() {
       const correctAnswer = this.currentQuestion.answer;
       const closest = this.playerAnswers.reduce((a, b) => {
         return Math.abs(b.answer - correctAnswer) <
@@ -101,7 +114,11 @@ export default {
           ? b
           : a;
       });
-      console.log(closest);
+      await this.$store.dispatch("game/addScore", {
+        playerId: closest.playerId,
+        round: this.game.currentRound,
+        score: closest.answer === this.currentQuestion.answer ? 2 : 1,
+      });
     },
   },
 };

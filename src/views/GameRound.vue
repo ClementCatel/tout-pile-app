@@ -72,7 +72,7 @@ export default {
       let answer = this.answer;
       if (!this.answer || isNaN(this.answer)) answer = 0;
       const finalAnswer = {
-        answer: answer,
+        answer: parseFloat(answer),
         playerId: this.$store.state.player.player.id,
         round: this.game.currentRound,
       };
