@@ -2,20 +2,24 @@
   <v-container fluid>
     <v-row justify="center">
       <v-col cols="4" class="text-center white--text">
-        <div class="text-h5 my-5">
-          {{ game.questions[game.currentRound - 1].question }}
-        </div>
-        <div>
+        <h2 class="my-5">
+          {{ currentQuestion.question }}
+        </h2>
+        <div class="font-weight-bold">
           {{ $t("answers.right_answer") }} :
-          <span class="text-h4 blurry-text px-3">{{
-            game.questions[game.currentRound - 1].answer
-          }}</span>
+          <span
+            :class="[
+              !this.game.showResults ? 'blurry-text' : '',
+              'text-h4 px-3',
+            ]"
+            >{{ currentQuestion.answer }}</span
+          >
         </div>
         <v-card
           rounded="lg"
           elevation="10"
           outlined
-          class="card white--text pa-3 my-6"
+          class="card white--text py-3 px-6 my-6"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
@@ -54,17 +58,24 @@ export default {
   },
   computed: {
     ...mapState("game", ["game"]),
+    currentQuestion() {
+      return this.game.questions[this.game.currentRound - 1];
+    },
     players() {
       return this.game?.players || [];
     },
-    answersDictionnary() {
-      const dict = {};
-      this.game?.answers.forEach((answer) => {
-        if (answer.round === this.game.currentRound) {
-          dict[answer.playerId] = answer;
-        }
+    playerAnswers() {
+      return this.game?.answers.filter((answer) => {
+        return answer.round === this.game.currentRound;
       });
-      return dict;
+    },
+    answersDictionnary() {
+      return this.game?.answers.reduce((obj, item) => {
+        if (item.round === this.game.currentRound) {
+          obj[item["playerId"]] = item;
+          return obj;
+        }
+      }, {});
     },
     isLeader() {
       return (
@@ -74,8 +85,23 @@ export default {
     },
   },
   methods: {
-    showResults() {
-      console.log("show results");
+    async showResults() {
+      this.loading = true;
+      await this.$store.dispatch("game/updateGame", {
+        showResults: true,
+      });
+      this.calculateScores();
+      this.loading = false;
+    },
+    calculateScores() {
+      const correctAnswer = this.currentQuestion.answer;
+      const closest = this.playerAnswers.reduce((a, b) => {
+        return Math.abs(b.answer - correctAnswer) <
+          Math.abs(a.answer - correctAnswer)
+          ? b
+          : a;
+      });
+      console.log(closest);
     },
   },
 };
@@ -89,5 +115,10 @@ export default {
 .blurry-text {
   color: transparent;
   text-shadow: 0 0 14px white;
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 </style>

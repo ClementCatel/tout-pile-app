@@ -10,11 +10,11 @@
       rounded="pill"
     >
       <div class="d-flex align-center">
-        <v-avatar size="60" color="transparent">
+        <v-avatar size="40" color="transparent">
           <img :src="player.avatarURL" />
           <!-- <v-icon dark> mdi-account-circle </v-icon> -->
         </v-avatar>
-        <v-card-title>
+        <v-card-title class="py-0">
           {{ player.username }}
         </v-card-title>
         <v-spacer></v-spacer>
@@ -23,7 +23,6 @@
           v-if="answers"
           color="white"
           class="px-6 mr-2 font-weight-bold"
-          large
           >{{ playerAnswer(player.id) }}</v-chip
         >
 

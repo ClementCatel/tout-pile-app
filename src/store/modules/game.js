@@ -20,6 +20,7 @@ const actions = {
       questions: [],
       rounds: 10,
       scores: [],
+      showResults: false,
       started: false,
       timer: 30,
     };
