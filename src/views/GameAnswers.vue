@@ -154,7 +154,11 @@ export default {
   watch: {
     currentRound(val, old) {
       if (val === old + 1) {
-        this.$router.push("/round");
+        if (old === this.game.rounds) {
+          console.log("C'est fini !");
+        } else {
+          this.$router.push("/round");
+        }
       }
     },
   },
