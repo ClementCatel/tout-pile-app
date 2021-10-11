@@ -34,7 +34,16 @@
           />
         </v-card>
         <v-btn
-          v-if="isLeader"
+          v-if="game.showResults && isLeader"
+          large
+          class="font-weight-bold secondary--text"
+          @click="nextRound"
+          :disabled="validated"
+        >
+          {{ $t("answers.next_round") }}
+        </v-btn>
+        <v-btn
+          v-else-if="isLeader"
           large
           :loading="loading"
           @click="showResults"
@@ -119,6 +128,9 @@ export default {
         round: this.game.currentRound,
         score: closest.answer === this.currentQuestion.answer ? 2 : 1,
       });
+    },
+    async nextRound() {
+      console.log("Next round");
     },
   },
 };

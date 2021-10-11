@@ -19,7 +19,8 @@
   "answers": {
     "show_results": "Voir les resultats",
     "answers": "Réponses",
-    "right_answer": "Bonne réponse"
+    "right_answer": "Bonne réponse",
+    "next_round": "Tour suivant"
   },
   "round": {
     "response": "Réponse",

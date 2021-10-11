@@ -19,7 +19,8 @@
   "answers": {
     "show_results": "Show results",
     "answers": "Answers",
-    "right_answer": "Right Answer"
+    "right_answer": "Right Answer",
+    "next_round": "Next round"
   },
   "round": {
     "response": "Response",
