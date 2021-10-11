@@ -27,6 +27,7 @@
             {{ $t("answers.answers") }}
           </v-card-title>
           <players-list
+            v-if="answersDictionnary"
             :players="players"
             :answers="answersDictionnary"
             :scores="scoresDictionnary"
@@ -38,7 +39,6 @@
           large
           class="font-weight-bold secondary--text"
           @click="nextRound"
-          :disabled="validated"
         >
           {{ $t("answers.next_round") }}
         </v-btn>
@@ -72,6 +72,9 @@ export default {
   },
   computed: {
     ...mapState("game", ["game"]),
+    currentRound() {
+      return this.game.currentRound;
+    },
     currentQuestion() {
       return this.game.questions[this.game.currentRound - 1];
     },
@@ -85,18 +88,20 @@ export default {
     },
     answersDictionnary() {
       return this.game?.answers.reduce((obj, item) => {
+        obj[item["playerId"]] = {};
         if (item.round === this.game.currentRound) {
           obj[item["playerId"]] = item;
           return obj;
         }
+        return obj;
       }, {});
     },
     scoresDictionnary() {
       return this.game?.scores.reduce((obj, item) => {
-        if (item.round === this.game.currentRound) {
-          obj[item["playerId"]] = item;
-          return obj;
-        }
+        obj[item["playerId"]]
+          ? (obj[item["playerId"]] = obj[item["playerId"]] + item.score)
+          : (obj[item["playerId"]] = item.score);
+        return obj;
       }, {});
     },
     isLeader() {
@@ -144,10 +149,13 @@ export default {
         currentRound: this.game.currentRound + 1,
         showResults: false,
       });
-      if (this.game.currentRound < this.game.rounds) {
+    },
+  },
+  watch: {
+    currentRound(val, old) {
+      if (val === old + 1) {
         this.$router.push("/round");
       }
-      console.log("C'est fini !");
     },
   },
 };

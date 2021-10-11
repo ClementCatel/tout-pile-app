@@ -97,7 +97,7 @@ export default {
     },
     playerScore(playerId) {
       if (this.scores) {
-        return this.scores[playerId]?.score || 0;
+        return this.scores[playerId] || 0;
       }
       return null;
     },
