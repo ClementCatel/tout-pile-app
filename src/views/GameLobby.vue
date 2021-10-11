@@ -40,11 +40,10 @@
           >
             {{ $t("lobby.settings") }}
           </v-card-title>
-          <div class="mx-6 mb-3">
+          <div class="mx-6 my-3">
             <v-row align="center">
               <div class="col-6 text-h5">
-                <v-icon color="white" left large>mdi-clock-fast</v-icon
-                >{{ $t("lobby.timer") }}
+                <span class="pr-2">⏱</span>{{ $t("lobby.timer") }}
               </div>
               <v-col>
                 <v-select
@@ -57,10 +56,9 @@
                 ></v-select>
               </v-col>
             </v-row>
-            <v-row>
+            <v-row align="center">
               <div class="col-6 text-h5">
-                <v-icon color="white" left large>mdi-repeat</v-icon
-                >{{ $t("lobby.rounds") }}
+                <span class="pr-2">🎯</span>{{ $t("lobby.rounds") }}
               </div>
               <v-col>
                 <v-select
@@ -72,10 +70,9 @@
                 ></v-select>
               </v-col>
             </v-row>
-            <v-row>
+            <v-row align="center">
               <div class="col-6 text-h5">
-                <v-icon color="white" left large>mdi-label-outline</v-icon
-                >{{ $t("lobby.categories") }}
+                <span class="pr-2">🔖</span>{{ $t("lobby.categories") }}
               </div>
               <v-col>
                 <v-autocomplete
@@ -135,7 +132,7 @@ export default {
   },
   data() {
     return {
-      timerItems: [15, 30, 45],
+      timerItems: [5, 15, 30, 45],
       timerSelected: null,
       roundsItems: [5, 10],
       roundsSelected: null,
@@ -207,7 +204,7 @@ export default {
       this.categoriesSelected = [];
     },
     countDownTimer() {
-      if (this.countDown > 0) {
+      if (this.countDown > 0 || this.countDown === "Go !") {
         setTimeout(() => {
           this.countDown !== 1
             ? (this.countDown -= 1)

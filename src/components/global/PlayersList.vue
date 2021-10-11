@@ -10,26 +10,42 @@
       rounded="pill"
     >
       <div class="d-flex align-center">
-        <v-avatar size="60" color="transparent">
+        <v-avatar size="40" color="transparent">
           <img :src="player.avatarURL" />
           <!-- <v-icon dark> mdi-account-circle </v-icon> -->
         </v-avatar>
-        <v-card-title>
+        <v-card-title class="py-0">
           {{ player.username }}
         </v-card-title>
         <v-spacer></v-spacer>
 
-        <span v-if="isPlayerLeader(player.id)" class="text-h5 mr-2">👑</span>
-        <v-btn
-          v-else-if="isLeader"
-          color="primary"
-          x-small
-          fab
-          dark
-          class="mr-2"
-          @click="kickPlayer(player)"
-          ><v-icon> mdi-close </v-icon></v-btn
+        <v-chip
+          v-if="answers && !showPoints"
+          color="white"
+          class="px-6 mr-2 font-weight-bold"
+          >{{ playerAnswer(player.id) }}</v-chip
         >
+
+        <div v-else-if="scores && showPoints">
+          <span>{{ $t("players.points") }} : </span>
+          <span class="px-2 mr-2 font-weight-bold">{{
+            playerScore(player.id)
+          }}</span>
+        </div>
+
+        <div v-else>
+          <span v-if="isPlayerLeader(player.id)" class="text-h5 mr-2">👑</span>
+          <v-btn
+            v-else-if="isLeader"
+            color="primary"
+            x-small
+            fab
+            dark
+            class="mr-2"
+            @click="kickPlayer(player)"
+            ><v-icon> mdi-close </v-icon></v-btn
+          >
+        </div>
       </div>
     </v-card>
   </div>
@@ -41,6 +57,21 @@ export default {
   props: {
     players: {
       type: Array,
+      default: () => {
+        return [];
+      },
+    },
+    answers: {
+      type: [Object, Boolean],
+      default: false,
+    },
+    scores: {
+      type: [Object, Boolean],
+      default: false,
+    },
+    showPoints: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -57,6 +88,18 @@ export default {
     },
     isPlayerLeader(playerId) {
       return playerId === this.$store.state.game.game.leaderId;
+    },
+    playerAnswer(playerId) {
+      if (this.answers) {
+        return this.answers[playerId]?.answer || 0;
+      }
+      return null;
+    },
+    playerScore(playerId) {
+      if (this.scores) {
+        return this.scores[playerId] || 0;
+      }
+      return null;
     },
     kickPlayer(player) {
       this.$emit("kick", player);

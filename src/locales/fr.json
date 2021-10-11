@@ -16,8 +16,17 @@
     "rounds": "Manches",
     "link_copied": "Lien copié"
   },
+  "answers": {
+    "show_results": "Voir les resultats",
+    "answers": "Réponses",
+    "right_answer": "Bonne réponse",
+    "next_round": "Tour suivant"
+  },
   "round": {
     "response": "Réponse",
     "validate": "Valider"
+  },
+  "players": {
+    "points": "Points"
   }
 }
