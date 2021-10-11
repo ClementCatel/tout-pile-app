@@ -140,7 +140,14 @@ export default {
       });
     },
     async nextRound() {
-      console.log("Next round");
+      await this.$store.dispatch("game/updateGame", {
+        currentRound: this.game.currentRound + 1,
+        showResults: false,
+      });
+      if (this.game.currentRound < this.game.rounds) {
+        this.$router.push("/round");
+      }
+      console.log("C'est fini !");
     },
   },
 };
