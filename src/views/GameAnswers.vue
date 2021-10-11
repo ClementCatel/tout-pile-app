@@ -118,10 +118,20 @@ export default {
     async calculateScores() {
       const correctAnswer = this.currentQuestion.answer;
       const closest = this.playerAnswers.reduce((a, b) => {
-        return Math.abs(b.answer - correctAnswer) <
+        if (
+          Math.abs(b.answer - correctAnswer) <
           Math.abs(a.answer - correctAnswer)
-          ? b
-          : a;
+        ) {
+          return b;
+        } else if (
+          Math.abs(b.answer - correctAnswer) ===
+          Math.abs(a.answer - correctAnswer)
+        ) {
+          if (b.timestamp < a.timestamp) {
+            return b;
+          }
+        }
+        return a;
       });
       await this.$store.dispatch("game/addScore", {
         playerId: closest.playerId,

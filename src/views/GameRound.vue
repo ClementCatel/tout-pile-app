@@ -42,7 +42,7 @@
         <v-btn
           height="48px"
           color="success"
-          @click="validated = true"
+          @click="validate"
           :disabled="validated"
         >
           {{ $t("round.validate") }}
@@ -62,12 +62,17 @@ export default {
     return {
       validated: false,
       answer: null,
+      validatedTimestamp: null,
     };
   },
   computed: {
     ...mapState("game", ["game"]),
   },
   methods: {
+    validate() {
+      this.validated = true;
+      this.validatedTimestamp = Date.now();
+    },
     async nextRound() {
       let answer = this.answer;
       if (!this.answer || isNaN(this.answer)) answer = 0;
@@ -75,6 +80,7 @@ export default {
         answer: parseFloat(answer),
         playerId: this.$store.state.player.player.id,
         round: this.game.currentRound,
+        timestamp: this.validatedTimestamp,
       };
       await this.$store.dispatch("game/addAnswer", finalAnswer);
       this.$router.push("/answers");
