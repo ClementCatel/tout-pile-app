@@ -20,7 +20,7 @@
           <v-card-title class="justify-center">
             {{ points }}
           </v-card-title>
-          <v-card-text class="text-center text-h3"> 🥈 </v-card-text>
+          <div class="text-center text-h3">🥈</div>
         </v-card>
       </v-col>
       <v-col cols="2" class="text-center">
@@ -42,7 +42,7 @@
           <v-card-title class="justify-center">
             {{ points }}
           </v-card-title>
-          <v-card-text class="text-center text-h3"> 🥇 </v-card-text>
+          <div class="text-center text-h3">🥇</div>
         </v-card>
       </v-col>
       <v-col cols="2" class="text-center">
@@ -64,7 +64,7 @@
           <v-card-title class="justify-center">
             {{ points }}
           </v-card-title>
-          <v-card-text class="text-center text-h3"> 🥉 </v-card-text>
+          <div class="text-center text-h3">🥉</div>
         </v-card>
       </v-col>
     </v-row>
@@ -73,15 +73,44 @@
         $t("results.back_to_lobby")
       }}</v-btn>
     </v-row>
+    <pre>{{ getFirstPlayersIndexes.slice(0, 3) }}</pre>
   </v-container>
 </template>
 <script>
+import {mapState} from "vuex";
+
 export default {
   data() {
     return {
       points: "8pts",
       username: "Edouard",
     };
+  },
+  computed: {
+    ...mapState("game", ["game"]),
+    players() {
+      return this.game?.players || [];
+    },
+    scoresDictionnary() {
+      return this.game?.scores.reduce((obj, item) => {
+        obj[item["playerId"]]
+          ? (obj[item["playerId"]] = {
+              playerId: item.playerId,
+              totalScore: obj[item["playerId"]].totalScore + item.score,
+            })
+          : (obj[item["playerId"]] = {
+              playerId: item.playerId,
+              totalScore: item.score,
+            });
+        return obj;
+      }, {});
+    },
+    getFirstPlayersIndexes() {
+      const array = Object.values(this.scoresDictionnary);
+      return array.sort((a, b) =>
+        a.totalScore < b.totalScore ? 1 : a.totalScore > b.totalScore ? -1 : 0,
+      );
+    },
   },
 };
 </script>
