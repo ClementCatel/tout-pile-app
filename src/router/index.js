@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Onboarding from "../views/Onboarding.vue";
 import GameLobby from "../views/GameLobby.vue";
+import GameAnswers from "../views/GameAnswers.vue";
 import GameRound from "../views/GameRound.vue";
 import GameFinalResults from "../views/GameFinalResults.vue";
 
@@ -23,6 +24,11 @@ const routes = [
     path: "/lobby",
     name: "GameLobby",
     component: GameLobby,
+  },
+  {
+    path: "/answers",
+    name: "GameAnswers",
+    component: GameAnswers,
   },
   {
     path: "/round",
