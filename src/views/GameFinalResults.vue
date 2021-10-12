@@ -1,14 +1,14 @@
 <template>
   <v-container class="containerHeight">
     <v-row class="rowHeight white--text" align="end" justify="center">
-      <v-col cols="2" class="text-center">
+      <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[1]">
         <v-avatar size="90" color="transparent">
           <img
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+            :src="getPlayerById(getFirstPlayersIndexes[1].playerId).avatarURL"
           />
         </v-avatar>
         <h4 class="second">
-          {{ username }}
+          {{ getPlayerById(getFirstPlayersIndexes[1].playerId).username }}
         </h4>
         <v-card
           rounded="lg"
@@ -18,19 +18,19 @@
           height="180"
         >
           <v-card-title class="justify-center">
-            {{ points }}
+            {{ getFirstPlayersIndexes[1].totalScore }} pts
           </v-card-title>
           <div class="text-center text-h3">🥈</div>
         </v-card>
       </v-col>
-      <v-col cols="2" class="text-center">
+      <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[0]">
         <v-avatar size="90" color="transparent">
           <img
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+            :src="getPlayerById(getFirstPlayersIndexes[0].playerId).avatarURL"
           />
         </v-avatar>
         <h4 class="first">
-          {{ username }}
+          {{ getPlayerById(getFirstPlayersIndexes[0].playerId).username }}
         </h4>
         <v-card
           rounded="lg"
@@ -40,19 +40,19 @@
           height="280"
         >
           <v-card-title class="justify-center">
-            {{ points }}
+            {{ getFirstPlayersIndexes[0].totalScore }} pts
           </v-card-title>
           <div class="text-center text-h3">🥇</div>
         </v-card>
       </v-col>
-      <v-col cols="2" class="text-center">
+      <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[2]">
         <v-avatar size="90" color="transparent">
           <img
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50"
+            :src="getPlayerById(getFirstPlayersIndexes[2].playerId).avatarURL"
           />
         </v-avatar>
         <h4 class="third">
-          {{ username }}
+          {{ getPlayerById(getFirstPlayersIndexes[2].playerId).username }}
         </h4>
         <v-card
           rounded="lg"
@@ -62,18 +62,20 @@
           height="130"
         >
           <v-card-title class="justify-center">
-            {{ points }}
+            {{ getFirstPlayersIndexes[2].totalScore }} pts
           </v-card-title>
           <div class="text-center text-h3">🥉</div>
         </v-card>
       </v-col>
     </v-row>
     <v-row align="end" justify="center" class="scndRowHeight">
-      <v-btn large class="font-weight-bold secondary--text">{{
-        $t("results.back_to_lobby")
-      }}</v-btn>
+      <v-btn
+        large
+        class="font-weight-bold secondary--text"
+        @click="backToLobby"
+        >{{ $t("results.back_to_lobby") }}</v-btn
+      >
     </v-row>
-    <pre>{{ getFirstPlayersIndexes.slice(0, 3) }}</pre>
   </v-container>
 </template>
 <script>
@@ -107,9 +109,25 @@ export default {
     },
     getFirstPlayersIndexes() {
       const array = Object.values(this.scoresDictionnary);
-      return array.sort((a, b) =>
-        a.totalScore < b.totalScore ? 1 : a.totalScore > b.totalScore ? -1 : 0,
-      );
+      return array
+        .sort((a, b) =>
+          a.totalScore < b.totalScore
+            ? 1
+            : a.totalScore > b.totalScore
+            ? -1
+            : 0,
+        )
+        .slice(0, 3);
+    },
+  },
+  methods: {
+    getPlayerById(playerId) {
+      return this.players.find((player) => {
+        return player.id === playerId;
+      });
+    },
+    backToLobby() {
+      this.$router.push("/lobby");
     },
   },
 };
