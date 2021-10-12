@@ -155,7 +155,7 @@ export default {
     currentRound(val, old) {
       if (val === old + 1) {
         if (old === this.game.rounds) {
-          console.log("C'est fini !");
+          this.$router.push("/results");
         } else {
           this.$router.push("/round");
         }

@@ -26,6 +26,9 @@
     "response": "Réponse",
     "validate": "Valider"
   },
+  "results": {
+    "back_to_lobby": "Retour à l'accueil"
+  },
   "players": {
     "points": "Points"
   }
