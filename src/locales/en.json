@@ -24,12 +24,15 @@
   },
   "round": {
     "response": "Response",
-    "validate": "Validate"
+    "validate": "Validate"    
   },
   "results": {
     "back_to_lobby": "Back to lobby"
   },
   "players": {
     "points": "Points"
+  },
+  "general": {
+    
   }
 }
