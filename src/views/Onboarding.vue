@@ -17,6 +17,8 @@
           :label="$t('onboarding.username')"
           v-model="username"
           solo
+          :maxlength="max"
+          :minlength="min"
         ></v-text-field
       ></v-col>
     </v-row>
@@ -54,6 +56,8 @@ export default {
       loading: false,
       // player data
       username: "",
+      max: 15,
+      min: 1,
     };
   },
   computed: {
@@ -71,19 +75,23 @@ export default {
     async start() {
       try {
         this.loading = true;
-        if (!this.localPlayer) {
-          await this.$store.dispatch("player/createPlayer", {
-            username: this.username,
-            avatarURL: this.avatarURL,
-          });
+        if (this.validateUsername()) {
+          if (!this.localPlayer) {
+            await this.$store.dispatch("player/createPlayer", {
+              username: this.username,
+              avatarURL: this.avatarURL,
+            });
+          } else {
+            await this.$store.dispatch("player/editPlayer", {
+              username: this.username,
+              avatarURL: this.avatarURL,
+            });
+          }
+          await this.$store.dispatch("game/createGame");
+          this.$router.push("/lobby");
         } else {
-          await this.$store.dispatch("player/editPlayer", {
-            username: this.username,
-            avatarURL: this.avatarURL,
-          });
+          this.loading = false;
         }
-        await this.$store.dispatch("game/createGame");
-        this.$router.push("/lobby");
       } catch (error) {
         console.log(error);
       }
@@ -91,17 +99,26 @@ export default {
     async joinGame() {
       try {
         this.loading = true;
-        await this.$store.dispatch("player/createPlayer", {
-          username: this.username,
-          avatarURL: this.avatarURL,
-        });
-        await this.$store.dispatch("game/addPlayer", this.$route.query.game);
-        await this.$store.dispatch("game/getGame", this.$route.query.game);
-        await this.$store.dispatch("game/bindGame", this.$route.query.game);
-        this.$router.push("/lobby");
+        if (this.validateUsername()) {
+          await this.$store.dispatch("player/createPlayer", {
+            username: this.username,
+            avatarURL: this.avatarURL,
+          });
+          await this.$store.dispatch("game/addPlayer", this.$route.query.game);
+          await this.$store.dispatch("game/getGame", this.$route.query.game);
+          await this.$store.dispatch("game/bindGame", this.$route.query.game);
+          this.$router.push("/lobby");
+        } else {
+          this.loading = false;
+        }
       } catch (error) {
         console.log(error);
       }
+    },
+    validateUsername() {
+      return (
+        this.username.length <= this.max && this.username.length >= this.min
+      );
     },
   },
   async created() {
