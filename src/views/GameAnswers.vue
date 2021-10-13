@@ -40,7 +40,12 @@
           class="font-weight-bold secondary--text"
           @click="nextRound"
         >
-          {{ $t("answers.next_round") }}
+          <div v-if="this.currentRound === this.game.rounds">
+            {{ $t("answers.final_results") }}
+          </div>
+          <div v-else>
+            {{ $t("answers.next_round") }}
+          </div>
         </v-btn>
         <v-btn
           v-else-if="isLeader"

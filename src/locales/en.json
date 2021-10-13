@@ -20,11 +20,12 @@
     "show_results": "Show results",
     "answers": "Answers",
     "right_answer": "Right Answer",
-    "next_round": "Next round"
+    "next_round": "Next round",
+    "final_results": "Final Results"
   },
   "round": {
     "response": "Response",
-    "validate": "Validate"    
+    "validate": "Validate"
   },
   "results": {
     "back_to_lobby": "Back to lobby"
@@ -32,7 +33,5 @@
   "players": {
     "points": "Points"
   },
-  "general": {
-    
-  }
+  "general": {}
 }
