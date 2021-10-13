@@ -12,6 +12,13 @@
 <script>
 export default {
   name: "App",
+  mounted() {
+    window.onpopstate = () => {
+      if (this.$route.path !== "/") {
+        this.$router.push("/");
+      }
+    };
+  },
 };
 </script>
 <style scoped>
