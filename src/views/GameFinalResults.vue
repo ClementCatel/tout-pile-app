@@ -82,12 +82,7 @@
 import {mapState} from "vuex";
 
 export default {
-  data() {
-    return {
-      points: "8pts",
-      username: "Edouard",
-    };
-  },
+  name: "GameFinalResults",
   computed: {
     ...mapState("game", ["game"]),
     players() {
@@ -126,7 +121,8 @@ export default {
         return player.id === playerId;
       });
     },
-    backToLobby() {
+    async backToLobby() {
+      await this.$store.dispatch("game/resetGame");
       this.$router.push("/lobby");
     },
   },

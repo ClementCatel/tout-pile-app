@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import store from "../store";
-import Home from "../views/Home.vue";
 import Onboarding from "../views/Onboarding.vue";
 import GameLobby from "../views/GameLobby.vue";
 import GameAnswers from "../views/GameAnswers.vue";
@@ -11,11 +10,6 @@ import GameFinalResults from "../views/GameFinalResults.vue";
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/home",
-    name: "Home",
-    component: Home,
-  },
   {
     path: "/",
     name: "Onboarding",

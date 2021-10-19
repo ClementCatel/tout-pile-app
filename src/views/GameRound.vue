@@ -55,6 +55,7 @@
 import {mapState} from "vuex";
 import CountDown from "@/components/global/CountDown";
 export default {
+  name: "GameRound",
   components: {
     CountDown,
   },
