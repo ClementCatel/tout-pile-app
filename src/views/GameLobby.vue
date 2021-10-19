@@ -126,7 +126,7 @@ import PlayersList from "@/components/global/PlayersList";
 import {mapState} from "vuex";
 
 export default {
-  name: "Home",
+  name: "GameLobby",
   components: {
     PlayersList,
   },
@@ -134,7 +134,7 @@ export default {
     return {
       timerItems: [5, 15, 30, 45],
       timerSelected: null,
-      roundsItems: [5, 10],
+      roundsItems: [1, 5, 10],
       roundsSelected: null,
       categoriesItems: [
         "History",

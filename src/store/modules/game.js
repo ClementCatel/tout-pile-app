@@ -84,6 +84,17 @@ const actions = {
     await dispatch("updateGame", data);
   },
 
+  async resetGame({state}) {
+    return await db.collection("games").doc(state.game.id).update({
+      answers: [],
+      currentRound: 0,
+      questions: [],
+      scores: [],
+      showResults: false,
+      started: false,
+    });
+  },
+
   async bindGame({commit}, gameId) {
     return await db
       .collection("games")
