@@ -160,10 +160,13 @@ export default {
       return this.game?.started;
     },
     isLeader() {
-      return (
-        this.$store.state.player.player.id ===
-        this.$store.state.game.game?.leaderId
-      );
+      if (this.$store.state.player.player) {
+        return (
+          this.$store.state.player.player.id ===
+          this.$store.state.game.game?.leaderId
+        );
+      }
+      return false;
     },
   },
   methods: {
