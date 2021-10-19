@@ -3,7 +3,7 @@
     <v-row justify="center">
       <v-col cols="4" class="text-center white--text">
         <h2 class="my-5">
-          {{ currentQuestion.question }}
+          {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
         <div class="font-weight-bold">
           {{ $t("answers.right_answer") }} :
@@ -12,7 +12,7 @@
               !this.game.showResults ? 'blurry-text' : '',
               'text-h4 px-3',
             ]"
-            >{{ currentQuestion.answer }}</span
+            >{{ currentQuestion ? currentQuestion.answer : "" }}</span
           >
         </div>
         <v-card
@@ -126,7 +126,9 @@ export default {
       this.loading = false;
     },
     async calculateScores() {
-      const correctAnswer = this.currentQuestion.answer;
+      const correctAnswer = this.currentQuestion
+        ? this.currentQuestion.answer
+        : 0;
       const closest = this.playerAnswers.reduce((a, b) => {
         if (
           Math.abs(b.answer - correctAnswer) <
@@ -146,7 +148,7 @@ export default {
       await this.$store.dispatch("game/addScore", {
         playerId: closest.playerId,
         round: this.game.currentRound,
-        score: closest.answer === this.currentQuestion.answer ? 2 : 1,
+        score: closest.answer === correctAnswer ? 2 : 1,
       });
     },
     async nextRound() {

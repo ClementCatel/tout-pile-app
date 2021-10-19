@@ -8,7 +8,7 @@
     <v-row justify="center">
       <v-col cols="6" md="8" class="mr-3">
         <h2 class="centerQst">
-          {{ game.questions[game.currentRound - 1].question }}
+          {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
       </v-col>
     </v-row>
@@ -21,7 +21,7 @@
           class="rounded elevation-10"
           lazy-src="loading"
           :aspect-ratio="16 / 9"
-          :src="game.questions[game.currentRound - 1].imageURL"
+          :src="currentQuestion ? currentQuestion.imageURL : ''"
         ></v-img>
       </v-col>
     </v-row>
@@ -32,7 +32,7 @@
           :label="$t('round.response')"
           type="number"
           value=""
-          :suffix="game.questions[game.currentRound - 1].unit"
+          :suffix="currentQuestion ? currentQuestion.unit : ''"
           solo
           hide-details
           :disabled="validated"
@@ -67,6 +67,9 @@ export default {
   },
   computed: {
     ...mapState("game", ["game"]),
+    currentQuestion() {
+      return this.game.questions[this.game.currentRound - 1];
+    },
   },
   methods: {
     validate() {
