@@ -21,7 +21,8 @@
     "answers": "Réponses",
     "right_answer": "Bonne réponse",
     "next_round": "Tour suivant",
-    "final_results": "Résultats finaux"
+    "final_results": "Résultats finaux",
+    "the_closest": "Le plus proche est"
   },
   "round": {
     "response": "Réponse",
