@@ -58,12 +58,33 @@
         >
       </v-col>
     </v-row>
+
+    <v-dialog
+      v-model="winnerAlert"
+      transition="dialog-top-transition"
+      persistent
+      hide-overlay
+      max-width="500px"
+      content-class="elevation-0"
+    >
+      <div v-if="winner" class="text-center pa-4 font-weight-bold">
+        <div class="mb-4">
+          <v-avatar size="150" color="transparent">
+            <img :src="winner.avatarURL" />
+          </v-avatar>
+        </div>
+        <v-chip x-large class="px-8 gold-outline white--text"
+          >{{ $t("answers.the_closest") }} {{ winner.username }} !</v-chip
+        >
+      </div>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
 import PlayersList from "@/components/global/PlayersList";
 import {mapState} from "vuex";
+import confetti from "canvas-confetti";
 
 export default {
   name: "GameAnswers",
@@ -73,6 +94,8 @@ export default {
   data() {
     return {
       loading: false,
+      winnerAlert: false,
+      winner: null,
     };
   },
   computed: {
@@ -124,6 +147,15 @@ export default {
         showResults: true,
       });
       this.loading = false;
+      this.winnerAlert = true;
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: {y: 0.6},
+      });
+      setTimeout(() => {
+        this.winnerAlert = false;
+      }, 2500);
     },
     async calculateScores() {
       const correctAnswer = this.currentQuestion
@@ -145,6 +177,9 @@ export default {
         }
         return a;
       });
+      this.winner = this.players.find(
+        (player) => player.id === closest.playerId,
+      );
       await this.$store.dispatch("game/addScore", {
         playerId: closest.playerId,
         round: this.game.currentRound,
@@ -185,5 +220,10 @@ export default {
   -khtml-user-select: none; /* Konqueror HTML */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
+.gold-outline {
+  background-color: #7454f9 !important;
+  border: 2px solid #ffd700;
 }
 </style>

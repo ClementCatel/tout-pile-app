@@ -21,7 +21,8 @@
     "answers": "Answers",
     "right_answer": "Right Answer",
     "next_round": "Next round",
-    "final_results": "Final Results"
+    "final_results": "Final Results",
+    "the_closest": "The closest is"
   },
   "round": {
     "response": "Response",
