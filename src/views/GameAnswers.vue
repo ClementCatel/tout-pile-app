@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-row justify="center">
-      <v-col cols="4" class="text-center white--text">
+      <v-col cols="12" lg="4" md="6" sm="8" class="text-center white--text">
         <h2 class="my-5">
           {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
@@ -19,7 +19,7 @@
           rounded="lg"
           elevation="10"
           outlined
-          class="card white--text py-3 px-6 mt-6 mb-10"
+          class="card white--text py-3 px-6 mt-4 pt-0 mb-10"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
@@ -159,7 +159,7 @@ export default {
       });
       setTimeout(() => {
         this.winnerAlert = false;
-      }, 3000);
+      }, 3500);
     },
     async calculateScores() {
       const correctAnswer = this.currentQuestion
