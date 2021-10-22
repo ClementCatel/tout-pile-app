@@ -25,30 +25,33 @@
         ></v-img>
       </v-col>
     </v-row>
-    <v-row justify="center" align="center">
-      <v-col cols="5">
-        <v-text-field
-          v-model="answer"
-          :label="$t('round.response')"
-          type="number"
-          value=""
-          :suffix="currentQuestion ? currentQuestion.unit : ''"
-          solo
-          hide-details
-          :disabled="validated"
-        ></v-text-field>
-      </v-col>
-      <v-col cols="auto" class="pl-0">
-        <v-btn
-          height="48px"
-          color="success"
-          @click="validate"
-          :disabled="validated"
-        >
-          {{ $t("round.validate") }}
-        </v-btn>
-      </v-col>
-    </v-row>
+    <form @submit.prevent="validate">
+      <v-row justify="center" align="center">
+        <v-col cols="5">
+          <v-text-field
+            v-model="answer"
+            :label="$t('round.response')"
+            type="number"
+            value=""
+            :suffix="currentQuestion ? currentQuestion.unit : ''"
+            solo
+            hide-details
+            autofocus
+            :disabled="validated"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="auto" class="pl-0">
+          <v-btn
+            height="48px"
+            color="success"
+            type="submit"
+            :disabled="validated"
+          >
+            {{ $t("round.validate") }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </form>
   </v-container>
 </template>
 <script>
