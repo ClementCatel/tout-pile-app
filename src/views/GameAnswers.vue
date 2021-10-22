@@ -74,7 +74,10 @@
           </v-avatar>
         </div>
         <v-chip x-large class="px-8 gold-outline white--text"
-          >{{ $t("answers.the_closest") }} {{ winner.username }} !</v-chip
+          >{{ $t("answers.the_closest") }} {{ winner.username }} ! (+{{
+            winnerScore
+          }}
+          pts)</v-chip
         >
       </div>
     </v-dialog>
@@ -96,6 +99,7 @@ export default {
       loading: false,
       winnerAlert: false,
       winner: null,
+      winnerScore: 0,
     };
   },
   computed: {
@@ -155,7 +159,7 @@ export default {
       });
       setTimeout(() => {
         this.winnerAlert = false;
-      }, 2500);
+      }, 3000);
     },
     async calculateScores() {
       const correctAnswer = this.currentQuestion
@@ -180,10 +184,11 @@ export default {
       this.winner = this.players.find(
         (player) => player.id === closest.playerId,
       );
+      this.winnerScore = closest.answer === correctAnswer ? 2 : 1;
       await this.$store.dispatch("game/addScore", {
         playerId: closest.playerId,
         round: this.game.currentRound,
-        score: closest.answer === correctAnswer ? 2 : 1,
+        score: this.winnerScore,
       });
     },
     async nextRound() {
