@@ -35,8 +35,8 @@ const actions = {
   },
 
   async startGame({dispatch}, gameData) {
-    // Generate an array of random numbers
     const max = gameData.rounds;
+    // Generate an array of random numbers
     let random = [];
     for (let i = 0; i < max; i++) {
       let tmp = Math.floor(Math.random() * max + 1);
@@ -44,26 +44,27 @@ const actions = {
         random.push(tmp);
       } else i--;
     }
+
+    const firstRandoms = random.splice(0, 10);
     // Get random questions
     const questions = [];
-    // for (const ran of random) {
-    //   const querySnapshot = await db
-    //     .collection("questions")
-    //     .where("id", "==", ran)
-    //     .get();
-    //   console.log(querySnapshot);
-    //   querySnapshot.forEach((document) => {
-    //     questions.push(document.data());
-    //   });
-    // }
     const querySnapshot = await db
       .collection("questions")
-      .where("id", "in", random)
+      .where("id", "in", firstRandoms)
       .get();
-
     querySnapshot.forEach((document) => {
       questions.push(document.data());
     });
+
+    if (max > 10) {
+      const querySnapshot = await db
+        .collection("questions")
+        .where("id", "in", random)
+        .get();
+      querySnapshot.forEach((document) => {
+        questions.push(document.data());
+      });
+    }
 
     // - Shuffle the questions
     for (let i = questions.length - 1; i > 0; i--) {

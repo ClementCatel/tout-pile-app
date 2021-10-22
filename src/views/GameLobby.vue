@@ -134,7 +134,7 @@ export default {
     return {
       timerItems: [5, 15, 30, 45],
       timerSelected: null,
-      roundsItems: [1, 5, 10],
+      roundsItems: [1, 5, 10, 15, 20],
       roundsSelected: null,
       categoriesItems: [
         "History",
