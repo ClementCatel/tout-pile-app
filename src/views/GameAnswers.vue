@@ -28,7 +28,7 @@
           </v-card-title>
           <players-list
             v-if="answersDictionnary"
-            :players="players"
+            :players="sortedPlayers"
             :answers="answersDictionnary"
             :scores="scoresDictionnary"
             :show-points="game.showResults"
@@ -113,6 +113,30 @@ export default {
     players() {
       return this.game?.players || [];
     },
+    sortedPlayers() {
+      const playersToSort = [...this.players];
+      const playersScores = this.scoresDictionnary;
+      return playersToSort.sort((a, b) => {
+        if (Math.abs(playersScores[b.id]) < Math.abs(playersScores[a.id])) {
+          console.log("1playerScores[b.id]:", playersScores[b.id]);
+          console.log("1playerScores[a.id]:", playersScores[a.id]);
+          return -1;
+        } else if (playersScores[b.id] === playersScores[a.id]) {
+          if (
+            Math.abs(this.getTotalTimestamp(b.id)) <
+            Math.abs(this.getTotalTimestamp(a.id))
+          ) {
+            console.log("2playerScores[b.id]:", playersScores[b.id]);
+            console.log("2playerScores[a.id]:", playersScores[a.id]);
+            return 1;
+          }
+        }
+        console.log("3playerScores[b.id]:", playersScores[b.id]);
+        console.log("3playerScores[a.id]:", playersScores[a.id]);
+        return 1;
+      });
+    },
+
     playerAnswers() {
       return this.game?.answers.filter((answer) => {
         return answer.round === this.game.currentRound;
@@ -196,6 +220,16 @@ export default {
         currentRound: this.game.currentRound + 1,
         showResults: false,
       });
+    },
+
+    getTotalTimestamp(id) {
+      let total = 0;
+      this.playerAnswers.forEach((element) => {
+        if (element.id === id) {
+          total += element.timestamp;
+        }
+      });
+      return total;
     },
   },
   watch: {
