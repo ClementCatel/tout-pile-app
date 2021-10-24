@@ -118,21 +118,15 @@ export default {
       const playersScores = this.scoresDictionnary;
       return playersToSort.sort((a, b) => {
         if (Math.abs(playersScores[b.id]) < Math.abs(playersScores[a.id])) {
-          console.log("1playerScores[b.id]:", playersScores[b.id]);
-          console.log("1playerScores[a.id]:", playersScores[a.id]);
           return -1;
         } else if (playersScores[b.id] === playersScores[a.id]) {
           if (
             Math.abs(this.getTotalTimestamp(b.id)) <
             Math.abs(this.getTotalTimestamp(a.id))
           ) {
-            console.log("2playerScores[b.id]:", playersScores[b.id]);
-            console.log("2playerScores[a.id]:", playersScores[a.id]);
             return 1;
           }
         }
-        console.log("3playerScores[b.id]:", playersScores[b.id]);
-        console.log("3playerScores[a.id]:", playersScores[a.id]);
         return 1;
       });
     },
@@ -178,15 +172,6 @@ export default {
         showResults: true,
       });
       this.loading = false;
-      // this.winnerAlert = true;
-      // confetti({
-      //   particleCount: 100,
-      //   spread: 70,
-      //   origin: {y: 0.6},
-      // });
-      // setTimeout(() => {
-      //   this.winnerAlert = false;
-      // }, 3500);
     },
     async calculateScores() {
       const closest = this.getClosestPlayer();
