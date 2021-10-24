@@ -166,6 +166,9 @@ export default {
         this.$store.state.game.game?.leaderId
       );
     },
+    gameShowResults() {
+      return this.game.showResults;
+    },
   },
   methods: {
     async showResults() {
@@ -175,17 +178,41 @@ export default {
         showResults: true,
       });
       this.loading = false;
-      this.winnerAlert = true;
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: {y: 0.6},
-      });
-      setTimeout(() => {
-        this.winnerAlert = false;
-      }, 3500);
+      // this.winnerAlert = true;
+      // confetti({
+      //   particleCount: 100,
+      //   spread: 70,
+      //   origin: {y: 0.6},
+      // });
+      // setTimeout(() => {
+      //   this.winnerAlert = false;
+      // }, 3500);
     },
     async calculateScores() {
+      const closest = this.getClosestPlayer();
+      await this.$store.dispatch("game/addScore", {
+        playerId: closest.playerId,
+        round: this.game.currentRound,
+        score: this.winnerScore,
+      });
+    },
+    async nextRound() {
+      await this.$store.dispatch("game/updateGame", {
+        currentRound: this.game.currentRound + 1,
+        showResults: false,
+      });
+    },
+
+    getTotalTimestamp(id) {
+      let total = 0;
+      this.playerAnswers.forEach((element) => {
+        if (element.id === id) {
+          total += element.timestamp;
+        }
+      });
+      return total;
+    },
+    getClosestPlayer() {
       const correctAnswer = this.currentQuestion
         ? this.currentQuestion.answer
         : 0;
@@ -209,27 +236,8 @@ export default {
         (player) => player.id === closest.playerId,
       );
       this.winnerScore = closest.answer === correctAnswer ? 2 : 1;
-      await this.$store.dispatch("game/addScore", {
-        playerId: closest.playerId,
-        round: this.game.currentRound,
-        score: this.winnerScore,
-      });
-    },
-    async nextRound() {
-      await this.$store.dispatch("game/updateGame", {
-        currentRound: this.game.currentRound + 1,
-        showResults: false,
-      });
-    },
 
-    getTotalTimestamp(id) {
-      let total = 0;
-      this.playerAnswers.forEach((element) => {
-        if (element.id === id) {
-          total += element.timestamp;
-        }
-      });
-      return total;
+      return closest;
     },
   },
   watch: {
@@ -240,6 +248,20 @@ export default {
         } else {
           this.$router.push("/round");
         }
+      }
+    },
+    gameShowResults(value) {
+      if (value) {
+        this.getClosestPlayer();
+        this.winnerAlert = true;
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: {y: 0.6},
+        });
+        setTimeout(() => {
+          this.winnerAlert = false;
+        }, 3500);
       }
     },
   },
