@@ -149,6 +149,9 @@ export default {
       overlay: false,
       countDown: 3,
       loading: false,
+      audioDisconnect: new Audio(require("@/assets/sounds/disconnect.mp3")),
+      audioConnect: new Audio(require("@/assets/sounds/connect.mp3")),
+      audioStart: new Audio(require("@/assets/sounds/start.mp3")),
     };
   },
   computed: {
@@ -207,6 +210,8 @@ export default {
       this.categoriesSelected = [];
     },
     countDownTimer() {
+      this.audioStart.volume = 0.2;
+      this.audioStart.play();
       if (this.countDown > 0 || this.countDown === "Go !") {
         setTimeout(() => {
           this.countDown !== 1
@@ -221,8 +226,13 @@ export default {
   },
   watch: {
     // Check if player has been kicked
-    players(val) {
+    players(val, oldValue) {
       if (val.length >= 0) {
+        if (val.length < oldValue.length) {
+          this.audioDisconnect.play();
+        } else if (val.length > oldValue.length) {
+          this.audioConnect.play();
+        }
         if (
           !val.some(
             (player) => player.id === this.$store.state.player.player.id,

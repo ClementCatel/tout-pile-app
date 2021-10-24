@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       timerCount: this.timer,
+      audioCountdown: new Audio(require("@/assets/sounds/countdown.mp3")),
     };
   },
   props: {
@@ -25,6 +26,9 @@ export default {
           setTimeout(() => {
             this.timerCount--;
           }, 1000);
+          if (value == 5) {
+            this.audioCountdown.play();
+          }
         } else {
           this.$emit("answered");
         }

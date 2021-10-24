@@ -67,6 +67,7 @@ export default {
       validated: false,
       answer: null,
       validatedTimestamp: null,
+      audioValidated: new Audio(require("@/assets/sounds/validated.mp3")),
     };
   },
   computed: {
@@ -79,6 +80,8 @@ export default {
     validate() {
       this.validated = true;
       this.validatedTimestamp = Date.now();
+      this.audioValidated.volume = 0.2;
+      this.audioValidated.play();
     },
     async nextRound() {
       let answer = this.answer;
