@@ -70,7 +70,7 @@
                 ></v-select>
               </v-col>
             </v-row>
-            <v-row align="center">
+            <!-- <v-row align="center">
               <div class="col-6 text-h5">
                 <span class="pr-2">🔖</span>{{ $t("lobby.categories") }}
               </div>
@@ -86,7 +86,7 @@
                   hide-details
                 ></v-autocomplete>
               </v-col>
-            </v-row>
+            </v-row> -->
           </div>
         </v-card>
 
