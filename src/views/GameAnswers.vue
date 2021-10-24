@@ -39,6 +39,7 @@
           large
           class="font-weight-bold secondary--text"
           @click="nextRound"
+          :disabled="!showNextEventButton"
         >
           <div v-if="this.currentRound === this.game.rounds">
             {{ $t("answers.final_results") }}
@@ -100,6 +101,7 @@ export default {
       winnerAlert: false,
       winner: null,
       winnerScore: 0,
+      showNextEventButton: false,
     };
   },
   computed: {
@@ -246,6 +248,7 @@ export default {
         });
         setTimeout(() => {
           this.winnerAlert = false;
+          this.showNextEventButton = true;
         }, 3500);
       }
     },
