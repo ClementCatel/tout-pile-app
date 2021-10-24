@@ -28,7 +28,7 @@
           </v-card-title>
           <players-list
             v-if="answersDictionnary"
-            :players="players"
+            :players="sortedPlayers"
             :answers="answersDictionnary"
             :scores="scoresDictionnary"
             :show-points="game.showResults"
@@ -39,6 +39,7 @@
           large
           class="font-weight-bold secondary--text"
           @click="nextRound"
+          :disabled="!showNextEventButton"
         >
           <div v-if="this.currentRound === this.game.rounds">
             {{ $t("answers.final_results") }}
@@ -100,6 +101,7 @@ export default {
       winnerAlert: false,
       winner: null,
       winnerScore: 0,
+      showNextEventButton: false,
     };
   },
   computed: {
@@ -113,6 +115,23 @@ export default {
     players() {
       return this.game?.players || [];
     },
+    sortedPlayers() {
+      const playersToSort = [...this.players];
+      const playersScores = this.scoresDictionnary;
+      return playersToSort.sort((a, b) => {
+        const scoreB = playersScores[b.id] || 0;
+        const scoreA = playersScores[a.id] || 0;
+        if (scoreB < scoreA) {
+          return -1;
+        } else if (scoreB === scoreA) {
+          if (this.getTotalTimestamp(b.id) < this.getTotalTimestamp(a.id)) {
+            return 1;
+          }
+        }
+        return 1;
+      });
+    },
+
     playerAnswers() {
       return this.game?.answers.filter((answer) => {
         return answer.round === this.game.currentRound;
@@ -142,6 +161,9 @@ export default {
         this.$store.state.game.game?.leaderId
       );
     },
+    gameShowResults() {
+      return this.game.showResults;
+    },
   },
   methods: {
     async showResults() {
@@ -151,17 +173,32 @@ export default {
         showResults: true,
       });
       this.loading = false;
-      this.winnerAlert = true;
-      confetti({
-        particleCount: 100,
-        spread: 70,
-        origin: {y: 0.6},
-      });
-      setTimeout(() => {
-        this.winnerAlert = false;
-      }, 3500);
     },
     async calculateScores() {
+      const closest = this.getClosestPlayer();
+      await this.$store.dispatch("game/addScore", {
+        playerId: closest.playerId,
+        round: this.game.currentRound,
+        score: this.winnerScore,
+      });
+    },
+    async nextRound() {
+      await this.$store.dispatch("game/updateGame", {
+        currentRound: this.game.currentRound + 1,
+        showResults: false,
+      });
+    },
+
+    getTotalTimestamp(id) {
+      let total = 0;
+      this.playerAnswers.forEach((element) => {
+        if (element.id === id) {
+          total += element.timestamp;
+        }
+      });
+      return total;
+    },
+    getClosestPlayer() {
       const correctAnswer = this.currentQuestion
         ? this.currentQuestion.answer
         : 0;
@@ -185,17 +222,8 @@ export default {
         (player) => player.id === closest.playerId,
       );
       this.winnerScore = closest.answer === correctAnswer ? 2 : 1;
-      await this.$store.dispatch("game/addScore", {
-        playerId: closest.playerId,
-        round: this.game.currentRound,
-        score: this.winnerScore,
-      });
-    },
-    async nextRound() {
-      await this.$store.dispatch("game/updateGame", {
-        currentRound: this.game.currentRound + 1,
-        showResults: false,
-      });
+
+      return closest;
     },
   },
   watch: {
@@ -206,6 +234,21 @@ export default {
         } else {
           this.$router.push("/round");
         }
+      }
+    },
+    gameShowResults(value) {
+      if (value) {
+        this.getClosestPlayer();
+        this.winnerAlert = true;
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: {y: 0.6},
+        });
+        setTimeout(() => {
+          this.winnerAlert = false;
+          this.showNextEventButton = true;
+        }, 3500);
       }
     },
   },

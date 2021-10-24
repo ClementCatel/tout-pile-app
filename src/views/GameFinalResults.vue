@@ -68,7 +68,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <v-row align="end" justify="center" class="scndRowHeight">
+    <v-row v-if="isLeader" align="end" justify="center" class="scndRowHeight">
       <v-btn
         large
         class="font-weight-bold secondary--text"
@@ -114,6 +114,16 @@ export default {
         )
         .slice(0, 3);
     },
+
+    getStartedValue() {
+      return this.game?.started;
+    },
+    isLeader() {
+      return (
+        this.$store.state.player.player.id ===
+        this.$store.state.game.game.leaderId
+      );
+    },
   },
   methods: {
     getPlayerById(playerId) {
@@ -124,6 +134,13 @@ export default {
     async backToLobby() {
       await this.$store.dispatch("game/resetGame");
       this.$router.push("/lobby");
+    },
+  },
+  watch: {
+    getStartedValue(value) {
+      if (!value) {
+        this.$router.push("/lobby");
+      }
     },
   },
 };

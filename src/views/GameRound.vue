@@ -82,6 +82,9 @@ export default {
     },
     async nextRound() {
       let answer = this.answer;
+      if (!this.validated) {
+        this.validatedTimestamp = Date.now();
+      }
       if (!this.answer || isNaN(this.answer)) answer = 0;
       const finalAnswer = {
         answer: parseFloat(answer),
