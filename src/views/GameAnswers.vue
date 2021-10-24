@@ -119,13 +119,12 @@ export default {
       const playersToSort = [...this.players];
       const playersScores = this.scoresDictionnary;
       return playersToSort.sort((a, b) => {
-        if (Math.abs(playersScores[b.id]) < Math.abs(playersScores[a.id])) {
+        const scoreB = playersScores[b.id] || 0;
+        const scoreA = playersScores[a.id] || 0;
+        if (scoreB < scoreA) {
           return -1;
-        } else if (playersScores[b.id] === playersScores[a.id]) {
-          if (
-            Math.abs(this.getTotalTimestamp(b.id)) <
-            Math.abs(this.getTotalTimestamp(a.id))
-          ) {
+        } else if (scoreB === scoreA) {
+          if (this.getTotalTimestamp(b.id) < this.getTotalTimestamp(a.id)) {
             return 1;
           }
         }
