@@ -102,6 +102,7 @@ export default {
       winner: null,
       winnerScore: 0,
       showNextEventButton: false,
+      audioWin: new Audio(require("@/assets/sounds/win.mp3")),
     };
   },
   computed: {
@@ -238,6 +239,7 @@ export default {
     },
     gameShowResults(value) {
       if (value) {
+        this.audioWin.play();
         this.getClosestPlayer();
         this.winnerAlert = true;
         confetti({
