@@ -1,0 +1,31 @@
+<svg id="rules1" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 297 297">
+  <path id="Tracé_2" data-name="Tracé 2" d="M0,297V0H297V297Z" fill="none"/>
+  <g id="Groupe_5" data-name="Groupe 5" transform="translate(41.765 9.281)">
+    <g id="Groupe_4" data-name="Groupe 4">
+      <path id="Tracé_3" data-name="Tracé 3" d="M26.875,18.813H231.063V269.407H50.078a23.2,23.2,0,0,1-23.2-23.2V18.812Z" transform="translate(-22.234 4.39)" fill="#aae1f9"/>
+      <path id="Tracé_4" data-name="Tracé 4" d="M147.531,236.922a92.813,92.813,0,0,1-92.812-92.812V18.813H26.875V246.2a23.2,23.2,0,0,0,23.2,23.2H231.063V236.923Z" transform="translate(-22.234 4.391)" fill="#57b7eb"/>
+      <g id="InterieurManette" transform="translate(30.539 153.672)">
+        <path id="Tracé_5" data-name="Tracé 5" d="M169.633,102.125H78.472a35.452,35.452,0,1,0,31.992,50.645H137.64a35.452,35.452,0,1,0,31.992-50.645Z" transform="translate(-42.978 -102.125)" fill="#f89c8d"/>
+        <path id="Tracé_6" data-name="Tracé 6" d="M184.826,162.9a45.312,45.312,0,0,1-32.565-13.745,36.566,36.566,0,0,0-26.042-11.577h-12.3a35.451,35.451,0,0,1-35.452-35.452,35.452,35.452,0,1,0,31.992,50.645H137.64a35.365,35.365,0,0,0,58.125,8.706,45.311,45.311,0,0,1-10.939,1.423Z" transform="translate(-42.978 -102.125)" fill="#f8664f"/>
+        <path id="Tracé_7" data-name="Tracé 7" d="M78.453,165.949a35.138,35.138,0,0,0,15.259-3.489,101.5,101.5,0,0,1-44.249-52.332,35.421,35.421,0,0,0,28.989,55.821Z" transform="translate(-42.96 -95.046)" fill="#cc5144"/>
+      </g>
+      <path id="Tracé_8" data-name="Tracé 8" d="M45.437,8.063H231.062V45.188H45.437A18.563,18.563,0,0,1,26.875,26.625h0A18.563,18.563,0,0,1,45.437,8.063Z" transform="translate(-22.234 -3.422)" fill="#57b7eb"/>
+      <path id="Tracé_9" data-name="Tracé 9" d="M39.578,13.437H225.2V27.359H39.578a4.641,4.641,0,0,1-4.641-4.641V18.078A4.641,4.641,0,0,1,39.578,13.437Z" transform="translate(-16.374 0.484)" fill="#aae1f9"/>
+      <g id="Groupe_3" data-name="Groupe 3">
+        <g id="contourManette" transform="translate(25.47 148.608)">
+          <path id="Tracé_22" data-name="Tracé 22" d="M96.044,104.5a5.065,5.065,0,0,0,5.064,5.065h70.9a30.387,30.387,0,1,1-27.419,43.4,5.064,5.064,0,0,0-4.558-2.887H112.843a5.065,5.065,0,0,0-4.558,2.887,30.387,30.387,0,1,1-27.434-43.4,5.065,5.065,0,0,0,0-10.129A40.516,40.516,0,1,0,115.9,160.212h21.068a40.516,40.516,0,1,0,35.046-60.774h-70.9a5.064,5.064,0,0,0-5.065,5.065Z" transform="translate(-40.288 -99.437)" fill="#39519d"/>
+          <path id="Tracé_23" data-name="Tracé 23" d="M75.2,124.193v-7.6a5.065,5.065,0,1,0-10.129,0v7.6h-7.6a5.064,5.064,0,1,0,0,10.129h7.6v7.6a5.065,5.065,0,0,0,10.129,0v-7.6h7.6a5.064,5.064,0,1,0,0-10.129Z" transform="translate(-29.57 -88.741)" fill="#39519d"/>
+          <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="5.065" cy="5.065" rx="5.065" ry="5.065" transform="translate(126.658 20.258)" fill="#39519d"/>
+          <ellipse id="Ellipse_4" data-name="Ellipse 4" cx="5.065" cy="5.065" rx="5.065" ry="5.065" transform="translate(126.658 45.581)" fill="#39519d"/>
+          <ellipse id="Ellipse_5" data-name="Ellipse 5" cx="5.065" cy="5.065" rx="5.065" ry="5.065" transform="translate(113.997 32.919)" fill="#39519d"/>
+          <ellipse id="Ellipse_6" data-name="Ellipse 6" cx="5.065" cy="5.065" rx="5.065" ry="5.065" transform="translate(139.32 32.919)" fill="#39519d"/>
+        </g>
+        <path id="Tracé_27" data-name="Tracé 27" d="M44.953,16.125a4.641,4.641,0,0,0,0,9.281h60.328a4.641,4.641,0,0,0,0-9.281Z" transform="translate(-12.468 2.438)" fill="#39519d"/>
+        <path id="Tracé_28" data-name="Tracé 28" d="M93.328,16.125a4.641,4.641,0,0,0,0,9.281h27.844a4.641,4.641,0,0,0,0-9.281Z" transform="translate(22.688 2.438)" fill="#39519d"/>
+        <path id="Tracé_29" data-name="Tracé 29" d="M233.016,23.937H195.891a4.641,4.641,0,0,0,0,9.281h32.484V42.5H47.39a13.922,13.922,0,0,1,0-27.844H233.015a4.641,4.641,0,1,0,0-9.281H47.39a23.231,23.231,0,0,0-23.2,23.2V135.313a4.641,4.641,0,1,0,9.281,0V47.02A22.962,22.962,0,0,0,47.39,51.781H233.015a4.641,4.641,0,0,0,4.641-4.641V28.578a4.641,4.641,0,0,0-4.641-4.641Z" transform="translate(-24.187 -5.375)" fill="#39519d"/>
+        <path id="Tracé_30" data-name="Tracé 30" d="M233.016,37.625a4.641,4.641,0,0,0-4.641,4.641V251.095H52.031a18.563,18.563,0,0,1-18.562-18.562V130.438a4.641,4.641,0,1,0-9.281,0V232.532a27.872,27.872,0,0,0,27.844,27.844H233.016a4.641,4.641,0,0,0,4.641-4.641V42.266a4.641,4.641,0,0,0-4.641-4.641Z" transform="translate(-24.187 18.063)" fill="#39519d"/>
+      </g>
+      <text id="RULES" transform="translate(37.235 109.719)" fill="#39519d" font-size="47" font-family="SegoeUI-Bold, Segoe UI" font-weight="700"><tspan x="0" y="0">RULES</tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="132.28" height="132.28" viewBox="0 0 132.28 132.28">
+  <g id="playIcon" transform="translate(22.14 -52.86)">
+    <g id="Groupe_18" data-name="Groupe 18" transform="translate(-60 26)">
+      <path id="Tracé_69" data-name="Tracé 69" d="M137.6,56.76a1.72,1.72,0,1,0,1.72,1.72A1.72,1.72,0,0,0,137.6,56.76Z" fill="#fff" stroke="#707070" stroke-width="1"/>
+      <path id="Tracé_62" data-name="Tracé 62" d="M86,22.36A63.64,63.64,0,1,0,149.64,86,63.714,63.714,0,0,0,86,22.36Z" transform="translate(20 7)" fill="#fff1a8"/>
+    </g>
+    <g id="Groupe_23" data-name="Groupe 23" transform="translate(-42 33)">
+      <path id="Tracé_69-2" data-name="Tracé 69" d="M137.6,56.76a1.72,1.72,0,1,0,1.72,1.72A1.72,1.72,0,0,0,137.6,56.76Z" fill="#fff"/>
+      <path id="Tracé_165" data-name="Tracé 165" d="M80.206,44.371C69.737,44.364,65.18,40.9,56.641,46.959,52.068,67.42,58.176,95.976,75.625,107.6s48.031,5.152,65.15-6.951c3.375-15.027-7.322-23.981-16.958-36S95.608,44.34,80.206,44.371Z" transform="translate(7.895 -19.398)" fill="#fff7cc"/>
+      <path id="Tracé_62-2" data-name="Tracé 62" d="M86,22.36A63.64,63.64,0,1,0,149.64,86,63.714,63.714,0,0,0,86,22.36Z" fill="none" stroke="#ff9500" stroke-width="5"/>
+      <path id="Tracé_166" data-name="Tracé 166" d="M32.232,5.107a3.988,3.988,0,0,1,6.7,0L67.09,48.374a4.053,4.053,0,0,1-3.351,6.277H7.427a4.053,4.053,0,0,1-3.351-6.277Z" transform="translate(120.651 50) rotate(90)" fill="#ff619a"/>
+      <path id="Soustraction_1" data-name="Soustraction 1" d="M4.011,62.147a4.078,4.078,0,0,1-2.786-1.122A3.946,3.946,0,0,1,0,58.14V1.805a4.186,4.186,0,0,1,.036-.546,40.034,40.034,0,0,0,16.29,30.909,34.826,34.826,0,0,0,20.308,6.578,34.464,34.464,0,0,0,4.642-.315L6.2,61.484A3.975,3.975,0,0,1,4.011,62.147Z" transform="translate(66 55.609)" fill="#fc025c"/>
+    </g>
+  </g>
+</svg>

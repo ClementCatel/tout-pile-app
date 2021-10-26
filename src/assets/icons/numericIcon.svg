@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="134.16" height="134.16" viewBox="0 0 134.16 134.16">
+  <g id="numericIcon" transform="translate(-27.92 -26.92)">
+    <g id="Groupe_18" data-name="Groupe 18" transform="translate(9 8)">
+      <path id="Tracé_60" data-name="Tracé 60" d="M22.36,46.44a3.44,3.44,0,1,0,3.44,3.44A3.44,3.44,0,0,0,22.36,46.44Z" fill="#ee3e54"/>
+      <path id="Tracé_61" data-name="Tracé 61" d="M132.44,20.64a1.72,1.72,0,1,0,1.72,1.72A1.72,1.72,0,0,0,132.44,20.64Z" fill="#f1bc19"/>
+      <path id="Tracé_62" data-name="Tracé 62" d="M86,22.36A63.64,63.64,0,1,0,149.64,86,63.64,63.64,0,0,0,86,22.36Z" fill="#fff1a8" stroke="#ff9500" stroke-width="5"/>
+      <path id="Tracé_63" data-name="Tracé 63" d="M142.76,18.92a6.88,6.88,0,1,0,6.88,6.88,6.88,6.88,0,0,0-6.88-6.88Z" fill="#f1bc19"/>
+      <path id="Tracé_64" data-name="Tracé 64" d="M149.64,37.84a3.44,3.44,0,1,0,3.44,3.44A3.44,3.44,0,0,0,149.64,37.84Z" fill="#ee3e54"/>
+      <path id="Tracé_65" data-name="Tracé 65" d="M139.32,127.28a3.44,3.44,0,1,0,3.44,3.44A3.44,3.44,0,0,0,139.32,127.28ZM25.8,101.48a6.88,6.88,0,1,0,6.88,6.88A6.88,6.88,0,0,0,25.8,101.48Z" fill="#fbcd59"/>
+      <path id="Tracé_66" data-name="Tracé 66" d="M43,146.2a3.44,3.44,0,1,0,3.44,3.44A3.44,3.44,0,0,0,43,146.2Z" fill="#ee3e54"/>
+      <path id="Tracé_67" data-name="Tracé 67" d="M31.82,87.72a4.3,4.3,0,1,0,4.3,4.3A4.3,4.3,0,0,0,31.82,87.72Z" fill="#fff"/>
+      <path id="Tracé_68" data-name="Tracé 68" d="M36.12,113.52a1.72,1.72,0,1,0,1.72,1.72A1.72,1.72,0,0,0,36.12,113.52Z" fill="#f1bc19"/>
+      <path id="Tracé_69" data-name="Tracé 69" d="M137.6,56.76a1.72,1.72,0,1,0,1.72,1.72A1.72,1.72,0,0,0,137.6,56.76Z" fill="#fff"/>
+      <text id="_3.14" data-name="3.14" transform="translate(41 102)" fill="#fc025c" font-size="43" font-family="ArialRoundedMTBold, Arial Rounded MT"><tspan x="0" y="0">3.14</tspan></text>
+    </g>
+  </g>
+</svg>
