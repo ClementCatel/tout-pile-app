@@ -8,7 +8,7 @@
         <v-dialog transition="dialog-top-transition" max-width="800">
           <template v-slot:activator="{on, attrs}">
             <div class="rules grow" v-bind="attrs" v-on="on">
-              <img height="50px" src="@/assets/icons/rules1.svg" />
+              <img height="50px" src="@/assets/icons/rules.svg" />
             </div>
           </template>
           <template v-slot:default="dialog">
@@ -68,10 +68,18 @@
                         src="@/assets/icons/toutPileIcon.svg"
                       />
                       <li>
-                        Le joueur ayant la réponse la plus proche du résultat
-                        attendu gagne un point. <br />
-                        S'il fait un tout pile, c'est à dire, qu'il trouve la
-                        valeur exacte, il remportre 2 points.
+                        <div class="mb-2">
+                          Le joueur ayant la réponse la plus proche du résultat
+                          attendu gagne un point.
+                        </div>
+                        <div class="mb-2">
+                          S'il fait un tout pile, c'est à dire, qu'il trouve la
+                          valeur exacte, il remportre 2 points.
+                        </div>
+                        <div class="mb-2">
+                          En cas d'égalité, le joueur ayant VALIDÉ sa réponse le
+                          plus rapidement remporte le point.
+                        </div>
                       </li>
                     </div>
                     <div class="d-flex align-center mb-7">
