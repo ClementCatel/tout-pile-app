@@ -36,10 +36,18 @@ const actions = {
 
   async startGame({dispatch}, gameData) {
     const max = gameData.rounds;
+    let nbQuestions;
+    await db
+      .collection("questions")
+      .doc("--stats--")
+      .get()
+      .then((doc) => {
+        nbQuestions = doc.data().questionCount;
+      });
     // Generate an array of random numbers
     let random = [];
     for (let i = 0; i < max; i++) {
-      let tmp = Math.floor(Math.random() * max + 1);
+      let tmp = Math.floor(Math.random() * nbQuestions + 1);
       if (random.indexOf(tmp) === -1 && tmp !== 0) {
         random.push(tmp);
       } else i--;

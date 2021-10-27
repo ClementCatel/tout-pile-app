@@ -42,8 +42,13 @@
           </v-card-title>
           <div class="mx-6 my-3">
             <v-row align="center">
-              <div class="col-6 text-h5">
-                <span class="pr-2">⏱</span>{{ $t("lobby.timer") }}
+              <div class="col-6 text-h5 d-flex align-center mb-10">
+                <img
+                  class="pr-3"
+                  height="30px"
+                  src="@/assets/icons/timerIconLobby.svg"
+                />
+                {{ $t("lobby.timer") }}
               </div>
               <v-col>
                 <v-select
@@ -57,8 +62,13 @@
               </v-col>
             </v-row>
             <v-row align="center">
-              <div class="col-6 text-h5">
-                <span class="pr-2">🎯</span>{{ $t("lobby.rounds") }}
+              <div class="col-6 text-h5 d-flex align-center mb-10">
+                <img
+                  class="pr-3"
+                  height="30px"
+                  src="@/assets/icons/toutPileIconLobby.svg"
+                />
+                {{ $t("lobby.rounds") }}
               </div>
               <v-col>
                 <v-select
@@ -93,19 +103,25 @@
         <div class="d-flex justify-center mt-16">
           <v-btn
             large
-            class="mr-3 font-weight-bold secondary--text"
+            class="mr-3 font-weight-bold secondary--text pl-2"
             @click="copyLink"
-            ><v-icon left>mdi-link-variant</v-icon
-            >{{ $t("lobby.copyLink") }}</v-btn
+            ><img
+              class="mr-2"
+              height="20px"
+              src="@/assets/icons/shareLinkIconLobby.svg"
+            />{{ $t("lobby.copyLink") }}</v-btn
           >
           <v-btn
             v-if="isLeader"
             large
             :loading="loading"
-            class="ml-3 font-weight-bold secondary--text"
+            class="ml-3 font-weight-bold secondary--text pl-2"
             @click="startGame"
-            ><v-icon left>mdi-play-outline</v-icon
-            >{{ $t("lobby.startGame") }}</v-btn
+            ><img
+              class="mr-2"
+              height="20px"
+              src="@/assets/icons/playIcon.svg"
+            />{{ $t("lobby.startGame") }}</v-btn
           >
         </div>
       </v-col>

@@ -20,7 +20,9 @@
           <v-card-title class="justify-center">
             {{ getFirstPlayersIndexes[1].totalScore }} pts
           </v-card-title>
-          <div class="text-center text-h3">🥈</div>
+          <div class="text-center text-h3">
+            <img height="60px" src="@/assets/icons/secondPlaceIcon.svg" />
+          </div>
         </v-card>
       </v-col>
       <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[0]">
@@ -42,7 +44,9 @@
           <v-card-title class="justify-center">
             {{ getFirstPlayersIndexes[0].totalScore }} pts
           </v-card-title>
-          <div class="text-center text-h3">🥇</div>
+          <div class="text-center text-h3">
+            <img height="60px" src="@/assets/icons/firstPlaceIcon.svg" />
+          </div>
         </v-card>
       </v-col>
       <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[2]">
@@ -64,7 +68,9 @@
           <v-card-title class="justify-center">
             {{ getFirstPlayersIndexes[2].totalScore }} pts
           </v-card-title>
-          <div class="text-center text-h3">🥉</div>
+          <div class="text-center text-h3">
+            <img height="60px" src="@/assets/icons/thirdPlaceIcon.svg" />
+          </div>
         </v-card>
       </v-col>
     </v-row>

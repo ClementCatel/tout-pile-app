@@ -14,7 +14,9 @@
     "timer": "Timer",
     "categories": "Categories",
     "rounds": "Rounds",
-    "link_copied": "Link copied"
+    "link_copied": "Link copied",
+    "rules_title": "Rules of the game",
+    "close": "Close"
   },
   "answers": {
     "show_results": "Show results",

@@ -14,7 +14,9 @@
     "timer": "Timer",
     "categories": "Catégories",
     "rounds": "Manches",
-    "link_copied": "Lien copié"
+    "link_copied": "Lien copié",
+    "rules_title": "Règles du jeu",
+    "close": "Fermer"
   },
   "answers": {
     "show_results": "Voir les resultats",
