@@ -1,0 +1,20 @@
+<svg id="secondPlaceIcon" xmlns="http://www.w3.org/2000/svg" width="172" height="172" viewBox="0 0 172 172">
+  <path id="Tracé_241" data-name="Tracé 241" d="M0,172V0H172V172Z" fill="none"/>
+  <g id="Groupe_27" data-name="Groupe 27">
+    <g id="Groupe_26" data-name="Groupe 26">
+      <path id="Tracé_249" data-name="Tracé 249" d="M0,0H16.125V69.875H0Z" transform="translate(102.125 8.063)" fill="#ff619a"/>
+      <rect id="Rectangle_25" data-name="Rectangle 25" width="16.125" height="69.875" transform="translate(86 8.063)" fill="#5841b6"/>
+      <rect id="Rectangle_26" data-name="Rectangle 26" width="16.125" height="69.875" transform="translate(69.875 8.063)" fill="#ff619a"/>
+      <rect id="Rectangle_27" data-name="Rectangle 27" width="16.125" height="69.875" transform="translate(53.75 8.063)" fill="#311c61"/>
+      <path id="Tracé_242" data-name="Tracé 242" d="M118.25,51.063V77.938H102.125V50.928c.887.081,1.774.134,2.688.134Z" fill="#fc025c"/>
+      <path id="Tracé_243" data-name="Tracé 243" d="M102.125,50.928V77.938H86V43.376a26.741,26.741,0,0,0,16.125,7.552Z" fill="#311c61"/>
+      <path id="Tracé_244" data-name="Tracé 244" d="M86,43.376V77.938H69.875V8.063h8.063V24.188A26.859,26.859,0,0,0,86,43.376Z" fill="#fc025c"/>
+      <path id="Tracé_251" data-name="Tracé 251" d="M53.75,0A53.75,53.75,0,1,1,0,53.75,53.75,53.75,0,0,1,53.75,0Z" transform="translate(32.25 56.438)" fill="#d0d8da"/>
+      <path id="Tracé_245" data-name="Tracé 245" d="M136.552,128.516a53.75,53.75,0,1,1-79.6-63.533,53.75,53.75,0,0,0,79.6,63.532Z" fill="#b8b8b8"/>
+      <circle id="Ellipse_25" data-name="Ellipse 25" cx="43" cy="43" r="43" transform="translate(43 67.188)" fill="#b8b8b8"/>
+      <path id="Tracé_246" data-name="Tracé 246" d="M86,67.188a43,43,0,1,0,43,43A43,43,0,0,0,86,67.188Zm21.5,69.876A53.691,53.691,0,0,1,53.831,84.657a42.965,42.965,0,0,1,66.139,50.9,54.433,54.433,0,0,1-12.47,1.505Z" fill="#8a8a8a"/>
+      <path id="Tracé_250" data-name="Tracé 250" d="M34.994-14.85V-2.168H2L2.9-14.961c9.772-15.416,14.694-20.431,16.538-24.094S22.2-45.576,22.2-47.628a6.054,6.054,0,0,0-.836-3.526,2.926,2.926,0,0,0-2.545-1.163,2.826,2.826,0,0,0-2.545,1.289q-.836,1.289-.836,5.119V-40.4H2v-2.112a44.361,44.361,0,0,1,.52-7.678,13.245,13.245,0,0,1,2.561-5.53,12.773,12.773,0,0,1,5.307-4.116,19.859,19.859,0,0,1,7.83-1.4q8.943,0,13.526,4.278A14.173,14.173,0,0,1,36.33-46.125,25.006,25.006,0,0,1,33.751-35.6c-1.72,3.7-5.733,8.747-14.145,20.751Z" transform="translate(68 139.168)" fill="#f6f6f6"/>
+      <path id="Tracé_248" data-name="Tracé 248" d="M104.813,136.982v.081H70.043l.207-10.688.184-1.1.6-1.306.461-.733.48.389a53.272,53.272,0,0,0,32.841,13.357Z" fill="#d0d8da"/>
+    </g>
+  </g>
+</svg>
