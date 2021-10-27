@@ -38,11 +38,7 @@
             v-if="isPlayerLeader(player.id)"
             class="text-h5 mr-2 d-flex align-center"
           >
-            <img
-              class="mr-4"
-              height="30px"
-              src="@/assets/icons/crownIcon.svg"
-            />
+            <img height="30px" src="@/assets/icons/crownIcon.svg" />
           </div>
           <v-btn
             v-else-if="isLeader"
