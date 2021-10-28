@@ -1,4 +1,5 @@
 import {db, fv} from "@/services/firebase";
+import i18n from "@/i18n.js";
 
 const state = () => ({
   game: null,
@@ -119,12 +120,24 @@ const actions = {
   },
 
   async addPlayer({rootState}, gameId) {
-    await db
-      .collection("games")
-      .doc(gameId)
-      .update({
-        players: fv.arrayUnion(rootState.player.player),
-      });
+    const playersLimit = 10;
+    const game = await db.collection("games").doc(gameId).get();
+    if (game.data().players.length < playersLimit) {
+      if (
+        !game.data().players.some((p) => p.id === rootState.player.player.id)
+      ) {
+        await db
+          .collection("games")
+          .doc(gameId)
+          .update({
+            players: fv.arrayUnion(rootState.player.player),
+          });
+      } else {
+        throw new Error(i18n.t("error.player_already_in"));
+      }
+    } else {
+      throw new Error(i18n.t("error.player_limit_reached"));
+    }
   },
 
   async removePlayer({state}, player) {
