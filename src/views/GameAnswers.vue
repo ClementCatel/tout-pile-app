@@ -19,7 +19,8 @@
           rounded="lg"
           elevation="10"
           outlined
-          class="card white--text py-3 px-6 mt-4 pt-0 mb-10"
+          class="card white--text py-3 px-6 mt-4 pt-0 mb-10 scroll"
+          height="500"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
