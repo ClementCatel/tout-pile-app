@@ -96,7 +96,8 @@ export default {
     },
     playerAnswer(playerId) {
       if (this.answers) {
-        return this.answers[playerId]?.answer || 0;
+        const value = this.answers[playerId]?.answer || 0;
+        return parseFloat(value).toLocaleString();
       }
       return null;
     },
