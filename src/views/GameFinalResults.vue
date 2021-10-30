@@ -139,7 +139,7 @@ export default {
     },
     async backToLobby() {
       await this.$store.dispatch("game/resetGame");
-      this.$router.push("/lobby");
+      // this.$router.push("/lobby");
     },
   },
   watch: {

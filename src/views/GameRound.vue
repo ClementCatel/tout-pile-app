@@ -29,10 +29,8 @@
       <v-row justify="center" align="center">
         <v-col cols="5">
           <v-text-field
-            v-model="answer"
+            v-model="formattedAnswer"
             :label="$t('round.response')"
-            type="number"
-            value=""
             :suffix="currentQuestion ? currentQuestion.unit : ''"
             solo
             hide-details
@@ -65,7 +63,7 @@ export default {
   data() {
     return {
       validated: false,
-      answer: null,
+      answer: "",
       validatedTimestamp: null,
       audioValidated: new Audio(require("@/assets/sounds/validated.mp3")),
     };
@@ -74,6 +72,23 @@ export default {
     ...mapState("game", ["game"]),
     currentQuestion() {
       return this.game.questions[this.game.currentRound - 1];
+    },
+    formattedAnswer: {
+      // getter
+      get: function () {
+        return this.answer;
+      },
+      // setter
+      set: function (newValue) {
+        if (newValue.length > 4) {
+          this.answer = parseFloat(
+            newValue.replace(/\s+/g, ""),
+          ).toLocaleString();
+          console.log(this.answer);
+        } else {
+          this.answer = newValue;
+        }
+      },
     },
   },
   methods: {
@@ -84,11 +99,11 @@ export default {
       this.audioValidated.play();
     },
     async nextRound() {
-      let answer = this.answer;
+      let answer = this.answer.replace(/\s+/g, "");
       if (!this.validated) {
         this.validatedTimestamp = Date.now();
       }
-      if (!this.answer || isNaN(this.answer)) answer = 0;
+      if (!this.answer || isNaN(answer)) answer = 0;
       const finalAnswer = {
         answer: parseFloat(answer),
         playerId: this.$store.state.player.player.id,

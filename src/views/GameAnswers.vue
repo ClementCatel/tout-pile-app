@@ -11,9 +11,25 @@
             :class="[
               !this.game.showResults ? 'blurry-text' : '',
               'text-h4 px-3',
+              'font-weight-black',
             ]"
             >{{ currentQuestion ? currentQuestion.answer : "" }}</span
           >
+          <v-tooltip bottom v-if="this.game.showResults">
+            <template v-slot:activator="{on, attrs}">
+              <v-btn
+                dark
+                icon
+                large
+                class="mb-3"
+                @click="dialog = true"
+                v-bind="attrs"
+                v-on="on"
+                ><v-icon>mdi-information-outline</v-icon></v-btn
+              >
+            </template>
+            <span>{{ $t("answers.explanations") }}</span>
+          </v-tooltip>
         </div>
         <v-card
           rounded="lg"
@@ -61,9 +77,9 @@
       </v-col>
     </v-row>
 
+    <!-- Winner dialog -->
     <v-dialog
       v-model="winnerAlert"
-      transition="dialog-top-transition"
       persistent
       hide-overlay
       max-width="500px"
@@ -76,12 +92,28 @@
           </v-avatar>
         </div>
         <v-chip x-large class="px-8 gold-outline white--text"
-          >{{ $t("answers.the_closest") }} {{ winner.username }} ! (+{{
-            winnerScore
-          }}
-          pts)</v-chip
+          >{{ $t("answers.the_closest") }}
+          <span class="font-weight-black">&nbsp;{{ winner.username }}</span> !
+          (+{{ winnerScore }} pts)</v-chip
         >
       </div>
+    </v-dialog>
+
+    <!-- Explanations dialog -->
+    <v-dialog v-model="dialog" max-width="500px">
+      <v-card>
+        <div class="d-flex justify-space-between align-center pl-2">
+          <v-card-title>
+            {{ $t("answers.explanations") }}
+          </v-card-title>
+          <v-btn icon @click="dialog = false" class="mr-4">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </div>
+        <v-card-text>
+          <p class="text-body-1">{{ currentQuestion.infos }}</p>
+        </v-card-text>
+      </v-card>
     </v-dialog>
   </v-container>
 </template>
@@ -104,6 +136,7 @@ export default {
       winnerScore: 0,
       showNextEventButton: false,
       audioWin: new Audio(require("@/assets/sounds/win.mp3")),
+      dialog: false,
     };
   },
   computed: {
