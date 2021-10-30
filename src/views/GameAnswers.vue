@@ -20,7 +20,7 @@
           elevation="10"
           outlined
           class="card white--text py-3 px-6 mt-4 pt-0 mb-10 scroll"
-          height="500"
+          :height="height"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
@@ -165,6 +165,23 @@ export default {
     },
     gameShowResults() {
       return this.game.showResults;
+    },
+
+    height() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return 100;
+        case "sm":
+          return 200;
+        case "md":
+          return 300;
+        case "lg":
+          return 400;
+        case "xl":
+          return 500;
+        default:
+          return 500;
+      }
     },
   },
   methods: {
