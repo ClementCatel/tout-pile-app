@@ -3,7 +3,7 @@
     <v-main class="backColor">
       <v-container>
         <v-row justify="center" class="my-4">
-          <v-col cols="3" class="px-0">
+          <v-col cols="3" class="px-0 d-flex align-center">
             <v-btn
               v-if="isLobby"
               class="px-10 font-weight-bold white--text"
@@ -13,15 +13,19 @@
               {{ $t("lobby.return") }}</v-btn
             >
           </v-col>
-          <v-col cols="4" class="text-center">
+          <v-col cols="4" class="d-flex align-center justify-center">
             <h1 class="white--text">Tout Pile</h1>
           </v-col>
           <v-col cols="3" class="text-right px-0">
             <v-dialog transition="dialog-top-transition" max-width="800">
               <template v-slot:activator="{on, attrs}">
-                <div class="grow" v-bind="attrs" v-on="on">
-                  <img height="50px" src="@/assets/icons/rules.svg" />
-                </div>
+                <img
+                  height="50px"
+                  src="@/assets/icons/rules.svg"
+                  class="grow-hover"
+                  v-bind="attrs"
+                  v-on="on"
+                />
               </template>
               <template v-slot:default="dialog">
                 <v-card>
@@ -156,10 +160,10 @@ export default {
   background-image: linear-gradient(to top, #5f72bd 0%, #9b23ea 100%);
 }
 
-.grow {
+.grow-hover {
   transition: all 0.2s ease-in-out;
 }
-.grow:hover {
+.grow-hover:hover {
   transform: scale(1.1);
 }
 
