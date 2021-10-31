@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center" class="my-15">
+    <v-row justify="center" class="my-12">
       <v-col cols="auto text-center">
         <h2 v-if="isInvited" class="white--text mb-3">
           {{ $t("onboarding.has_been_invited") }}
@@ -12,15 +12,18 @@
     </v-row>
 
     <v-row justify="center">
-      <v-col cols="auto">
+      <v-col cols="5">
         <v-text-field
           :label="$t('onboarding.username')"
           v-model="username"
           solo
           :maxlength="max"
           :minlength="min"
-        ></v-text-field
-      ></v-col>
+        ></v-text-field>
+        <v-alert v-model="alert" type="error" dismissible>
+          {{ alertMessage }}
+        </v-alert>
+      </v-col>
     </v-row>
 
     <v-row justify="center">
@@ -54,6 +57,8 @@ export default {
     return {
       // general data
       loading: false,
+      alert: false,
+      alertMessage: null,
       // player data
       username: "",
       max: 15,
@@ -100,10 +105,17 @@ export default {
       try {
         this.loading = true;
         if (this.validateUsername()) {
-          await this.$store.dispatch("player/createPlayer", {
-            username: this.username,
-            avatarURL: this.avatarURL,
-          });
+          if (!this.localPlayer) {
+            await this.$store.dispatch("player/createPlayer", {
+              username: this.username,
+              avatarURL: this.avatarURL,
+            });
+          } else {
+            await this.$store.dispatch("player/editPlayer", {
+              username: this.username,
+              avatarURL: this.avatarURL,
+            });
+          }
           await this.$store.dispatch("game/addPlayer", this.$route.query.game);
           await this.$store.dispatch("game/getGame", this.$route.query.game);
           await this.$store.dispatch("game/bindGame", this.$route.query.game);
@@ -112,7 +124,9 @@ export default {
           this.loading = false;
         }
       } catch (error) {
-        console.log(error);
+        this.loading = false;
+        this.alertMessage = error.message;
+        this.alert = true;
       }
     },
     validateUsername() {

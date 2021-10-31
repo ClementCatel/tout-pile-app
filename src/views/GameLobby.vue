@@ -1,17 +1,6 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="10" class="pl-0">
-        <v-btn
-          class="px-10 font-weight-bold white--text mb-5"
-          outlined
-          @click="leaveGame"
-          ><v-icon left>mdi-arrow-left</v-icon> {{ $t("lobby.return") }}</v-btn
-        >
-      </v-col>
-    </v-row>
-
-    <v-row justify="center">
       <v-col cols="4" class="mr-3">
         <v-card
           rounded="lg"
@@ -23,6 +12,7 @@
             class="justify-center text-h5 font-weight-bold text-uppercase"
           >
             {{ $t("lobby.players") }}
+            ({{ players.length }}/10)
           </v-card-title>
           <players-list :players="players" @kick="kickPlayer" />
         </v-card>
@@ -212,13 +202,6 @@ export default {
         navigator.clipboard;
       clipboardData.writeText(link);
       this.snackbar = true;
-    },
-    async leaveGame() {
-      await await this.$store.dispatch(
-        "game/removePlayer",
-        this.$store.state.player.player,
-      );
-      // this.$router.push("/");
     },
     prefillForm() {
       this.timerSelected = this.game.timer;
