@@ -13,7 +13,9 @@
       </v-col>
     </v-row>
     <v-row justify="center" class="mt-5 mb-3">
-      <h3><count-down :timer="game.timer" @answered="nextRound" /></h3>
+      <h3>
+        <count-down ref="countdown" :timer="game.timer" @answered="nextRound" />
+      </h3>
     </v-row>
     <v-row justify="center" class="mb-10">
       <v-col cols="5">
@@ -96,7 +98,7 @@ export default {
       this.validated = true;
       this.validatedTimestamp = Date.now();
       this.audioValidated.volume = 0.2;
-      this.audioValidated.play();
+      this.$store.dispatch("playAudio", this.audioValidated);
     },
     async nextRound() {
       let answer = this.answer.replace(/\s+/g, "");
@@ -113,6 +115,11 @@ export default {
       await this.$store.dispatch("game/addAnswer", finalAnswer);
       this.$router.push("/answers");
     },
+  },
+
+  beforeRouteLeave(to, from, next) {
+    this.$refs.countdown.stopSound();
+    next();
   },
 };
 </script>

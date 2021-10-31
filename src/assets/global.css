@@ -1,0 +1,51 @@
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+}
+
+::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+}
+
+.scroll {
+  overflow-y: auto;
+}
+
+/* width */
+.scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+.scroll::-webkit-scrollbar-thumb {
+  background: #6b63c6;
+}
+
+/* Handle on hover */
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: #312856;
+}
+
+.scroll::-webkit-scrollbar-track-piece:end {
+  background: transparent;
+  margin-bottom: 30px;
+}
+
+.scroll::-webkit-scrollbar-track-piece:start {
+  background: transparent;
+  margin-top: 70px;
+}

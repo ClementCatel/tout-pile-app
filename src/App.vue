@@ -16,7 +16,14 @@
           <v-col cols="4" class="d-flex align-center justify-center">
             <h1 class="white--text">Tout Pile</h1>
           </v-col>
-          <v-col cols="3" class="text-right px-0">
+          <v-col
+            cols="3"
+            class="d-flex align-center justify-end text-right px-0"
+          >
+            <v-btn @click="muteSound" icon dark x-large class="mr-6"
+              ><v-icon v-if="isMuted">mdi-volume-off</v-icon>
+              <v-icon v-else>mdi-volume-high</v-icon>
+            </v-btn>
             <v-dialog transition="dialog-top-transition" max-width="800">
               <template v-slot:activator="{on, attrs}">
                 <img
@@ -135,6 +142,10 @@ export default {
     isLobby() {
       return this.$route.path === "/lobby";
     },
+
+    isMuted() {
+      return this.$store.state.muted;
+    },
   },
   methods: {
     async leaveGame() {
@@ -143,6 +154,14 @@ export default {
           "game/removePlayer",
           this.$store.state.player.player,
         );
+      }
+    },
+
+    muteSound() {
+      if (this.$store.state.muted) {
+        this.$store.commit("SET_MUTED", false);
+      } else {
+        this.$store.commit("SET_MUTED", true);
       }
     },
   },
