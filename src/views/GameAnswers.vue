@@ -216,6 +216,9 @@ export default {
           return 500;
       }
     },
+    isMuted() {
+      return this.$store.state.muted;
+    },
   },
   methods: {
     async showResults() {
@@ -290,8 +293,7 @@ export default {
     },
     gameShowResults(value) {
       if (value) {
-        this.audioWin.volume = this.$store.state.masterVolume;
-        this.audioWin.play();
+        this.$store.dispatch("playAudio", this.audioWin);
         this.getClosestPlayer();
         this.winnerAlert = true;
         confetti({
@@ -303,6 +305,13 @@ export default {
           this.winnerAlert = false;
           this.showNextEventButton = true;
         }, 3500);
+      }
+    },
+    isMuted(value) {
+      if (value) {
+        this.audioWin.muted = true;
+      } else {
+        this.audioWin.muted = false;
       }
     },
   },

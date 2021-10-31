@@ -12,7 +12,7 @@
     </v-row>
 
     <v-row justify="center">
-      <v-col cols="5">
+      <v-col cols="auto">
         <v-text-field
           :label="$t('onboarding.username')"
           v-model="username"
@@ -20,10 +20,12 @@
           :maxlength="max"
           :minlength="min"
         ></v-text-field>
-        <v-alert v-model="alert" type="error" dismissible>
-          {{ alertMessage }}
-        </v-alert>
       </v-col>
+    </v-row>
+    <v-row justify="center">
+      <v-alert v-model="alert" type="error" dismissible>
+        {{ alertMessage }}
+      </v-alert>
     </v-row>
 
     <v-row justify="center">

@@ -210,8 +210,7 @@ export default {
       this.categoriesSelected = [];
     },
     countDownTimer() {
-      this.audioStart.volume = this.$store.state.masterVolume;
-      this.audioStart.play();
+      this.$store.dispatch("playAudio", this.audioStart);
       if (this.countDown > 0 || this.countDown === "Go !") {
         setTimeout(() => {
           this.countDown !== 1
@@ -229,11 +228,9 @@ export default {
     players(val, oldValue) {
       if (val.length >= 0) {
         if (val.length < oldValue.length) {
-          this.audioDisconnect.volume = this.$store.state.masterVolume;
-          this.audioDisconnect.play();
+          this.$store.dispatch("playAudio", this.audioDisconnect);
         } else if (val.length > oldValue.length) {
-          this.audioConnect.volume = this.$store.state.masterVolume;
-          this.audioConnect.play();
+          this.$store.dispatch("playAudio", this.audioConnect);
         }
         if (
           !val.some(
