@@ -290,6 +290,7 @@ export default {
     },
     gameShowResults(value) {
       if (value) {
+        this.audioWin.volume = this.$store.state.masterVolume;
         this.audioWin.play();
         this.getClosestPlayer();
         this.winnerAlert = true;

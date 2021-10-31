@@ -5,6 +5,9 @@
         <h1 class="white--text mt-15">Tout Pile</h1>
       </div>
       <v-col cols="auto">
+        <div>
+          <button></button>
+        </div>
         <v-dialog transition="dialog-top-transition" max-width="800">
           <template v-slot:activator="{on, attrs}">
             <div class="rules grow" v-bind="attrs" v-on="on">

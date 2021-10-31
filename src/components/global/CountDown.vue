@@ -27,6 +27,7 @@ export default {
             this.timerCount--;
           }, 1000);
           if (value == 5) {
+            this.audioCountdown.volume = this.$store.state.masterVolume;
             this.audioCountdown.play();
           }
         } else {

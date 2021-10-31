@@ -18,7 +18,7 @@
           elevation="10"
           outlined
           class="card white--text pa-3 scroll"
-          height="500"
+          height="600"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
@@ -227,7 +227,7 @@ export default {
       this.categoriesSelected = [];
     },
     countDownTimer() {
-      this.audioStart.volume = 0.2;
+      this.audioStart.volume = this.$store.state.masterVolume;
       this.audioStart.play();
       if (this.countDown > 0 || this.countDown === "Go !") {
         setTimeout(() => {
@@ -246,8 +246,10 @@ export default {
     players(val, oldValue) {
       if (val.length >= 0) {
         if (val.length < oldValue.length) {
+          this.audioDisconnect.volume = this.$store.state.masterVolume;
           this.audioDisconnect.play();
         } else if (val.length > oldValue.length) {
+          this.audioConnect.volume = this.$store.state.masterVolume;
           this.audioConnect.play();
         }
         if (

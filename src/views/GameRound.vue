@@ -95,7 +95,7 @@ export default {
     validate() {
       this.validated = true;
       this.validatedTimestamp = Date.now();
-      this.audioValidated.volume = 0.2;
+      this.audioValidated.volume = this.$store.state.masterVolume;
       this.audioValidated.play();
     },
     async nextRound() {
