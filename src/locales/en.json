@@ -37,5 +37,9 @@
   "players": {
     "points": "Points"
   },
-  "general": {}
+  "general": {},
+  "error": {
+    "player_limit_reached": "Oops, the room you're trying to join is already full 😢",
+    "player_already_in": "Oops, looks like you're already playing in this room 🤡"
+  }
 }
