@@ -1,11 +1,34 @@
 <template>
-  <v-container fluid>
+  <v-container>
     <v-row justify="center">
-      <v-col cols="12" lg="4" md="6" sm="8" class="text-center white--text">
+      <v-col cols="4" class="mr-3">
+        <v-card
+          rounded="lg"
+          elevation="10"
+          outlined
+          class="card white--text py-3 px-6 mt-4 pt-0 mb-10 scroll"
+          height="600"
+        >
+          <v-card-title
+            class="justify-center text-h5 font-weight-bold text-uppercase"
+          >
+            {{ $t("answers.answers") }}
+          </v-card-title>
+          <players-list
+            v-if="answersDictionnary"
+            :players="sortedPlayers"
+            :answers="answersDictionnary"
+            :scores="scoresDictionnary"
+            :show-points="game.showResults"
+          />
+        </v-card>
+      </v-col>
+
+      <v-col cols="6" class="ml-3 text-center white--text">
         <h2 class="my-5">
           {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
-        <div class="font-weight-bold">
+        <div class="font-weight-bold mb-10">
           {{ $t("answers.right_answer") }} :
           <span
             :class="[
@@ -31,26 +54,6 @@
             <span>{{ $t("answers.explanations") }}</span>
           </v-tooltip>
         </div>
-        <v-card
-          rounded="lg"
-          elevation="10"
-          outlined
-          class="card white--text py-3 px-6 mt-4 pt-0 mb-10 scroll"
-          :height="height"
-        >
-          <v-card-title
-            class="justify-center text-h5 font-weight-bold text-uppercase"
-          >
-            {{ $t("answers.answers") }}
-          </v-card-title>
-          <players-list
-            v-if="answersDictionnary"
-            :players="sortedPlayers"
-            :answers="answersDictionnary"
-            :scores="scoresDictionnary"
-            :show-points="game.showResults"
-          />
-        </v-card>
         <v-btn
           v-if="game.showResults && isLeader"
           large
