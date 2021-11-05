@@ -86,7 +86,6 @@ export default {
           this.answer = parseFloat(
             newValue.replace(/\s+/g, ""),
           ).toLocaleString();
-          console.log(this.answer);
         } else {
           this.answer = newValue;
         }
@@ -118,7 +117,9 @@ export default {
   },
 
   beforeRouteLeave(to, from, next) {
-    this.$refs.countdown.stopSound();
+    if (to.fullPath !== "/answers") {
+      this.$refs.countdown.stopSound();
+    }
     next();
   },
 };
