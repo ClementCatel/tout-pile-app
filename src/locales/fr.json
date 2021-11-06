@@ -1,0 +1,45 @@
+{
+  "onboarding": {
+    "start": "Démarrer",
+    "username": "Pseudo",
+    "has_been_invited": "Vous avez été invité à rejoindre une partie !",
+    "join": "Rejoindre"
+  },
+  "lobby": {
+    "return": "Retour",
+    "copyLink": "Copier le lien",
+    "startGame": "Zé partiiii !",
+    "players": "Joueurs",
+    "settings": "Réglages",
+    "timer": "Timer",
+    "categories": "Catégories",
+    "rounds": "Manches",
+    "link_copied": "Lien copié",
+    "rules_title": "Règles du jeu",
+    "close": "Fermer"
+  },
+  "answers": {
+    "show_results": "Voir les resultats",
+    "answers": "Réponses",
+    "right_answer": "Bonne réponse",
+    "next_round": "Tour suivant",
+    "final_results": "Résultats finaux",
+    "the_closest": "Le plus proche et plus rapide est",
+    "explanations": "Explications"
+  },
+  "round": {
+    "response": "Réponse",
+    "validate": "Valider"
+  },
+  "results": {
+    "back_to_lobby": "Retour à l'accueil"
+  },
+  "players": {
+    "points": "Points"
+  },
+  "general": {},
+  "error": {
+    "player_limit_reached": "Oups, la partie que vous essayez de rejoindre est déjà pleine 😢",
+    "player_already_in": "Oups, on dirait que tu joues déjà dans cette partie 🤡"
+  }
+}

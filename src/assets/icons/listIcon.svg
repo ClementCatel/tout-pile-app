@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="514" height="514" viewBox="0 0 514 501">
+  <defs>
+    <clipPath id="clip-path">
+      <rect width="263" height="363" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-3">
+      <rect width="238" height="337" fill="none"/>
+    </clipPath>
+    <clipPath id="clip-path-4">
+      <rect width="99" height="44" fill="none"/>
+    </clipPath>
+  </defs>
+  <g id="listIcon" transform="translate(-710 -290)">
+    <g id="cadre">
+      <g id="Ellipse_8" data-name="Ellipse 8" transform="translate(710 290)" fill="#ffc400" stroke="#707070" stroke-width="1">
+        <circle cx="250.5" cy="250.5" r="250.5" stroke="none"/>
+        <circle cx="250.5" cy="250.5" r="250" fill="none"/>
+      </g>
+      <path id="Intersection_1" data-name="Intersection 1" d="M-3769.689,497.794l-86.761-63.036,256.274-352.731,103.124,74.924A249.749,249.749,0,0,1-3479,250.5c0,138.348-112.153,250.5-250.5,250.5A252.338,252.338,0,0,1-3769.689,497.794Z" transform="translate(4690 290)" fill="#ff9500"/>
+      <rect id="Rectangle_5" data-name="Rectangle 5" width="263" height="363" rx="15" transform="translate(829 365)" fill="#fc025c"/>
+      <g id="Grille_de_répétition_3" data-name="Grille de répétition 3" transform="translate(961 365)" clip-path="url(#clip-path)">
+        <g transform="translate(-829 -365)">
+          <g id="Grille_de_répétition_4" data-name="Grille de répétition 4" transform="translate(698 364)" clip-path="url(#clip-path)">
+            <g transform="translate(-698 -364)">
+              <rect id="Rectangle_4" data-name="Rectangle 4" width="263" height="363" rx="18" transform="translate(698 364)" fill="#cd0045"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+    <g id="papier">
+      <rect id="Rectangle_1" data-name="Rectangle 1" width="238" height="337" rx="3" transform="translate(842 378)" fill="#fff"/>
+      <g id="Grille_de_répétition_5" data-name="Grille de répétition 5" transform="translate(961 378)" clip-path="url(#clip-path-3)">
+        <g transform="translate(-842 -378)">
+          <rect id="Rectangle_6" data-name="Rectangle 6" width="238" height="337" rx="3" transform="translate(722 378)" fill="#bdfefb"/>
+        </g>
+      </g>
+      <rect id="Rectangle_7" data-name="Rectangle 7" width="119" height="13" transform="translate(842 702)" fill="#00e3ff"/>
+      <rect id="Rectangle_8" data-name="Rectangle 8" width="119" height="13" transform="translate(961 702)" fill="#00b5ff"/>
+      <rect id="Rectangle_9" data-name="Rectangle 9" width="32" height="32" transform="translate(886 450)" fill="#ffaa20"/>
+      <rect id="Rectangle_10" data-name="Rectangle 10" width="32" height="32" transform="translate(886 590)" fill="#ffaa20"/>
+      <rect id="Rectangle_11" data-name="Rectangle 11" width="32" height="32" transform="translate(886 520)" fill="#ffaa20"/>
+      <rect id="Rectangle_12" data-name="Rectangle 12" width="26" height="15" transform="translate(935 459)" fill="#5841b6"/>
+      <rect id="Rectangle_15" data-name="Rectangle 15" width="82" height="15" transform="translate(961 459)" fill="#311c61"/>
+      <rect id="Rectangle_16" data-name="Rectangle 16" width="82" height="15" transform="translate(961 529)" fill="#311c61"/>
+      <rect id="Rectangle_17" data-name="Rectangle 17" width="82" height="15" transform="translate(961 599)" fill="#311c61"/>
+      <rect id="Rectangle_13" data-name="Rectangle 13" width="26" height="15" transform="translate(935 529)" fill="#5841b6"/>
+      <rect id="Rectangle_14" data-name="Rectangle 14" width="26" height="15" transform="translate(935 599)" fill="#5841b6"/>
+    </g>
+    <g id="calePapier">
+      <g id="Rectangle_3" data-name="Rectangle 3" transform="translate(911 353)" fill="#5841b6" stroke="#707070" stroke-width="1">
+        <rect width="99" height="44" rx="10" stroke="none"/>
+        <rect x="0.5" y="0.5" width="98" height="43" rx="9.5" fill="none"/>
+      </g>
+      <g id="Grille_de_répétition_1" data-name="Grille de répétition 1" transform="translate(961 353)" clip-path="url(#clip-path-4)">
+        <g transform="translate(-911 -363)">
+          <g id="Grille_de_répétition_2" data-name="Grille de répétition 2" transform="translate(861 363)" clip-path="url(#clip-path-4)">
+            <g transform="translate(-861 -363)">
+              <g id="Rectangle_2" data-name="Rectangle 2" transform="translate(861 363)" fill="#311c61" stroke="#707070" stroke-width="1">
+                <rect width="99" height="44" rx="10" stroke="none"/>
+                <rect x="0.5" y="0.5" width="98" height="43" rx="9.5" fill="none"/>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

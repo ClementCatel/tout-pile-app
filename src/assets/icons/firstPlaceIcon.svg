@@ -1,0 +1,20 @@
+<svg id="firstPlaceIcon" xmlns="http://www.w3.org/2000/svg" width="172" height="172" viewBox="0 0 172 172">
+  <path id="Tracé_241" data-name="Tracé 241" d="M0,172V0H172V172Z" fill="none"/>
+  <g id="Groupe_27" data-name="Groupe 27">
+    <g id="Groupe_26" data-name="Groupe 26">
+      <path id="Tracé_249" data-name="Tracé 249" d="M0,0H16.125V69.875H0Z" transform="translate(102.125 8.063)" fill="#ff619a"/>
+      <rect id="Rectangle_25" data-name="Rectangle 25" width="16.125" height="69.875" transform="translate(86 8.063)" fill="#5841b6"/>
+      <rect id="Rectangle_26" data-name="Rectangle 26" width="16.125" height="69.875" transform="translate(69.875 8.063)" fill="#ff619a"/>
+      <rect id="Rectangle_27" data-name="Rectangle 27" width="16.125" height="69.875" transform="translate(53.75 8.063)" fill="#311c61"/>
+      <path id="Tracé_242" data-name="Tracé 242" d="M118.25,51.063V77.938H102.125V50.928c.887.081,1.774.134,2.688.134Z" fill="#fc025c"/>
+      <path id="Tracé_243" data-name="Tracé 243" d="M102.125,50.928V77.938H86V43.376a26.741,26.741,0,0,0,16.125,7.552Z" fill="#311c61"/>
+      <path id="Tracé_244" data-name="Tracé 244" d="M86,43.376V77.938H69.875V8.063h8.063V24.188A26.859,26.859,0,0,0,86,43.376Z" fill="#fc025c"/>
+      <circle id="Ellipse_24" data-name="Ellipse 24" cx="53.75" cy="53.75" r="53.75" transform="translate(32.25 56.438)" fill="#f9d423"/>
+      <path id="Tracé_245" data-name="Tracé 245" d="M136.552,128.516a53.75,53.75,0,1,1-79.6-63.533,53.75,53.75,0,0,0,79.6,63.532Z" fill="#f9b53d"/>
+      <circle id="Ellipse_25" data-name="Ellipse 25" cx="43" cy="43" r="43" transform="translate(43 67.188)" fill="#f9b53d"/>
+      <path id="Tracé_246" data-name="Tracé 246" d="M86,67.188a43,43,0,1,0,43,43A43,43,0,0,0,86,67.188Zm21.5,69.876A53.691,53.691,0,0,1,53.831,84.657a42.965,42.965,0,0,1,66.139,50.9,54.433,54.433,0,0,1-12.47,1.505Z" fill="#fc913a"/>
+      <path id="Tracé_247" data-name="Tracé 247" d="M94.063,123.625v-43H80.625L67.188,94.063l6.555,5.864L80.625,98.4v25.228H69.875v13.437h34.938V123.625Z" fill="#ede574"/>
+      <path id="Tracé_248" data-name="Tracé 248" d="M104.813,136.982v.081H69.876V123.625h2.1a53.272,53.272,0,0,0,32.841,13.357Z" fill="#f9d423"/>
+    </g>
+  </g>
+</svg>

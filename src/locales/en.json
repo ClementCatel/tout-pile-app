@@ -1,3 +1,45 @@
 {
-  "message": "hello i18n !!"
+  "onboarding": {
+    "start": "Start",
+    "username": "Username",
+    "has_been_invited": "You've been invited to join a game !",
+    "join": "Join"
+  },
+  "lobby": {
+    "return": "Return",
+    "copyLink": "Copy Link",
+    "startGame": "Start Game",
+    "players": "Players",
+    "settings": "Settings",
+    "timer": "Timer",
+    "categories": "Categories",
+    "rounds": "Rounds",
+    "link_copied": "Link copied",
+    "rules_title": "Rules of the game",
+    "close": "Close"
+  },
+  "answers": {
+    "show_results": "Show results",
+    "answers": "Answers",
+    "right_answer": "Right Answer",
+    "next_round": "Next round",
+    "final_results": "Final Results",
+    "the_closest": "The closest and fastest is",
+    "explanations": "Explanations"
+  },
+  "round": {
+    "response": "Response",
+    "validate": "Validate"
+  },
+  "results": {
+    "back_to_lobby": "Back to lobby"
+  },
+  "players": {
+    "points": "Points"
+  },
+  "general": {},
+  "error": {
+    "player_limit_reached": "Oops, the room you're trying to join is already full 😢",
+    "player_already_in": "Oops, looks like you're already playing in this room 🤡"
+  }
 }
