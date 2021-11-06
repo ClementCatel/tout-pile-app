@@ -156,6 +156,7 @@ export default {
       overlay: false,
       countDown: 3,
       loading: false,
+      countDownTimeout: null,
       audioDisconnect: new Audio(require("@/assets/sounds/disconnect.mp3")),
       audioConnect: new Audio(require("@/assets/sounds/connect.mp3")),
       audioStart: new Audio(require("@/assets/sounds/start.mp3")),
@@ -212,14 +213,14 @@ export default {
     countDownTimer() {
       this.$store.dispatch("playAudio", this.audioStart);
       if (this.countDown > 0 || this.countDown === "Go !") {
-        setTimeout(() => {
+        this.countDownTimeout = setTimeout(() => {
           this.countDown !== 1
             ? (this.countDown -= 1)
             : (this.countDown = "Go !");
           this.countDownTimer();
         }, 1000);
       } else {
-        this.$router.push("/round");
+        if (this.$route.path === "/lobby") this.$router.push("/round");
       }
     },
   },
@@ -252,6 +253,13 @@ export default {
     if (this.game) {
       this.prefillForm();
     }
+  },
+  async beforeRouteLeave(to, from, next) {
+    this.audioStart.muted = true;
+    if (this.countDownTimeout) {
+      clearTimeout(this.countDownTimeout);
+    }
+    next();
   },
 };
 </script>
