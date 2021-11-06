@@ -91,7 +91,7 @@ const actions = {
       ...gameData,
     };
 
-    await dispatch("updateGame", data);
+    return await dispatch("updateGame", data);
   },
 
   async resetGame({state}) {
