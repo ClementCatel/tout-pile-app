@@ -35,7 +35,8 @@
     "back_to_lobby": "Back to lobby"
   },
   "players": {
-    "points": "Points"
+    "points": "Points",
+    "answer": "Answer"
   },
   "general": {},
   "error": {

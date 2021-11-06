@@ -27,6 +27,10 @@
         >
 
         <div v-else-if="scores && showPoints">
+          <span>{{ $t("players.answer") }} : </span>
+          <span class="px-2 mr-2 font-weight-bold">{{
+            playerAnswer(player.id)
+          }}</span>
           <span>{{ $t("players.points") }} : </span>
           <span class="px-2 mr-2 font-weight-bold">{{
             playerScore(player.id)

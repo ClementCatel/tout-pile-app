@@ -35,7 +35,8 @@
     "back_to_lobby": "Retour à l'accueil"
   },
   "players": {
-    "points": "Points"
+    "points": "Points",
+    "answer": "Réponse"
   },
   "general": {},
   "error": {
