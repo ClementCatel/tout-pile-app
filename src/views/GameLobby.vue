@@ -186,11 +186,15 @@ export default {
     },
     async startGame() {
       this.loading = true;
-      await this.$store.dispatch("game/startGame", {
-        timer: this.timerSelected,
-        rounds: this.roundsSelected,
-        categories: this.categoriesSelected,
-      });
+      try {
+        await this.$store.dispatch("game/startGame", {
+          timer: this.timerSelected,
+          rounds: this.roundsSelected,
+          categories: this.categoriesSelected,
+        });
+      } catch (error) {
+        await this.$store.dispatch("game/unsubscribe");
+      }
       this.loading = false;
     },
     copyLink() {
