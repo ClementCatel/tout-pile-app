@@ -347,9 +347,4 @@ export default {
   background-color: #7454f9 !important;
   border: 2px solid #ffd700;
 }
-
-/* .closeButton {
-  flex: auto;
-  justify-content: right;
-} */
 </style>
