@@ -139,9 +139,9 @@ export default {
   },
   data() {
     return {
-      timerItems: [5, 15, 30, 45],
+      timerItems: [20, 30, 40, 50, 60],
       timerSelected: null,
-      roundsItems: [1, 5, 10, 15, 20],
+      roundsItems: [10, 20, 30],
       roundsSelected: null,
       categoriesItems: [
         "History",
