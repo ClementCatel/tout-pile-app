@@ -12,7 +12,6 @@
       <div class="d-flex align-center">
         <v-avatar size="40" color="transparent">
           <img :src="player.avatarURL" />
-          <!-- <v-icon dark> mdi-account-circle </v-icon> -->
         </v-avatar>
         <v-card-title class="py-0">
           {{ player.username }}
@@ -20,17 +19,27 @@
         <v-spacer></v-spacer>
 
         <v-chip
-          v-if="answers && !showPoints"
+          v-if="answers"
           color="white"
           class="px-6 mr-2 font-weight-bold"
           >{{ playerAnswer(player.id) }}</v-chip
         >
 
-        <div v-else-if="scores && showPoints">
+        <div v-if="scores && showPoints" class="ml-6">
           <span>{{ $t("players.points") }} : </span>
-          <span class="px-2 mr-2 font-weight-bold">{{
-            playerScore(player.id)
-          }}</span>
+          <span
+            :class="[
+              index === 0
+                ? 'gold'
+                : index === 1
+                ? 'silver'
+                : index === 2
+                ? 'bronze'
+                : '',
+              'px-2 mr-2 font-weight-bold',
+            ]"
+            >{{ playerScore(player.id) }}</span
+          >
         </div>
 
         <div v-else>
@@ -120,5 +129,14 @@ export default {
 }
 .whiteBorder {
   border: solid 2px #00e676;
+}
+.gold {
+  color: gold;
+}
+.silver {
+  color: silver;
+}
+.bronze {
+  color: #a07155;
 }
 </style>
