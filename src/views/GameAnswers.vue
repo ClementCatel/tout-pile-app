@@ -105,17 +105,24 @@
     <!-- Explanations dialog -->
     <v-dialog v-model="dialog" max-width="500px">
       <v-card>
-        <div class="d-flex justify-space-between align-center pl-2">
-          <v-card-title>
-            {{ $t("answers.explanations") }}
-          </v-card-title>
-          <v-btn icon @click="dialog = false" class="mr-4">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-        </div>
-        <v-card-text>
-          <p class="text-body-1">{{ currentQuestion.infos }}</p>
+        <v-toolbar color="primary" dark
+          ><img
+            class="d-flex justify-space-between align-center pl-2 mr-4"
+            height="30px"
+            src="@/assets/icons/explanationIcon.svg"
+          />
+          <h2>{{ $t("answers.explanations") }}</h2>
+        </v-toolbar>
+        <v-card-text class="pb-0">
+          <div class="mt-8">
+            <p class="text-body-1 text-justify mb-0">
+              {{ currentQuestion.infos }}
+            </p>
+          </div>
         </v-card-text>
+        <v-card-actions class="justify-end">
+          <v-btn text @click="dialog = false">{{ $t("lobby.close") }}</v-btn>
+        </v-card-actions>
       </v-card>
     </v-dialog>
   </v-container>
@@ -340,4 +347,9 @@ export default {
   background-color: #7454f9 !important;
   border: 2px solid #ffd700;
 }
+
+/* .closeButton {
+  flex: auto;
+  justify-content: right;
+} */
 </style>
