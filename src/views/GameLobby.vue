@@ -139,9 +139,9 @@ export default {
   },
   data() {
     return {
-      timerItems: [5, 15, 30, 45],
+      timerItems: [20, 30, 40, 50, 60],
       timerSelected: null,
-      roundsItems: [1, 5, 10, 15, 20],
+      roundsItems: [10, 20, 30],
       roundsSelected: null,
       categoriesItems: [
         "History",
@@ -186,11 +186,15 @@ export default {
     },
     async startGame() {
       this.loading = true;
-      await this.$store.dispatch("game/startGame", {
-        timer: this.timerSelected,
-        rounds: this.roundsSelected,
-        categories: this.categoriesSelected,
-      });
+      try {
+        await this.$store.dispatch("game/startGame", {
+          timer: this.timerSelected,
+          rounds: this.roundsSelected,
+          categories: this.categoriesSelected,
+        });
+      } catch (error) {
+        await this.$store.dispatch("game/unsubscribe");
+      }
       this.loading = false;
     },
     copyLink() {
