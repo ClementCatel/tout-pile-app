@@ -114,6 +114,12 @@ const actions = {
       });
   },
 
+  async unsubscribe({commit}) {
+    return await db.collection("games").onSnapshot(() => {
+      commit("SET_GAME", null);
+    });
+  },
+
   async getGame({commit}, gameId) {
     const game = await db.collection("games").doc(gameId).get();
     commit("SET_GAME", {id: game.id, ...game.data()});
