@@ -14,7 +14,14 @@
             >
           </v-col>
           <v-col cols="4" class="d-flex align-center justify-center">
-            <h1 class="white--text">Tout Pile</h1>
+            <!-- <h1 class="white--text">Tout Pile</h1> -->
+            <img
+              height="100px"
+              src="@/assets/logo.svg"
+              class="grow-hover"
+              v-bind="attrs"
+              v-on="on"
+            />
           </v-col>
           <v-col
             cols="3"
