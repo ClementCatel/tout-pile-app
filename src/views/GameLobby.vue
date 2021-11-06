@@ -199,9 +199,10 @@ export default {
     },
     copyLink() {
       // dev link
-      const link = `http://localhost:8080/?game=${this.game.id}`;
-      // production link
+      let link = `https://tout-pile.com/?game=${this.game.id}`;
       //const link = "";
+      const isDevelopment = process.env.NODE_ENV === "development";
+      if (isDevelopment) link = `http://localhost:8080/?game=${this.game.id}`;
       const clipboardData =
         window.clipboardData ||
         event.originalEvent?.clipboardData ||
