@@ -94,7 +94,18 @@
             <img :src="winner.avatarURL" />
           </v-avatar>
         </div>
-        <v-chip x-large class="px-8 gold-outline white--text"
+        <v-chip
+          v-if="winnerScore === 2"
+          x-large
+          class="px-8 gold-outline white--text"
+        >
+          <span class="font-weight-black">{{ winner.username }}</span
+          >&nbsp; {{ $t("answers.tout_pile") }} ! (+{{
+            winnerScore
+          }}
+          pts)</v-chip
+        >
+        <v-chip v-else x-large class="px-8 gold-outline white--text"
           >{{ $t("answers.the_closest") }}
           <span class="font-weight-black">&nbsp;{{ winner.username }}</span> !
           (+{{ winnerScore }} pts)</v-chip
