@@ -1,12 +1,21 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import {auth} from "@/services/firebase";
 
 import game from "./modules/game";
 import player from "./modules/player";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+auth.onAuthStateChanged(async (user) => {
+  if (user) {
+    const {uid} = user;
+
+    await store.dispatch("player/getPlayer", uid);
+  }
+});
+
+const store = new Vuex.Store({
   state: {
     loading: false,
     muted: false,
@@ -30,3 +39,5 @@ export default new Vuex.Store({
     player,
   },
 });
+
+export default store;

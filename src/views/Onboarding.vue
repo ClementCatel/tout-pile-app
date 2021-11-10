@@ -71,8 +71,11 @@ export default {
     isInvited() {
       return !!this.$route.query.game;
     },
-    localPlayer() {
-      return this.$store.state.player.player;
+    // localPlayer() {
+    //   return this.$store.state.player.player;
+    // },
+    storeUsername() {
+      return this.$store.state.player.player?.username;
     },
     avatarURL() {
       return `https://avatars.dicebear.com/api/bottts/${this.username}.svg`;
@@ -83,17 +86,21 @@ export default {
       try {
         this.loading = true;
         if (this.validateUsername()) {
-          if (!this.localPlayer) {
-            await this.$store.dispatch("player/createPlayer", {
-              username: this.username,
-              avatarURL: this.avatarURL,
-            });
-          } else {
-            await this.$store.dispatch("player/editPlayer", {
-              username: this.username,
-              avatarURL: this.avatarURL,
-            });
-          }
+          await this.$store.dispatch("player/signInAnonymously", {
+            username: this.username,
+            avatarURL: this.avatarURL,
+          });
+          // if (!this.localPlayer) {
+          //   await this.$store.dispatch("player/createPlayer", {
+          //     username: this.username,
+          //     avatarURL: this.avatarURL,
+          //   });
+          // } else {
+          //   await this.$store.dispatch("player/editPlayer", {
+          //     username: this.username,
+          //     avatarURL: this.avatarURL,
+          //   });
+          // }
           await this.$store.dispatch("game/createGame");
           this.$router.push("/lobby");
         } else {
@@ -107,17 +114,21 @@ export default {
       try {
         this.loading = true;
         if (this.validateUsername()) {
-          if (!this.localPlayer) {
-            await this.$store.dispatch("player/createPlayer", {
-              username: this.username,
-              avatarURL: this.avatarURL,
-            });
-          } else {
-            await this.$store.dispatch("player/editPlayer", {
-              username: this.username,
-              avatarURL: this.avatarURL,
-            });
-          }
+          await this.$store.dispatch("player/signInAnonymously", {
+            username: this.username,
+            avatarURL: this.avatarURL,
+          });
+          // if (!this.localPlayer) {
+          //   await this.$store.dispatch("player/createPlayer", {
+          //     username: this.username,
+          //     avatarURL: this.avatarURL,
+          //   });
+          // } else {
+          //   await this.$store.dispatch("player/editPlayer", {
+          //     username: this.username,
+          //     avatarURL: this.avatarURL,
+          //   });
+          // }
           await this.$store.dispatch("game/addPlayer", this.$route.query.game);
           await this.$store.dispatch("game/getGame", this.$route.query.game);
           await this.$store.dispatch("game/bindGame", this.$route.query.game);
@@ -126,6 +137,7 @@ export default {
           this.loading = false;
         }
       } catch (error) {
+        console.error(error);
         this.loading = false;
         this.alertMessage = error.message;
         this.alert = true;
@@ -137,12 +149,20 @@ export default {
       );
     },
   },
+  watch: {
+    storeUsername(val) {
+      if (val) {
+        this.username = val;
+      }
+    },
+  },
   async created() {
-    const playerId = localStorage.playerId;
-    if (playerId) {
-      await this.$store.dispatch("player/getPlayer", playerId);
-      this.username = this.$store.state.player.player.username;
-    }
+    // const playerId = localStorage.playerId;
+    // if (playerId) {
+    //   await this.$store.dispatch("player/getPlayer", playerId);
+    //   this.username = this.$store.state.player.player.username;
+    // }
+    this.username = this.$store.state.player.player?.username || "";
   },
 };
 </script>
