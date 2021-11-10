@@ -1,4 +1,4 @@
-import {db} from "@/services/firebase";
+import {db, auth} from "@/services/firebase";
 
 const state = () => ({
   player: null,
@@ -11,18 +11,25 @@ const mutations = {
 };
 
 const actions = {
+  async signInAnonymously({dispatch}, playerData) {
+    if (auth.currentUser) {
+      return await dispatch("editPlayer", playerData);
+    }
+    return await dispatch("createPlayer", playerData);
+  },
+
   async createPlayer({commit}, playerData) {
-    const player = await db.collection("players").add(playerData);
-    commit("SET_PLAYER", {id: player.id, ...playerData});
-    localStorage.playerId = player.id;
+    await auth.signInAnonymously();
+    const {uid} = auth.currentUser;
+    await db.collection("players").doc(uid).set(playerData);
+    commit("SET_PLAYER", {id: uid, ...playerData});
+    // localStorage.playerId = player.id;
   },
 
   async editPlayer({dispatch}, playerData) {
-    await db
-      .collection("players")
-      .doc(localStorage.playerId)
-      .update(playerData);
-    await dispatch("getPlayer", localStorage.playerId);
+    const {uid} = auth.currentUser;
+    await db.collection("players").doc(uid).update(playerData);
+    await dispatch("getPlayer", uid);
   },
 
   async getPlayer({commit}, playerId) {
