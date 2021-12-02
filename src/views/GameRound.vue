@@ -8,7 +8,7 @@
     <v-row justify="center">
       <v-col cols="6" md="8" class="mr-3">
         <!-- <h1 class="px-10">{{ game.currentRound }}/{{ game.rounds }}</h1> -->
-        <h2 class="centerQst">
+        <h2 class="text-center select-disabled">
           <span class="pr-2">{{ game.currentRound }}/{{ game.rounds }}</span
           >{{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
@@ -127,7 +127,11 @@ export default {
 };
 </script>
 <style scoped>
-.centerQst {
-  text-align: center;
+.select-disabled {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 </style>
