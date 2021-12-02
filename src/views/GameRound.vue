@@ -51,6 +51,9 @@
           >
             {{ $t("round.validate") }}
           </v-btn>
+          <span class="ml-2"
+            >{{ validatedAnswers }}/{{ game.players.length }}</span
+          >
         </v-col>
       </v-row>
     </form>
@@ -93,19 +96,30 @@ export default {
         }
       },
     },
+    validatedAnswers() {
+      const currentRoundAnswers = this.game.answers.filter(
+        (answer) => answer.round === this.game.currentRound,
+      );
+      return currentRoundAnswers.length;
+    },
   },
   methods: {
-    validate() {
+    async validate() {
       this.validated = true;
       this.validatedTimestamp = Date.now();
       this.audioValidated.volume = 0.2;
       this.$store.dispatch("playAudio", this.audioValidated);
+      await this.addAnswer();
     },
     async nextRound() {
-      let answer = this.answer.replace(/\s+/g, "");
       if (!this.validated) {
         this.validatedTimestamp = Date.now();
+        await this.addAnswer();
       }
+      this.$router.push("/answers");
+    },
+    async addAnswer() {
+      let answer = this.answer.replace(/\s+/g, "");
       if (!this.answer || isNaN(answer)) answer = 0;
       const finalAnswer = {
         answer: parseFloat(answer),
@@ -114,7 +128,13 @@ export default {
         timestamp: this.validatedTimestamp,
       };
       await this.$store.dispatch("game/addAnswer", finalAnswer);
-      this.$router.push("/answers");
+    },
+  },
+  watch: {
+    async validatedAnswers(value) {
+      if (value === this.game.players.length) {
+        await this.nextRound();
+      }
     },
   },
 
