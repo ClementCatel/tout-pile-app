@@ -1,14 +1,16 @@
 <template>
   <v-container class="white--text">
-    <v-row justify="center">
+    <!-- <v-row justify="center">
       <v-col cols="10" class="pl-0">
-        <h1 class="px-10">{{ game.currentRound }}/{{ game.rounds }}</h1>
+        
       </v-col>
-    </v-row>
+    </v-row> -->
     <v-row justify="center">
       <v-col cols="6" md="8" class="mr-3">
+        <!-- <h1 class="px-10">{{ game.currentRound }}/{{ game.rounds }}</h1> -->
         <h2 class="centerQst">
-          {{ currentQuestion ? currentQuestion.question : "" }}
+          <span class="pr-2">{{ game.currentRound }}/{{ game.rounds }}</span
+          >{{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
       </v-col>
     </v-row>
