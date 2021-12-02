@@ -133,6 +133,7 @@ export default {
   watch: {
     async validatedAnswers(value) {
       if (value === this.game.players.length) {
+        this.$refs.countdown.stopSound();
         await this.nextRound();
       }
     },
