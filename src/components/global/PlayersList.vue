@@ -13,20 +13,16 @@
         <v-avatar size="40" color="transparent">
           <img :src="player.avatarURL" />
         </v-avatar>
-        <v-card-title class="py-0">
-          {{ player.username }}
+        <v-card-title class="py-0 text-ellipsis-item">
+          <div class="text-ellipsis">{{ player.username }}</div>
         </v-card-title>
         <v-spacer></v-spacer>
 
-        <v-chip
-          v-if="answers"
-          color="white"
-          class="px-6 mr-2 font-weight-bold"
-          >{{ playerAnswer(player.id) }}</v-chip
-        >
+        <v-chip v-if="answers" color="white" class="px-6 font-weight-bold">{{
+          playerAnswer(player.id)
+        }}</v-chip>
 
-        <div v-if="scores && showPoints" class="ml-6">
-          <span>{{ $t("players.points") }} : </span>
+        <div v-if="scores && showPoints" class="ml-3 fit-content">
           <span
             :class="[
               index === 0
@@ -36,21 +32,21 @@
                 : index === 2
                 ? 'bronze'
                 : '',
-              'px-2 mr-2 font-weight-bold',
+              'px-2 mr-1 font-weight-bold',
             ]"
-            >{{ playerScore(player.id) }}</span
+            >{{ playerScore(player.id) }} {{ $t("players.points") }}</span
           >
         </div>
 
         <div v-else>
           <div
-            v-if="isPlayerLeader(player.id)"
+            v-if="isPlayerLeader(player.id) && !answers"
             class="text-h5 mr-2 d-flex align-center"
           >
             <img height="30px" src="@/assets/icons/crownIcon.svg" />
           </div>
           <v-btn
-            v-else-if="isLeader"
+            v-else-if="isLeader && !answers"
             color="primary"
             x-small
             fab
@@ -124,6 +120,18 @@ export default {
 </script>
 
 <style scoped>
+.text-ellipsis-item {
+  display: flex;
+  min-width: 0;
+}
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.fit-content {
+  min-width: fit-content;
+}
 .playerCard {
   background-color: rgb(0, 0, 0, 0.34) !important;
 }
