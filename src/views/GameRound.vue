@@ -1,14 +1,16 @@
 <template>
   <v-container class="white--text">
-    <v-row justify="center">
+    <!-- <v-row justify="center">
       <v-col cols="10" class="pl-0">
-        <h1 class="px-10">{{ game.currentRound }}/{{ game.rounds }}</h1>
+        
       </v-col>
-    </v-row>
+    </v-row> -->
     <v-row justify="center">
       <v-col cols="6" md="8" class="mr-3">
-        <h2 class="centerQst">
-          {{ currentQuestion ? currentQuestion.question : "" }}
+        <!-- <h1 class="px-10">{{ game.currentRound }}/{{ game.rounds }}</h1> -->
+        <h2 class="text-center select-disabled">
+          <span class="pr-2">{{ game.currentRound }}/{{ game.rounds }}</span
+          >{{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
       </v-col>
     </v-row>
@@ -49,6 +51,9 @@
           >
             {{ $t("round.validate") }}
           </v-btn>
+          <span class="ml-2"
+            >{{ validatedAnswers }}/{{ game.players.length }}</span
+          >
         </v-col>
       </v-row>
     </form>
@@ -91,19 +96,30 @@ export default {
         }
       },
     },
+    validatedAnswers() {
+      const currentRoundAnswers = this.game.answers.filter(
+        (answer) => answer.round === this.game.currentRound,
+      );
+      return currentRoundAnswers.length;
+    },
   },
   methods: {
-    validate() {
+    async validate() {
       this.validated = true;
       this.validatedTimestamp = Date.now();
       this.audioValidated.volume = 0.2;
       this.$store.dispatch("playAudio", this.audioValidated);
+      await this.addAnswer();
     },
     async nextRound() {
-      let answer = this.answer.replace(/\s+/g, "");
       if (!this.validated) {
         this.validatedTimestamp = Date.now();
+        await this.addAnswer();
       }
+      this.$router.push("/answers");
+    },
+    async addAnswer() {
+      let answer = this.answer.replace(/\s+/g, "");
       if (!this.answer || isNaN(answer)) answer = 0;
       const finalAnswer = {
         answer: parseFloat(answer),
@@ -112,7 +128,14 @@ export default {
         timestamp: this.validatedTimestamp,
       };
       await this.$store.dispatch("game/addAnswer", finalAnswer);
-      this.$router.push("/answers");
+    },
+  },
+  watch: {
+    async validatedAnswers(value) {
+      if (value === this.game.players.length) {
+        this.$refs.countdown.stopSound();
+        await this.nextRound();
+      }
     },
   },
 
@@ -125,7 +148,11 @@ export default {
 };
 </script>
 <style scoped>
-.centerQst {
-  text-align: center;
+.select-disabled {
+  user-select: none; /* supported by Chrome and Opera */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
 }
 </style>
