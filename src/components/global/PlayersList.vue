@@ -102,7 +102,10 @@ export default {
     playerAnswer(playerId) {
       if (this.answers) {
         const value = this.answers[playerId]?.answer || 0;
-        return parseFloat(value).toLocaleString();
+        if (value.length > 4) {
+          return parseFloat(value).toLocaleString();
+        }
+        return parseFloat(value);
       }
       return null;
     },
