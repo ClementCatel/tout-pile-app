@@ -88,9 +88,8 @@ export default {
       // setter
       set: function (newValue) {
         if (newValue.length > 4) {
-          this.answer = parseFloat(
-            newValue.replace(/\s+/g, ""),
-          ).toLocaleString();
+          const tmp = newValue.replace(/,/g, ".");
+          this.answer = parseFloat(tmp.replace(/\s+/g, "")).toLocaleString();
         } else {
           this.answer = newValue;
         }
@@ -119,7 +118,7 @@ export default {
       this.$router.push("/answers");
     },
     async addAnswer() {
-      let answer = this.answer.replace(/\s+/g, "");
+      let answer = this.answer.replace(/\s+/g, "").replace(/,/g, ".");
       if (!this.answer || isNaN(answer)) answer = 0;
       const finalAnswer = {
         answer: parseFloat(answer),
