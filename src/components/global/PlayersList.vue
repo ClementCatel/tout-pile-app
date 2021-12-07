@@ -102,6 +102,7 @@ export default {
     playerAnswer(playerId) {
       if (this.answers) {
         const value = this.answers[playerId]?.answer || 0;
+        console.log(value);
         if (value.length > 4) {
           return parseFloat(value).toLocaleString();
         }
