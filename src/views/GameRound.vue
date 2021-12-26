@@ -89,7 +89,9 @@ export default {
       set: function (newValue) {
         if (newValue.length > 4) {
           const tmp = newValue.replace(/,/g, ".");
-          this.answer = parseFloat(tmp.replace(/\s+/g, "")).toLocaleString();
+          this.answer = parseFloat(tmp.replace(/\s+/g, "")).toLocaleString(
+            "fr",
+          );
         } else {
           this.answer = newValue;
         }
