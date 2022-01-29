@@ -6,7 +6,7 @@
       </v-col>
     </v-row> -->
     <v-row justify="center">
-      <v-col cols="6" md="8" class="mr-3">
+      <v-col cols="12" md="8" class="mr-3">
         <!-- <h1 class="px-10">{{ game.currentRound }}/{{ game.rounds }}</h1> -->
         <h2 class="text-center select-disabled">
           <span class="pr-2">{{ game.currentRound }}/{{ game.rounds }}</span
@@ -20,7 +20,7 @@
       </h3>
     </v-row>
     <v-row justify="center" class="mb-10">
-      <v-col cols="5">
+      <v-col cols="10" sm="5">
         <v-img
           class="rounded elevation-10"
           lazy-src="loading"
@@ -31,7 +31,7 @@
     </v-row>
     <form @submit.prevent="validate">
       <v-row justify="center" align="center">
-        <v-col cols="5">
+        <v-col cols="7" sm="5">
           <v-text-field
             v-model="formattedAnswer"
             :label="$t('round.response')"

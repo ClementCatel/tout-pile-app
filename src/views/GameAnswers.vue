@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="11" sm="8" md="6" lg="5" xl="4" class="mr-lg-3">
+      <v-col cols="12" sm="8" md="6" lg="5" xl="4" class="mr-lg-3">
         <v-card
           rounded="lg"
           elevation="10"
@@ -23,7 +23,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="6" class="ml-lg-3 text-center white--text">
+      <v-col cols="12" sm="6" class="ml-lg-3 text-center white--text">
         <h2 class="mb-2">
           {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
@@ -84,7 +84,7 @@
         <v-btn
           v-if="game.showResults"
           large
-          class="font-weight-bold secondary--text mt-10"
+          class="font-weight-bold secondary--text mt-10 mb-6"
           @click="nextRound"
           :disabled="!showNextEventButton || !isLeader"
         >
@@ -101,7 +101,7 @@
           :loading="loading"
           :disabled="!isLeader"
           @click="showResults"
-          class="font-weight-bold secondary--text mt-10"
+          class="font-weight-bold secondary--text mt-10 mb-6"
           ><v-icon left>mdi-eye-outline</v-icon
           >{{ $t("answers.show_results") }}</v-btn
         >
@@ -113,7 +113,7 @@
       v-model="winnerAlert"
       persistent
       hide-overlay
-      max-width="500px"
+      max-width="650px"
       content-class="elevation-0"
     >
       <div v-if="winner" class="text-center pa-4 font-weight-bold">
@@ -125,7 +125,7 @@
         <v-chip
           v-if="winnerScore === 2"
           x-large
-          class="px-8 gold-outline white--text"
+          class="px-sm-8 gold-outline white--text"
         >
           <span class="font-weight-black">{{ winner.username }}</span
           >&nbsp; {{ $t("answers.tout_pile") }} ! (+{{
@@ -133,7 +133,7 @@
           }}
           pts)</v-chip
         >
-        <v-chip v-else x-large class="px-8 gold-outline white--text"
+        <v-chip v-else x-large class="px-sm-8 gold-outline white--text"
           >{{ $t("answers.the_closest") }}
           <span class="font-weight-black">&nbsp;{{ winner.username }}</span> !
           (+{{ winnerScore }} pts)</v-chip
