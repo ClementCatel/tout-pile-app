@@ -5,9 +5,8 @@
         <v-card
           rounded="lg"
           elevation="10"
-          outlined
           class="card white--text pa-3 scroll"
-          height="600"
+          height="65vh"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
@@ -32,8 +31,8 @@
             {{ $t("lobby.settings") }}
           </v-card-title>
           <div class="mx-6 my-3">
-            <v-row align="center">
-              <div class="col-6 text-h5 d-flex align-center mb-10">
+            <v-row align="center" class="mb-3">
+              <div class="col-6 text-h5 d-flex align-center">
                 <img
                   class="pr-3"
                   height="30px"
@@ -53,7 +52,7 @@
               </v-col>
             </v-row>
             <v-row align="center">
-              <div class="col-6 text-h5 d-flex align-center mb-10">
+              <div class="col-6 text-h5 d-flex align-center">
                 <img
                   class="pr-3"
                   height="30px"

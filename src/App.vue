@@ -59,7 +59,7 @@
                           />
                           <li>
                             Avant chaque partie l'hôte décide du nombre de
-                            manche et du temps de réponse par question.
+                            manches et du temps de réponse par question.
                           </li>
                         </div>
                         <div class="d-flex align-center mb-10">

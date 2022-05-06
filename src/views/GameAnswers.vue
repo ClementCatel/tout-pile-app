@@ -1,13 +1,12 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="4" class="mr-3">
+      <v-col cols="11" sm="8" md="6" lg="5" xl="4" class="mr-lg-3">
         <v-card
           rounded="lg"
           elevation="10"
-          outlined
-          class="card white--text py-3 px-6 mt-4 pt-0 mb-10 scroll"
-          height="600"
+          class="card white--text py-3 px-6 pt-0 mb-10 scroll"
+          height="65vh"
         >
           <v-card-title
             class="justify-center text-h5 font-weight-bold text-uppercase"
@@ -24,11 +23,11 @@
         </v-card>
       </v-col>
 
-      <v-col cols="6" class="ml-3 text-center white--text">
-        <h2 class="my-5">
+      <v-col cols="6" class="ml-lg-3 text-center white--text">
+        <h2 class="mb-2">
           {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
-        <div class="font-weight-bold mb-10">
+        <div class="font-weight-bold mb-2">
           {{ $t("answers.right_answer") }} :
           <span
             :class="[
@@ -38,28 +37,56 @@
             ]"
             >{{ currentQuestion ? currentQuestion.answer : "" }}</span
           >
+        </div>
+        <v-card class="mt-5" flat v-if="this.game.showResults">
+          <v-toolbar color="#4a3c82" dark flat
+            ><img
+              class="d-flex justify-space-between align-center pl-2 mr-4"
+              height="30px"
+              src="@/assets/icons/explanationIcon.svg"
+            />
+            <h2>{{ $t("answers.explanations") }}</h2>
+          </v-toolbar>
+          <v-card-text>
+            <div>
+              <p class="text-body-1 text-justify mb-0">
+                {{ currentQuestion.infos }}
+              </p>
+            </div>
+          </v-card-text>
+        </v-card>
+        <!-- <div>
           <v-tooltip bottom v-if="this.game.showResults">
             <template v-slot:activator="{on, attrs}">
               <v-btn
                 dark
-                icon
+                text
                 large
                 class="mb-3"
                 @click="dialog = true"
                 v-bind="attrs"
                 v-on="on"
-                ><v-icon>mdi-information-outline</v-icon></v-btn
+                >{{ $t("answers.know_more") }}</v-btn
               >
             </template>
             <span>{{ $t("answers.explanations") }}</span>
           </v-tooltip>
-        </div>
+        </div> -->
+        <!-- <div v-if="this.game.showResults">
+          <v-img
+            class="rounded elevation-10 mx-auto"
+            lazy-src="loading"
+            :aspect-ratio="16 / 9"
+            width="27vw"
+            :src="currentQuestion ? currentQuestion.imageURL : ''"
+          ></v-img>
+        </div> -->
         <v-btn
-          v-if="game.showResults && isLeader"
+          v-if="game.showResults"
           large
-          class="font-weight-bold secondary--text"
+          class="font-weight-bold secondary--text mt-10"
           @click="nextRound"
-          :disabled="!showNextEventButton"
+          :disabled="!showNextEventButton || !isLeader"
         >
           <div v-if="this.currentRound === this.game.rounds">
             {{ $t("answers.final_results") }}
@@ -69,11 +96,12 @@
           </div>
         </v-btn>
         <v-btn
-          v-else-if="isLeader"
+          v-else
           large
           :loading="loading"
+          :disabled="!isLeader"
           @click="showResults"
-          class="font-weight-bold secondary--text"
+          class="font-weight-bold secondary--text mt-10"
           ><v-icon left>mdi-eye-outline</v-icon
           >{{ $t("answers.show_results") }}</v-btn
         >
@@ -94,7 +122,18 @@
             <img :src="winner.avatarURL" />
           </v-avatar>
         </div>
-        <v-chip x-large class="px-8 gold-outline white--text"
+        <v-chip
+          v-if="winnerScore === 2"
+          x-large
+          class="px-8 gold-outline white--text"
+        >
+          <span class="font-weight-black">{{ winner.username }}</span
+          >&nbsp; {{ $t("answers.tout_pile") }} ! (+{{
+            winnerScore
+          }}
+          pts)</v-chip
+        >
+        <v-chip v-else x-large class="px-8 gold-outline white--text"
           >{{ $t("answers.the_closest") }}
           <span class="font-weight-black">&nbsp;{{ winner.username }}</span> !
           (+{{ winnerScore }} pts)</v-chip
@@ -103,7 +142,7 @@
     </v-dialog>
 
     <!-- Explanations dialog -->
-    <v-dialog v-model="dialog" max-width="500px">
+    <!-- <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-toolbar color="primary" dark
           ><img
@@ -124,7 +163,7 @@
           <v-btn text @click="dialog = false">{{ $t("lobby.close") }}</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog>
+    </v-dialog> -->
   </v-container>
 </template>
 
@@ -232,6 +271,7 @@ export default {
   },
   methods: {
     async showResults() {
+      if (!this.isLeader) return;
       this.loading = true;
       await this.calculateScores();
       await this.$store.dispatch("game/updateGame", {
@@ -248,6 +288,7 @@ export default {
       });
     },
     async nextRound() {
+      if (!this.isLeader) return;
       await this.$store.dispatch("game/updateGame", {
         currentRound: this.game.currentRound + 1,
         showResults: false,
