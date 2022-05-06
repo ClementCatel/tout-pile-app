@@ -98,7 +98,7 @@
                             </div>
                             <div class="mb-2">
                               S'il fait un tout pile, c'est à dire, qu'il trouve
-                              la valeur exacte, il remportre 2 points.
+                              la valeur exacte, il remporte 2 points.
                             </div>
                             <div class="mb-2">
                               En cas d'égalité, le joueur ayant VALIDÉ sa
