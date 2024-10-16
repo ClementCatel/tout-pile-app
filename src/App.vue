@@ -14,7 +14,6 @@
             >
           </v-col>
           <v-col cols="4" class="d-flex align-center justify-center">
-            <!-- <h1 class="white--text">Tout Pile</h1> -->
             <img :height="height" src="@/assets/logo.svg" class="grow-hover" />
           </v-col>
           <v-col
