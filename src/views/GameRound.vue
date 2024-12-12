@@ -1,10 +1,5 @@
 <template>
   <v-container class="white--text">
-    <!-- <v-row justify="center">
-      <v-col cols="10" class="pl-0">
-        
-      </v-col>
-    </v-row> -->
     <v-row justify="center">
       <v-col cols="12" md="8" class="mr-3">
         <!-- <h1 class="px-10">{{ game.currentRound }}/{{ game.rounds }}</h1> -->
