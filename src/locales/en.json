@@ -21,13 +21,11 @@
   "answers": {
     "show_results": "Show results",
     "answers": "Answers",
-    "right_answer": "Right Answer",
     "next_round": "Next round",
     "final_results": "Final Results",
     "the_closest": "The closest and fastest is",
     "explanations": "Explanations",
-    "tout_pile": "made a tout pile",
-    "know_more": "Know more"
+    "tout_pile": "made a tout pile"
   },
   "round": {
     "response": "Response",

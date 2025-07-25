@@ -1,7 +1,13 @@
 <template>
   <v-container class="containerHeight">
     <v-row class="rowHeight white--text" align="end" justify="center">
-      <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[1]">
+      <v-col
+        cols="8"
+        sm="3"
+        md="2"
+        class="text-center"
+        v-if="getFirstPlayersIndexes[1]"
+      >
         <v-avatar size="90" color="transparent">
           <img
             :src="getPlayerById(getFirstPlayersIndexes[1].playerId).avatarURL"
@@ -25,7 +31,13 @@
           </div>
         </v-card>
       </v-col>
-      <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[0]">
+      <v-col
+        cols="8"
+        sm="3"
+        md="2"
+        class="text-center"
+        v-if="getFirstPlayersIndexes[0]"
+      >
         <v-avatar size="90" color="transparent">
           <img
             :src="getPlayerById(getFirstPlayersIndexes[0].playerId).avatarURL"
@@ -49,7 +61,13 @@
           </div>
         </v-card>
       </v-col>
-      <v-col cols="2" class="text-center" v-if="getFirstPlayersIndexes[2]">
+      <v-col
+        cols="8"
+        sm="3"
+        md="2"
+        class="text-center"
+        v-if="getFirstPlayersIndexes[2]"
+      >
         <v-avatar size="90" color="transparent">
           <img
             :src="getPlayerById(getFirstPlayersIndexes[2].playerId).avatarURL"

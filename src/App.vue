@@ -6,7 +6,7 @@
           <v-col cols="3" class="px-0 d-flex align-center">
             <v-btn
               v-if="isLobby"
-              class="px-10 font-weight-bold white--text"
+              class="px-sm-10 font-weight-bold white--text"
               outlined
               @click="leaveGame"
               ><v-icon left>mdi-arrow-left</v-icon>
@@ -14,8 +14,7 @@
             >
           </v-col>
           <v-col cols="4" class="d-flex align-center justify-center">
-            <!-- <h1 class="white--text">Tout Pile</h1> -->
-            <img height="100px" src="@/assets/logo.svg" class="grow-hover" />
+            <img :height="height" src="@/assets/logo.svg" class="grow-hover" />
           </v-col>
           <v-col
             cols="3"
@@ -143,9 +142,16 @@ export default {
     isLobby() {
       return this.$route.path === "/lobby";
     },
-
     isMuted() {
       return this.$store.state.muted;
+    },
+    height() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return 30;
+        default:
+          return 100;
+      }
     },
   },
   methods: {
@@ -157,7 +163,6 @@ export default {
         );
       }
     },
-
     muteSound() {
       if (this.$store.state.muted) {
         this.$store.commit("SET_MUTED", false);

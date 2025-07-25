@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="4" class="mr-3">
+      <v-col cols="12" sm="4" class="mr-sm-3" :order="2" :order-sm="1">
         <v-card
           rounded="lg"
           elevation="10"
@@ -18,7 +18,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="6" class="ml-3">
+      <v-col cols="12" sm="6" class="ml-sm-3" :order="1" :order-sm="2">
         <v-card
           rounded="lg"
           elevation="10"
@@ -51,7 +51,7 @@
                 ></v-select>
               </v-col>
             </v-row>
-            <v-row align="center">
+            <v-row align="center" class="mb-3">
               <div class="col-6 text-h5 d-flex align-center">
                 <img
                   class="pr-3"
@@ -90,7 +90,7 @@
           </div>
         </v-card>
 
-        <div class="d-flex justify-center mt-16">
+        <div class="d-flex justify-center mt-16 mb-5">
           <v-btn
             large
             class="mr-3 font-weight-bold secondary--text pl-2"

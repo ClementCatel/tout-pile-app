@@ -1,7 +1,17 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="11" sm="8" md="6" lg="5" xl="4" class="mr-lg-3">
+      <!-- Liste des joueurs (à gauche en md+, en dessous en sm) -->
+      <v-col
+        cols="12"
+        sm="8"
+        md="6"
+        lg="5"
+        xl="4"
+        class="mr-lg-3"
+        :order="2"
+        :order-md="1"
+      >
         <v-card
           rounded="lg"
           elevation="10"
@@ -23,24 +33,55 @@
         </v-card>
       </v-col>
 
-      <v-col cols="6" class="ml-lg-3 text-center white--text">
+      <!-- Réponses + explications (à droite en md+, au-dessus en sm) -->
+      <v-col
+        cols="12"
+        sm="6"
+        class="ml-lg-3 text-center white--text"
+        :order="1"
+        :order-md="2"
+      >
         <h2 class="mb-2">
           {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
-        <div class="font-weight-bold mb-2">
-          {{ $t("answers.right_answer") }} :
+        <div class="font-weight-bold mb-2 d-flex justify-center align-center">
           <span
             :class="[
               !this.game.showResults ? 'blurry-text' : '',
               'text-h4 px-3',
               'font-weight-black',
             ]"
-            >{{ currentQuestion ? currentQuestion.answer : "" }}</span
           >
+            {{ currentQuestion ? currentQuestion.answer : "" }}
+          </span>
+          <!-- Bouton "En savoir plus" visible UNIQUEMENT en sm et moins -->
+          <div class="d-md-none">
+            <v-tooltip bottom v-if="this.game.showResults">
+              <template v-slot:activator="{on, attrs}">
+                <v-btn
+                  height="1.25rem"
+                  width="1.25rem"
+                  color="#ffffff"
+                  fab
+                  @click="dialog = true"
+                  v-bind="attrs"
+                  v-on="on"
+                >
+                  <v-icon> mdi-information-symbol </v-icon>
+                </v-btn>
+              </template>
+              <span>{{ $t("answers.explanations") }}</span>
+            </v-tooltip>
+          </div>
         </div>
-        <v-card class="mt-5" flat v-if="this.game.showResults">
-          <v-toolbar color="#4a3c82" dark flat
-            ><img
+        <!-- Explication visible UNIQUEMENT en md et + -->
+        <v-card
+          class="mt-5 d-none d-md-block"
+          flat
+          v-if="this.game.showResults"
+        >
+          <v-toolbar color="#4a3c82" dark flat>
+            <img
               class="d-flex justify-space-between align-center pl-2 mr-4"
               height="30px"
               src="@/assets/icons/explanationIcon.svg"
@@ -48,43 +89,16 @@
             <h2>{{ $t("answers.explanations") }}</h2>
           </v-toolbar>
           <v-card-text>
-            <div>
-              <p class="text-body-1 text-justify mb-0">
-                {{ currentQuestion.infos }}
-              </p>
-            </div>
+            <p class="text-body-1 text-justify mb-0">
+              {{ currentQuestion.infos }}
+            </p>
           </v-card-text>
         </v-card>
-        <!-- <div>
-          <v-tooltip bottom v-if="this.game.showResults">
-            <template v-slot:activator="{on, attrs}">
-              <v-btn
-                dark
-                text
-                large
-                class="mb-3"
-                @click="dialog = true"
-                v-bind="attrs"
-                v-on="on"
-                >{{ $t("answers.know_more") }}</v-btn
-              >
-            </template>
-            <span>{{ $t("answers.explanations") }}</span>
-          </v-tooltip>
-        </div> -->
-        <!-- <div v-if="this.game.showResults">
-          <v-img
-            class="rounded elevation-10 mx-auto"
-            lazy-src="loading"
-            :aspect-ratio="16 / 9"
-            width="27vw"
-            :src="currentQuestion ? currentQuestion.imageURL : ''"
-          ></v-img>
-        </div> -->
+
         <v-btn
           v-if="game.showResults"
           large
-          class="font-weight-bold secondary--text mt-10"
+          class="font-weight-bold secondary--text mt-md-10 my-6"
           @click="nextRound"
           :disabled="!showNextEventButton || !isLeader"
         >
@@ -95,16 +109,18 @@
             {{ $t("answers.next_round") }}
           </div>
         </v-btn>
+
         <v-btn
           v-else
           large
           :loading="loading"
           :disabled="!isLeader"
           @click="showResults"
-          class="font-weight-bold secondary--text mt-10"
-          ><v-icon left>mdi-eye-outline</v-icon
-          >{{ $t("answers.show_results") }}</v-btn
+          class="font-weight-bold secondary--text mt-10 mb-6"
         >
+          <v-icon left>mdi-eye-outline</v-icon>
+          {{ $t("answers.show_results") }}
+        </v-btn>
       </v-col>
     </v-row>
 
@@ -113,7 +129,7 @@
       v-model="winnerAlert"
       persistent
       hide-overlay
-      max-width="500px"
+      max-width="650px"
       content-class="elevation-0"
     >
       <div v-if="winner" class="text-center pa-4 font-weight-bold">
@@ -125,7 +141,7 @@
         <v-chip
           v-if="winnerScore === 2"
           x-large
-          class="px-8 gold-outline white--text"
+          class="px-sm-8 gold-outline white--text"
         >
           <span class="font-weight-black">{{ winner.username }}</span
           >&nbsp; {{ $t("answers.tout_pile") }} ! (+{{
@@ -133,7 +149,7 @@
           }}
           pts)</v-chip
         >
-        <v-chip v-else x-large class="px-8 gold-outline white--text"
+        <v-chip v-else x-large class="px-sm-8 gold-outline white--text"
           >{{ $t("answers.the_closest") }}
           <span class="font-weight-black">&nbsp;{{ winner.username }}</span> !
           (+{{ winnerScore }} pts)</v-chip
@@ -142,7 +158,7 @@
     </v-dialog>
 
     <!-- Explanations dialog -->
-    <!-- <v-dialog v-model="dialog" max-width="500px">
+    <v-dialog v-model="dialog" max-width="500px">
       <v-card>
         <v-toolbar color="primary" dark
           ><img
@@ -163,7 +179,7 @@
           <v-btn text @click="dialog = false">{{ $t("lobby.close") }}</v-btn>
         </v-card-actions>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
   </v-container>
 </template>
 
