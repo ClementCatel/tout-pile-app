@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="12" sm="4" class="mr-sm-3">
+      <v-col cols="12" sm="4" class="mr-sm-3" :order="2" :order-sm="1">
         <v-card
           rounded="lg"
           elevation="10"
@@ -18,7 +18,7 @@
         </v-card>
       </v-col>
 
-      <v-col cols="12" sm="6" class="ml-sm-3">
+      <v-col cols="12" sm="6" class="ml-sm-3" :order="1" :order-sm="2">
         <v-card
           rounded="lg"
           elevation="10"
