@@ -41,6 +41,9 @@
         :order="1"
         :order-md="2"
       >
+        <div>
+          {{ $t("answers.question") }} {{ currentRound }}/{{ totalRounds }}
+        </div>
         <h2 class="mb-2">
           {{ currentQuestion ? currentQuestion.question : "" }}
         </h2>
@@ -208,6 +211,9 @@ export default {
     ...mapState("game", ["game"]),
     currentRound() {
       return this.game.currentRound;
+    },
+    totalRounds() {
+      return this.game.rounds;
     },
     currentQuestion() {
       return this.game.questions[this.game.currentRound - 1];
