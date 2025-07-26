@@ -78,7 +78,7 @@ export default {
       return this.$store.state.player.player?.username;
     },
     avatarURL() {
-      return `https://avatars.dicebear.com/api/bottts/${this.username}.svg`;
+      return `https://api.dicebear.com/9.x/bottts/svg?seed=${this.username}`;
     },
   },
   methods: {
