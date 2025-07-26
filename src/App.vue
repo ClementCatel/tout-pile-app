@@ -3,8 +3,9 @@
     <v-main class="backColor">
       <v-container>
         <v-row justify="center" class="my-4">
-          <v-col cols="3" class="px-0 d-flex align-center" v-if="isLobby">
+          <v-col cols="3" class="px-0 d-flex align-center">
             <v-btn
+              v-if="isLobby"
               class="px-sm-10 font-weight-bold white--text"
               :icon="$vuetify.breakpoint.xs"
               :outlined="!$vuetify.breakpoint.xs"
