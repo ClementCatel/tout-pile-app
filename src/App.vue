@@ -7,11 +7,18 @@
             <v-btn
               v-if="isLobby"
               class="px-sm-10 font-weight-bold white--text"
-              outlined
+              :icon="$vuetify.breakpoint.xs"
+              :outlined="!$vuetify.breakpoint.xs"
               @click="leaveGame"
-              ><v-icon left>mdi-arrow-left</v-icon>
-              {{ $t("lobby.return") }}</v-btn
             >
+              <v-icon left v-if="!$vuetify.breakpoint.xs"
+                >mdi-arrow-left</v-icon
+              >
+              <v-icon v-else>mdi-arrow-left</v-icon>
+              <span v-if="!$vuetify.breakpoint.xs">
+                {{ $t("lobby.return") }}
+              </span>
+            </v-btn>
           </v-col>
           <v-col cols="4" class="d-flex align-center justify-center">
             <img :height="height" src="@/assets/logo.svg" class="grow-hover" />
@@ -20,7 +27,12 @@
             cols="3"
             class="d-flex align-center justify-end text-right px-0"
           >
-            <v-btn @click="muteSound" icon dark x-large class="mr-6"
+            <v-btn
+              @click="muteSound"
+              icon
+              dark
+              x-large
+              :class="$vuetify.breakpoint.xs ? 'mr-1' : 'mr-6'"
               ><v-icon v-if="isMuted">mdi-volume-off</v-icon>
               <v-icon v-else>mdi-volume-high</v-icon>
             </v-btn>
@@ -148,7 +160,7 @@ export default {
     height() {
       switch (this.$vuetify.breakpoint.name) {
         case "xs":
-          return 30;
+          return 60;
         default:
           return 100;
       }

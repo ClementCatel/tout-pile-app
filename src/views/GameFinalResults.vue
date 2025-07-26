@@ -2,8 +2,8 @@
   <v-container class="containerHeight">
     <v-row class="rowHeight white--text" align="end" justify="center">
       <v-col
-        cols="8"
-        sm="3"
+        cols="4"
+        sm="4"
         md="2"
         class="text-center"
         v-if="getFirstPlayersIndexes[1]"
@@ -32,8 +32,8 @@
         </v-card>
       </v-col>
       <v-col
-        cols="8"
-        sm="3"
+        cols="4"
+        sm="4"
         md="2"
         class="text-center"
         v-if="getFirstPlayersIndexes[0]"
@@ -62,8 +62,8 @@
         </v-card>
       </v-col>
       <v-col
-        cols="8"
-        sm="3"
+        cols="4"
+        sm="4"
         md="2"
         class="text-center"
         v-if="getFirstPlayersIndexes[2]"
@@ -184,11 +184,14 @@ export default {
 }
 .first {
   color: gold;
+  word-break: break-word;
 }
 .second {
   color: silver;
+  word-break: break-word;
 }
 .third {
   color: #a07155;
+  word-break: break-word;
 }
 </style>
